@@ -192,7 +192,7 @@ insert into public.categories (id, label, description, icon, sort_order) values
   ('isotope-labeled', 'Isotope-Labeled Standards', 'Stable-isotope internal standards for LC-MS/MS and GC-MS workflows.', 'orbit', 2),
   ('chromatography', 'Chromatography Standards', 'Multi-component mixes for HPLC and GC method validation.', 'funnel', 3),
   ('buffers', 'Buffers & Calibration', 'Traceable pH and conductivity calibration solutions.', 'flask', 4),
-  ('solvents', 'Solvents & Reagents', 'High-purity anhydrous solvents for sample prep and extraction.', 'droplet', 5),
+  ('solvents', 'Solvents & Chemicals', 'High-purity anhydrous solvents for sample prep and extraction.', 'droplet', 5),
   ('forensic', 'Forensic Reference Panels', 'Multi-analyte panels for forensic toxicology screening.', 'grid', 6)
 on conflict (id) do nothing;
 
@@ -255,8 +255,8 @@ values
    'Store at room temperature, tightly sealed.',
    'For laboratory research use only. Handle with standard PPE (gloves, eye protection) per institutional safety protocols. See Safety Data Sheet for full hazard classification.'),
 
-  ('nc-5127', 'NC-5127', 'solvents', 'High-Purity Anhydrous Solvent Reagent',
-   'An anhydrous, high-purity solvent reagent suited to moisture-sensitive sample preparation and extraction workflows.',
+  ('nc-5127', 'NC-5127', 'solvents', 'High-Purity Anhydrous Solvent',
+   'An anhydrous, high-purity solvent suited to moisture-sensitive sample preparation and extraction workflows.',
    '≥99.9%', '1 L amber bottle', 97, 'unit', 'low-stock', true,
    'Available on Certificate of Analysis', 'Available on Certificate of Analysis',
    'Store at room temperature in a flammables cabinet, away from ignition sources.',

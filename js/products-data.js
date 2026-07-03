@@ -46,7 +46,7 @@ window.NICHECHEMS_CATEGORIES = [
   },
   {
     id: "solvents",
-    label: "Solvents & Reagents",
+    label: "Solvents & Chemicals",
     description: "High-purity anhydrous solvents for sample prep and extraction.",
     icon: "droplet"
   },
@@ -67,6 +67,6 @@ window.NICHECHEMS_PRODUCTS = [
   { id: "nc-3325", sku: "NC-3325", category: "chromatography", name: "GC-Grade Chromatography Standard Mix", purity: "≥99% per component", format: "8 × 1 mL set", price: 410, priceUnit: "set", stock: "in-stock", active: true },
   { id: "nc-4460", sku: "NC-4460", category: "buffers", name: "Buffered Calibration Solution, pH 7.00", purity: "±0.01 pH", format: "500 mL bottle", price: 58, priceUnit: "unit", stock: "in-stock", active: true },
   { id: "nc-4461", sku: "NC-4461", category: "buffers", name: "Buffered Calibration Solution, pH 4.01", purity: "±0.01 pH", format: "500 mL bottle", price: 58, priceUnit: "unit", stock: "in-stock", active: true },
-  { id: "nc-5127", sku: "NC-5127", category: "solvents", name: "High-Purity Anhydrous Solvent Reagent", purity: "≥99.9%", format: "1 L amber bottle", price: 97, priceUnit: "unit", stock: "low-stock", active: true },
+  { id: "nc-5127", sku: "NC-5127", category: "solvents", name: "High-Purity Anhydrous Solvent", purity: "≥99.9%", format: "1 L amber bottle", price: 97, priceUnit: "unit", stock: "low-stock", active: true },
   { id: "nc-6084", sku: "NC-6084", category: "forensic", name: "Forensic Toxicology Reference Panel", purity: "≥98% per analyte", format: "12-analyte panel", price: 720, priceUnit: "panel", stock: "in-stock", active: true }
 ];
