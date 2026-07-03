@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us | NicheChems</title>
+<meta name="description" content="About NicheChems, and a plain-language guide to buying Ethereum and connecting a wallet to pay for your order.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://nichechems.com/about/">
+<meta name="theme-color" content="#3B5FCC">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%233B5FCC'/%3E%3Cpath d='M13 6h6v6.6l4.6 9.9a2 2 0 0 1-1.8 2.9H10.2a2 2 0 0 1-1.8-2.9L13 12.6V6z' fill='none' stroke='%23FAF9F6' stroke-width='1.7' stroke-linejoin='round' stroke-linecap='round'/%3E%3Cpath d='M11 19h10' stroke='%23A9C9A0' stroke-width='1.7' stroke-linecap='round'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+
+<style>
+/* Design tokens, reset, header/nav/footer are identical to the rest of
+   the site — see catalogue/index.html's section-1 comment. */
+:root {
+  --color-bg:          #FAF9F6;
+  --color-bg-alt:      #F2F0EA;
+  --color-bg-cool:     #EFF2F0;
+  --color-surface:     #FFFFFF;
+  --color-border:      #E4E1D8;
+  --color-border-cool: #DCE3DE;
+
+  --color-blue-light:  #6FA0F5;
+  --color-blue:        #3B5FCC;
+  --color-blue-dark:   #2A459E;
+  --color-blue-tint:   #EDF2FD;
+
+  --color-sage:        #93AC8B;
+  --color-moss:        #5C7A52;
+  --color-forest:      #33502F;
+  --color-green-tint:  #EEF3EA;
+
+  --color-warn:        #96631C;
+  --color-warn-tint:   #FBF1E4;
+
+  --color-ink:         #202722;
+  --color-ink-soft:    #545E56;
+  --color-ink-faint:   #7C877F;
+  --color-on-blue:     #FBFBF8;
+
+  --font-serif: "Fraunces", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-mono:  ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --text-xs:   clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
+  --text-sm:   clamp(0.875rem, 0.84rem + 0.15vw, 0.9375rem);
+  --text-base: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+  --text-md:   clamp(1.125rem, 1.05rem + 0.3vw, 1.3125rem);
+  --text-lg:   clamp(1.375rem, 1.2rem + 0.7vw, 1.75rem);
+  --text-xl:   clamp(1.75rem, 1.4rem + 1.4vw, 2.375rem);
+  --text-2xl:  clamp(2.25rem, 1.7rem + 2.4vw, 3.375rem);
+
+  --leading-tight: 1.15;
+  --leading-snug:  1.35;
+  --leading-normal: 1.6;
+
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
+  --space-5: 1.5rem; --space-6: 2rem; --space-7: 2.5rem; --space-8: 3.25rem; --space-9: 4.5rem; --space-10: 6rem;
+
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 18px;
+  --radius-blob: 62% 38% 55% 45% / 48% 45% 55% 52%;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(32, 39, 34, 0.06), 0 1px 1px rgba(32, 39, 34, 0.04);
+  --shadow-md: 0 4px 14px -8px rgba(32, 39, 34, 0.14), 0 2px 5px -3px rgba(32, 39, 34, 0.08);
+  --shadow-lg: 0 10px 26px -12px rgba(32, 39, 34, 0.18), 0 4px 10px -6px rgba(32, 39, 34, 0.08);
+  --shadow-blue: 0 6px 16px -8px rgba(59, 95, 204, 0.32);
+
+  --ease-organic: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft:    cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 180ms;
+  --duration-base: 340ms;
+  --duration-slow: 620ms;
+
+  --container-max: 1320px;
+  --header-h: 76px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans); font-size: var(--text-base); line-height: var(--leading-normal);
+  color: var(--color-ink); background: var(--color-bg);
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
+img, svg { display: block; max-width: 100%; }
+ul, ol { list-style: none; padding: 0; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+input { font: inherit; }
+h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 500; line-height: var(--leading-tight); color: var(--color-forest); text-wrap: balance; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 2.5px solid var(--color-blue); outline-offset: 3px; border-radius: var(--radius-sm); }
+
+.c-skip-link {
+  position: absolute; left: var(--space-4); top: -60px; z-index: 1000;
+  background: var(--color-forest); color: var(--color-on-blue);
+  padding: var(--space-3) var(--space-5); border-radius: var(--radius-sm);
+  font-weight: 600; transition: top var(--duration-fast) var(--ease-soft);
+}
+.c-skip-link:focus { top: var(--space-4); }
+
+.l-container { width: 100%; max-width: var(--container-max); margin-inline: auto; padding-inline: var(--space-5); }
+@media (min-width: 600px) { .l-container { padding-inline: var(--space-7); } }
+@media (min-width: 1200px) { .l-container { padding-inline: var(--space-8); } }
+
+.l-section { padding-block: var(--space-9); }
+@media (min-width: 900px) { .l-section { padding-block: var(--space-10); } }
+.l-section--alt { background: var(--color-bg-alt); }
+.l-section--blue { background: linear-gradient(155deg, var(--color-blue) 0%, var(--color-blue-dark) 100%); color: var(--color-on-blue); }
+
+.c-eyebrow {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--color-moss); margin-bottom: var(--space-4);
+}
+.c-eyebrow::before { content: ""; width: 22px; height: 2px; background: var(--color-moss); border-radius: var(--radius-pill); }
+
+.c-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  padding: 0.9rem 1.75rem; border-radius: var(--radius-md); font-size: var(--text-sm); font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: transform var(--duration-base) var(--ease-organic), box-shadow var(--duration-base) var(--ease-organic), background-color var(--duration-fast) var(--ease-soft), color var(--duration-fast) var(--ease-soft);
+  white-space: nowrap;
+}
+.c-btn--primary { background: var(--color-blue); color: var(--color-on-blue); box-shadow: var(--shadow-blue); }
+.c-btn--primary:hover { background: var(--color-blue-dark); transform: translateY(-1px); }
+.c-btn--ghost { background: transparent; color: var(--color-forest); border: 1.5px solid var(--color-border-cool); }
+.c-btn--ghost:hover { border-color: var(--color-moss); background: var(--color-green-tint); transform: translateY(-1px); }
+.c-btn--on-blue { background: var(--color-on-blue); color: var(--color-blue-dark); }
+.c-btn--on-blue:hover { background: var(--color-bg-alt); transform: translateY(-1px); }
+
+/* -- Top bar / header / mobile nav — identical to catalogue/index.html -- */
+.c-top-bar { background: var(--color-forest); color: var(--color-on-blue); }
+.c-top-bar__inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--space-2) var(--space-6); padding-block: var(--space-2); font-size: var(--text-xs); text-align: center; }
+.c-top-bar__inner a { text-decoration: underline; text-underline-offset: 2px; opacity: 0.9; }
+.c-top-bar__inner a:hover { opacity: 1; }
+@media (min-width: 700px) { .c-top-bar__inner { justify-content: space-between; } }
+
+.c-header { position: sticky; top: 0; z-index: 100; background: rgba(250, 249, 246, 0.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid transparent; transition: box-shadow var(--duration-base) var(--ease-soft), border-color var(--duration-base) var(--ease-soft); }
+.c-header.is-scrolled { box-shadow: var(--shadow-sm); border-bottom-color: var(--color-border); }
+.c-header__inner { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); min-height: var(--header-h); }
+
+.c-logo { display: inline-flex; align-items: center; gap: var(--space-2); font-family: var(--font-serif); font-size: var(--text-md); font-weight: 600; color: var(--color-forest); }
+.c-logo__mark { display: grid; place-items: center; width: 38px; height: 38px; border-radius: var(--radius-md); background: var(--color-blue); color: var(--color-on-blue); flex-shrink: 0; overflow: hidden; }
+.c-logo__mark img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; }
+.c-logo__word-alt { color: var(--color-blue); }
+.c-header .c-logo { font-size: 1.4rem; }
+.c-header .c-logo__mark { width: 64px; height: 64px; }
+.c-header .c-logo__mark img { transform: scale(2.3); transform-origin: 50% 34%; }
+
+.c-nav { display: none; }
+.c-nav__list { display: flex; align-items: center; gap: var(--space-7); font-size: var(--text-sm); font-weight: 500; }
+.c-nav__list a { position: relative; padding-block: var(--space-2); color: var(--color-ink-soft); transition: color var(--duration-fast) var(--ease-soft); }
+.c-nav__list a::after { content: ""; position: absolute; left: 0; bottom: -2px; width: 100%; height: 2px; background: var(--color-blue); transform: scaleX(0); transform-origin: left; transition: transform var(--duration-base) var(--ease-organic); }
+.c-nav__list a:hover, .c-nav__list a[aria-current="page"] { color: var(--color-blue); }
+.c-nav__list a:hover::after, .c-nav__list a[aria-current="page"]::after { transform: scaleX(1); }
+
+.c-header__actions { display: flex; align-items: center; gap: var(--space-4); }
+.c-header__account-link { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); font-weight: 500; color: var(--color-ink-soft); }
+.c-header__account-link:hover { color: var(--color-blue); }
+.c-header__account-link span { display: none; }
+@media (min-width: 480px) { .c-header__account-link span { display: inline; } }
+
+.c-header__cart-link { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 28px; color: var(--color-ink-soft); transition: color var(--duration-fast) var(--ease-soft); }
+.c-header__cart-link:hover { color: var(--color-blue); }
+.c-header__cart-count { position: absolute; top: -8px; right: -10px; min-width: 17px; height: 17px; padding: 0 3px; display: flex; align-items: center; justify-content: center; background: var(--color-blue); color: var(--color-on-blue); font-size: 0.65rem; font-weight: 700; line-height: 1; border-radius: var(--radius-pill); }
+
+.c-nav-toggle { display: inline-flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 44px; height: 44px; border-radius: var(--radius-sm); }
+.c-nav-toggle span { width: 22px; height: 2px; background: var(--color-forest); border-radius: var(--radius-pill); transition: transform var(--duration-base) var(--ease-organic), opacity var(--duration-fast) var(--ease-soft); }
+.c-nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.c-nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.c-nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.c-mobile-nav { position: fixed; inset: var(--mobile-nav-top, 116px) 0 0 0; z-index: 90; background: var(--color-bg); padding: var(--space-6) var(--space-5) var(--space-8); overflow-y: auto; transform: translateX(100%); transition: transform var(--duration-slow) var(--ease-organic); }
+.c-mobile-nav.is-open { transform: translateX(0); }
+.c-mobile-nav__list { display: flex; flex-direction: column; font-family: var(--font-serif); font-size: var(--text-lg); gap: var(--space-1); }
+.c-mobile-nav__list a { display: block; padding-block: var(--space-3); border-bottom: 1px solid var(--color-border); color: var(--color-forest); }
+.c-mobile-nav__list a[aria-current="page"] { color: var(--color-blue); }
+.c-mobile-nav__cta { margin-top: var(--space-7); display: flex; flex-direction: column; gap: var(--space-3); }
+
+@media (min-width: 960px) {
+  .c-nav { display: block; }
+  .c-nav-toggle { display: none; }
+  .c-mobile-nav { display: none; }
+}
+
+/* -- Page header / breadcrumb -- */
+.c-page-header { padding-block: var(--space-8) var(--space-6); }
+.c-breadcrumb { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-2); font-size: var(--text-xs); color: var(--color-ink-faint); margin-bottom: var(--space-5); }
+.c-breadcrumb a { color: var(--color-ink-soft); }
+.c-breadcrumb a:hover { color: var(--color-blue); }
+.c-page-header__title { font-size: var(--text-2xl); margin-bottom: var(--space-4); max-width: 40rem; }
+.c-page-header__lede { font-size: var(--text-md); color: var(--color-ink-soft); max-width: 46rem; }
+
+/* -- About body copy -- */
+.c-prose { max-width: 46rem; }
+.c-prose p { color: var(--color-ink-soft); margin-bottom: var(--space-5); }
+.c-prose p:last-child { margin-bottom: 0; }
+
+.c-section-head { max-width: 46rem; margin-bottom: var(--space-8); }
+.c-section-head p { color: var(--color-ink-soft); margin-top: var(--space-3); }
+
+/* -- Numbered guide steps -- */
+.c-guide-list { display: grid; gap: var(--space-6); counter-reset: guide-step; }
+@media (min-width: 800px) { .c-guide-list { grid-template-columns: repeat(2, 1fr); } }
+.c-guide-step {
+  position: relative; background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); padding: var(--space-6) var(--space-6) var(--space-6) var(--space-7);
+  counter-increment: guide-step;
+}
+.c-guide-step::before {
+  content: counter(guide-step);
+  position: absolute; top: var(--space-6); left: -18px;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--color-blue); color: var(--color-on-blue);
+  font-family: var(--font-serif); font-weight: 600; font-size: var(--text-md);
+  display: grid; place-items: center; box-shadow: var(--shadow-md);
+}
+.c-guide-step h3 { font-size: var(--text-md); margin-bottom: var(--space-3); }
+.c-guide-step p { font-size: var(--text-sm); color: var(--color-ink-soft); margin-bottom: var(--space-3); }
+.c-guide-step p:last-child { margin-bottom: 0; }
+.c-guide-step ul { margin-top: var(--space-3); display: flex; flex-direction: column; gap: var(--space-2); }
+.c-guide-step li { font-size: var(--text-sm); color: var(--color-ink-soft); padding-left: var(--space-5); position: relative; }
+.c-guide-step li::before { content: "\2022"; position: absolute; left: var(--space-1); color: var(--color-blue); font-weight: 700; }
+
+.c-callout {
+  display: flex; gap: var(--space-4); background: var(--color-warn-tint); border: 1px solid rgba(150, 99, 28, 0.25);
+  border-radius: var(--radius-lg); padding: var(--space-6); margin-top: var(--space-8);
+}
+.c-callout__icon { flex-shrink: 0; width: 36px; height: 36px; border-radius: var(--radius-sm); background: rgba(150, 99, 28, 0.14); color: var(--color-warn); display: grid; place-items: center; }
+.c-callout h3 { font-size: var(--text-md); color: var(--color-warn); margin-bottom: var(--space-2); }
+.c-callout p { font-size: var(--text-sm); color: var(--color-ink-soft); margin: 0; }
+
+.c-cta-band { position: relative; overflow: hidden; border-radius: var(--radius-lg); margin-inline: var(--space-5); padding: var(--space-9) var(--space-6); text-align: center; }
+@media (min-width: 700px) { .c-cta-band { margin-inline: var(--space-7); padding: var(--space-10) var(--space-9); } }
+.c-cta-band::before { content: ""; position: absolute; bottom: -30%; left: -6%; width: 320px; height: 320px; background: rgba(255, 255, 255, 0.08); border-radius: var(--radius-blob); }
+.c-cta-band__inner { position: relative; z-index: 1; max-width: 40rem; margin-inline: auto; }
+.c-cta-band h2 { color: var(--color-on-blue); font-size: var(--text-xl); margin-bottom: var(--space-4); }
+.c-cta-band p { color: rgba(251, 251, 248, 0.85); font-size: var(--text-md); margin-bottom: var(--space-7); }
+.c-cta-band__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-4); }
+
+/* -- Footer — identical to catalogue/index.html -- */
+.c-footer { background: var(--color-forest); color: rgba(251, 251, 248, 0.88); }
+.c-footer__top { display: grid; gap: var(--space-8); padding-block: var(--space-10); }
+@media (min-width: 700px) { .c-footer__top { grid-template-columns: 1.3fr repeat(3, 1fr); gap: var(--space-6); } }
+.c-footer__brand .c-logo { color: var(--color-on-blue); }
+.c-footer__brand .c-logo__word-alt { color: var(--color-blue-light); }
+.c-footer__brand .c-logo__mark { background: var(--color-blue-light); color: var(--color-forest); }
+.c-footer__brand p { margin-top: var(--space-4); font-size: var(--text-sm); color: rgba(251, 251, 248, 0.7); max-width: 26rem; }
+.c-footer__col h3 { font-family: var(--font-sans); font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-blue-light); margin-bottom: var(--space-5); }
+.c-footer__col ul { display: flex; flex-direction: column; gap: var(--space-3); }
+.c-footer__col a, .c-footer__col address { font-size: var(--text-sm); font-style: normal; color: rgba(251, 251, 248, 0.78); transition: color var(--duration-fast) var(--ease-soft); }
+.c-footer__col a:hover { color: var(--color-on-blue); }
+.c-footer__legal { border-top: 1px solid rgba(251, 251, 248, 0.14); padding-block: var(--space-6); }
+.c-footer__disclaimer { font-size: var(--text-xs); line-height: var(--leading-normal); color: rgba(251, 251, 248, 0.62); max-width: 62rem; margin-bottom: var(--space-5); }
+.c-footer__bottom-row { display: flex; flex-direction: column; gap: var(--space-3); font-size: var(--text-xs); color: rgba(251, 251, 248, 0.55); }
+@media (min-width: 700px) { .c-footer__bottom-row { flex-direction: row; justify-content: space-between; align-items: center; } }
+.c-footer__bottom-links { display: flex; gap: var(--space-5); flex-wrap: wrap; }
+.c-footer__bottom-links a:hover { color: var(--color-on-blue); }
+
+.u-visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+</style>
+</head>
+<body>
+
+<a class="c-skip-link" href="#main-content">Skip to main content</a>
+
+<div class="c-top-bar">
+  <div class="l-container c-top-bar__inner">
+    <p>For laboratory &amp; research use only. Verified institutional accounts required for fulfillment.</p>
+    <p><a href="../account/index.html">Track an order</a> &nbsp;&middot;&nbsp; <a href="#contact">Contact support</a></p>
+  </div>
+</div>
+
+<header class="c-header" id="site-header">
+  <div class="l-container c-header__inner">
+    <a class="c-logo" href="../index.html">
+      <span class="c-logo__mark" aria-hidden="true">
+        <img src="../assets/logo.png" alt="" width="38" height="38" loading="eager">
+      </span>
+      Niche<span class="c-logo__word-alt">Chems</span>
+    </a>
+
+    <nav class="c-nav" aria-label="Primary">
+      <ul class="c-nav__list">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../catalogue/index.html">Catalogue</a></li>
+        <li><a href="index.html" aria-current="page">About Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="c-header__actions">
+      <a class="c-header__account-link" href="../account/index.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="7.5" r="4.5"/></svg>
+        <span>Account</span>
+      </a>
+      <a class="c-header__cart-link" href="../checkout/index.html" aria-label="Cart">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6h15l-1.6 9.2a2 2 0 0 1-2 1.8H8.6a2 2 0 0 1-2-1.7L5 3H2"/><circle cx="9" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/></svg>
+        <span class="c-header__cart-count" id="cart-count" hidden>0</span>
+      </a>
+      <button class="c-nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="c-mobile-nav" id="mobile-nav" aria-label="Mobile primary">
+  <ul class="c-mobile-nav__list">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../catalogue/index.html">Catalogue</a></li>
+    <li><a href="index.html" aria-current="page">About Us</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="c-mobile-nav__cta">
+    <a class="c-btn c-btn--primary" href="../catalogue/index.html">Browse Catalogue</a>
+    <a class="c-btn c-btn--ghost" href="../account/index.html">Sign In / Account</a>
+  </div>
+</nav>
+
+<main id="main-content">
+
+  <!-- ===================================================================
+       PAGE HEADER
+       =================================================================== -->
+  <div class="l-container c-page-header">
+    <nav class="c-breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">About Us</span>
+    </nav>
+    <span class="c-eyebrow">About NicheChems</span>
+    <h1 class="c-page-header__title">Certified reference materials, straightforward crypto checkout.</h1>
+    <p class="c-page-header__lede">Who we are, and a plain-language walkthrough of buying Ethereum and paying with a wallet — since that's the only way we currently accept payment.</p>
+  </div>
+
+  <!-- ===================================================================
+       ABOUT
+       =================================================================== -->
+  <section class="l-section" style="padding-top: 0;">
+    <div class="l-container c-prose">
+      <p>NicheChems supplies certified reference standards, isotope-labeled internal standards, chromatography reagents, calibration buffers, high-purity solvents, and forensic reference panels to universities, testing laboratories, and industrial R&amp;D teams. Every lot ships with a Certificate of Analysis and Safety Data Sheet, and every product on the site is managed through our internal catalogue tools — what you see here reflects current stock and pricing, not a stale spec sheet.</p>
+      <p>We run a lean, research-focused operation. To keep overhead down (and pass that through in pricing) we accept payment in Ethereum (ETH) only — no card processors, no invoicing delays. If you've never paid with crypto before, the guide below covers everything you need: buying ETH, moving it to a wallet you control, and sending payment at checkout.</p>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       ETH BUYING + WALLET GUIDE
+       =================================================================== -->
+  <section class="l-section l-section--alt">
+    <div class="l-container">
+      <div class="c-section-head">
+        <span class="c-eyebrow">Paying With Ethereum</span>
+        <h2>A guide to buying ETH and connecting a wallet</h2>
+        <p>Five steps, start to finish. Budget 15–20 minutes if this is your first time — most of that is exchange identity verification, not the crypto part.</p>
+      </div>
+
+      <ol class="c-guide-list">
+        <li class="c-guide-step">
+          <h3>Buy ETH on an exchange</h3>
+          <p>Sign up with a reputable exchange — Coinbase, Kraken, and Binance are the largest and all support bank transfers or card purchases. Complete their identity verification (required by law), then buy the ETH amount you need.</p>
+          <p>Check your order total in USD at checkout first — ETH's price moves, so buy a little extra to cover network fees and price movement between purchase and payment.</p>
+        </li>
+
+        <li class="c-guide-step">
+          <h3>Move it to a wallet you control</h3>
+          <p>An exchange account isn't a wallet — you don't hold the private keys. Install a self-custody wallet before you pay us:</p>
+          <ul>
+            <li>MetaMask (browser extension + mobile)</li>
+            <li>Rainbow (mobile)</li>
+            <li>Trust Wallet (mobile)</li>
+          </ul>
+          <p>Set it up, securely back up the seed phrase it gives you, then withdraw your ETH from the exchange to your new wallet's address.</p>
+        </li>
+
+        <li class="c-guide-step">
+          <h3>Head to checkout</h3>
+          <p>Add products to your cart and proceed to <a href="../checkout/index.html" style="color: var(--color-blue); text-decoration: underline;">Checkout</a>. The payment step shows the exact ETH amount due and our receiving address.</p>
+        </li>
+
+        <li class="c-guide-step">
+          <h3>Connect your wallet</h3>
+          <p>Click <strong>Connect Wallet</strong> on the payment page. Your wallet extension or app opens a popup:</p>
+          <ul>
+            <li>Pick the account you want to pay from, then approve the connection</li>
+            <li>Check the network shown is <strong>Ethereum Mainnet</strong> — switch it in your wallet if it shows anything else</li>
+            <li>Confirm the ETH amount and receiving address in the popup match what's shown on our payment page</li>
+            <li>Approve / sign the transaction — your wallet will prompt you once more before anything sends</li>
+          </ul>
+          <p>Prefer not to connect a wallet to a site? Skip this and use "send manually" instead — copy our address, send from any wallet app, no connection needed.</p>
+        </li>
+
+        <li class="c-guide-step">
+          <h3>Confirm your payment</h3>
+          <p>Either way you paid, copy the transaction hash from your wallet's activity log and email it to us along with your order reference (both are on the payment page) so we can confirm it on-chain and fulfill your order.</p>
+        </li>
+      </ol>
+
+      <div class="c-callout">
+        <span class="c-callout__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 16.5h.01"/><path d="M10.3 3.9 2.5 17.5A1.8 1.8 0 0 0 4 20.3h16a1.8 1.8 0 0 0 1.5-2.8L13.7 3.9a1.8 1.8 0 0 0-3.4 0Z"/></svg>
+        </span>
+        <div>
+          <h3>Before you send anything</h3>
+          <p>Double- and triple-check the receiving address on the payment page character-by-character before sending — Ethereum transactions can't be reversed. For a large order, consider sending a small test amount first. Never share your wallet's seed phrase with anyone, including anyone claiming to be NicheChems support — we will never ask for it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       CTA BAND
+       =================================================================== -->
+  <section class="l-section">
+    <div class="c-cta-band l-section--blue">
+      <div class="c-cta-band__inner">
+        <h2>Ready to order?</h2>
+        <p>Browse certified reference standards and reagents, or reach out if you need help with your first crypto payment.</p>
+        <div class="c-cta-band__actions">
+          <a class="c-btn c-btn--on-blue" href="../catalogue/index.html">Browse Catalogue</a>
+          <a class="c-btn c-btn--ghost" style="color: var(--color-on-blue); border-color: rgba(251,251,248,0.35);" href="#contact">Contact Our Team</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="c-footer" id="contact">
+  <div class="l-container c-footer__top">
+    <div class="c-footer__brand">
+      <a class="c-logo" href="../index.html">
+        <span class="c-logo__mark" aria-hidden="true">
+          <img src="../assets/logo.png" alt="" width="38" height="38" loading="lazy">
+        </span>
+        Niche<span class="c-logo__word-alt">Chems</span>
+      </a>
+      <p>Certified reference standards and analytical reagents for universities, laboratories, and qualified research institutions. Research use only.</p>
+    </div>
+
+    <div class="c-footer__col">
+      <h3>Catalogue</h3>
+      <ul>
+        <li><a href="../catalogue/index.html?category=reference-standards">Reference Standards</a></li>
+        <li><a href="../catalogue/index.html?category=chromatography">Chromatography Reagents</a></li>
+        <li><a href="../catalogue/index.html?category=isotope-labeled">Isotope-Labeled Standards</a></li>
+        <li><a href="../catalogue/index.html?category=forensic">Forensic Reference Panels</a></li>
+      </ul>
+    </div>
+
+    <div class="c-footer__col">
+      <h3>Resources</h3>
+      <ul>
+        <li><a href="index.html">About Us</a></li>
+        <li><a href="#contact">Safety Data Sheets</a></li>
+        <li><a href="#contact">Certificate of Analysis Requests</a></li>
+        <li><a href="#contact">Shipping &amp; Handling Policy</a></li>
+      </ul>
+    </div>
+
+    <div class="c-footer__col">
+      <h3>Contact</h3>
+      <ul>
+        <li><a href="mailto:research@nichechems.com">research@nichechems.com</a></li>
+        <li><a href="tel:+18005550142">+1 (800) 555-0142</a></li>
+        <li><address>Laboratory Way, Suite 200<br>Cambridge, MA, USA</address></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="l-container c-footer__legal">
+    <p class="c-footer__disclaimer">
+      All products offered by NicheChems are intended strictly for in-vitro laboratory, analytical, and forensic research use by qualified professionals and institutions. They are not intended for human or veterinary use, diagnostic use, food, drug, or household purposes, and must not be used for personal consumption. NicheChems reserves the right to verify the professional or institutional status of any account prior to order fulfillment.
+    </p>
+    <div class="c-footer__bottom-row">
+      <p>&copy; 2026 NicheChems. All rights reserved.</p>
+      <div class="c-footer__bottom-links">
+        <a href="#contact">Privacy Policy</a>
+        <a href="#contact">Terms of Service</a>
+        <a href="#contact">Research Use Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/cart.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  var toggle = document.getElementById("nav-toggle");
+  var mobileNav = document.getElementById("mobile-nav");
+  var header = document.getElementById("site-header");
+
+  function syncMobileNavOffset() {
+    var offset = header.getBoundingClientRect().bottom;
+    document.documentElement.style.setProperty("--mobile-nav-top", offset + "px");
+  }
+
+  function closeNav() {
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "Open menu");
+    mobileNav.classList.remove("is-open");
+    document.body.style.overflow = "";
+  }
+
+  function openNav() {
+    syncMobileNavOffset();
+    toggle.setAttribute("aria-expanded", "true");
+    toggle.setAttribute("aria-label", "Close menu");
+    mobileNav.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+  }
+
+  window.addEventListener("resize", syncMobileNavOffset);
+
+  toggle.addEventListener("click", function () {
+    var isOpen = toggle.getAttribute("aria-expanded") === "true";
+    isOpen ? closeNav() : openNav();
+  });
+
+  mobileNav.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", closeNav);
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+      closeNav();
+      toggle.focus();
+    }
+  });
+
+  function updateHeaderShadow() {
+    header.classList.toggle("is-scrolled", window.scrollY > 8);
+  }
+  document.addEventListener("scroll", updateHeaderShadow, { passive: true });
+  updateHeaderShadow();
+
+  function syncCartBadge() {
+    var badge = document.getElementById("cart-count");
+    if (!badge || !window.NicheChemsCart) return;
+    var count = window.NicheChemsCart.getCartCount();
+    badge.textContent = count;
+    badge.hidden = count === 0;
+  }
+  syncCartBadge();
+  window.addEventListener("nichechems:cart-updated", syncCartBadge);
+  window.addEventListener("storage", function (e) { if (e.key === "nichechems_cart") syncCartBadge(); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catalogue | NicheChems Reference Standards &amp; Reagents</title>
+<meta name="description" content="Browse NicheChems' full catalogue of certified reference standards, isotope-labeled standards, chromatography reagents, buffers, solvents, and forensic reference panels.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://nichechems.com/catalogue/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NicheChems">
+<meta property="og:title" content="Catalogue | NicheChems Reference Standards &amp; Reagents">
+<meta property="og:description" content="Certified reference standards, chromatography reagents, and analytical materials for qualified research institutions.">
+<meta property="og:url" content="https://nichechems.com/catalogue/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#3B5FCC">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%233B5FCC'/%3E%3Cpath d='M13 6h6v6.6l4.6 9.9a2 2 0 0 1-1.8 2.9H10.2a2 2 0 0 1-1.8-2.9L13 12.6V6z' fill='none' stroke='%23FAF9F6' stroke-width='1.7' stroke-linejoin='round' stroke-linecap='round'/%3E%3Cpath d='M11 19h10' stroke='%23A9C9A0' stroke-width='1.7' stroke-linecap='round'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nichechems.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Catalogue", "item": "https://nichechems.com/catalogue/" }
+  ]
+}
+</script>
+
+<style>
+/* =====================================================================
+   Design tokens, reset, layout primitives, buttons, top bar, header and
+   mobile nav are identical to home/index.html — kept in sync by hand
+   since this static build has no CSS bundler. See that file's section 1
+   comment for the color-ratio / contrast rationale behind these tokens.
+   ===================================================================== */
+:root {
+  --color-bg:          #FAF9F6;
+  --color-bg-alt:      #F2F0EA;
+  --color-bg-cool:     #EFF2F0;
+  --color-surface:     #FFFFFF;
+  --color-border:      #E4E1D8;
+  --color-border-cool: #DCE3DE;
+
+  --color-blue-light:  #6FA0F5;
+  --color-blue:        #3B5FCC;
+  --color-blue-dark:   #2A459E;
+  --color-blue-tint:   #EDF2FD;
+
+  --color-sage:        #93AC8B;
+  --color-moss:        #5C7A52;
+  --color-forest:      #33502F;
+  --color-green-tint:  #EEF3EA;
+
+  --color-ink:         #202722;
+  --color-ink-soft:    #545E56;
+  --color-ink-faint:   #7C877F;
+  --color-on-blue:     #FBFBF8;
+
+  --font-serif: "Fraunces", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --text-xs:   clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
+  --text-sm:   clamp(0.875rem, 0.84rem + 0.15vw, 0.9375rem);
+  --text-base: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+  --text-md:   clamp(1.125rem, 1.05rem + 0.3vw, 1.3125rem);
+  --text-lg:   clamp(1.375rem, 1.2rem + 0.7vw, 1.75rem);
+  --text-xl:   clamp(1.75rem, 1.4rem + 1.4vw, 2.375rem);
+  --text-2xl:  clamp(2.25rem, 1.7rem + 2.4vw, 3.375rem);
+  --text-3xl:  clamp(2.75rem, 1.95rem + 3.4vw, 4.5rem);
+
+  --leading-tight: 1.15;
+  --leading-snug:  1.35;
+  --leading-normal: 1.6;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 2.5rem;
+  --space-8: 3.25rem;
+  --space-9: 4.5rem;
+  --space-10: 6rem;
+  --space-11: 8rem;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-blob: 62% 38% 55% 45% / 48% 45% 55% 52%;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(32, 39, 34, 0.06), 0 1px 1px rgba(32, 39, 34, 0.04);
+  --shadow-md: 0 4px 14px -8px rgba(32, 39, 34, 0.14), 0 2px 5px -3px rgba(32, 39, 34, 0.08);
+  --shadow-lg: 0 10px 26px -12px rgba(32, 39, 34, 0.18), 0 4px 10px -6px rgba(32, 39, 34, 0.08);
+  --shadow-blue: 0 6px 16px -8px rgba(59, 95, 204, 0.32);
+
+  --ease-organic: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft:    cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 180ms;
+  --duration-base: 340ms;
+  --duration-slow: 620ms;
+
+  --container-max: 1320px;
+  --header-h: 76px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--color-ink);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img, svg { display: block; max-width: 100%; }
+ul, ol { list-style: none; padding: 0; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+input { font: inherit; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  line-height: var(--leading-tight);
+  color: var(--color-forest);
+  text-wrap: balance;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2.5px solid var(--color-blue);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+.c-skip-link {
+  position: absolute;
+  left: var(--space-4);
+  top: -60px;
+  z-index: 1000;
+  background: var(--color-forest);
+  color: var(--color-on-blue);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  transition: top var(--duration-fast) var(--ease-soft);
+}
+.c-skip-link:focus { top: var(--space-4); }
+
+.l-container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--space-5);
+}
+@media (min-width: 600px) { .l-container { padding-inline: var(--space-7); } }
+@media (min-width: 1200px) { .l-container { padding-inline: var(--space-8); } }
+@media (min-width: 1800px) { .l-container { max-width: 1560px; } }
+
+.l-section { padding-block: var(--space-9); }
+@media (min-width: 900px) { .l-section { padding-block: var(--space-10); } }
+
+.l-section--alt   { background: var(--color-bg-alt); }
+.l-section--cool  { background: var(--color-bg-cool); }
+.l-section--blue  { background: linear-gradient(155deg, var(--color-blue) 0%, var(--color-blue-dark) 100%); color: var(--color-on-blue); }
+
+.c-section-head { max-width: 46rem; margin-bottom: var(--space-8); }
+.c-section-head--center { margin-inline: auto; text-align: center; }
+.c-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-moss);
+  margin-bottom: var(--space-4);
+}
+.c-eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 2px;
+  background: var(--color-moss);
+  border-radius: var(--radius-pill);
+}
+
+/* =====================================================================
+   BUTTONS
+   ===================================================================== */
+.c-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 0.9rem 1.75rem;
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: transform var(--duration-base) var(--ease-organic),
+              box-shadow var(--duration-base) var(--ease-organic),
+              background-color var(--duration-fast) var(--ease-soft),
+              color var(--duration-fast) var(--ease-soft);
+  white-space: nowrap;
+}
+.c-btn--primary { background: var(--color-blue); color: var(--color-on-blue); box-shadow: var(--shadow-blue); }
+.c-btn--primary:hover { background: var(--color-blue-dark); transform: translateY(-1px); box-shadow: 0 20px 36px -14px rgba(59, 95, 204, 0.48); }
+.c-btn--ghost { background: transparent; color: var(--color-forest); border: 1.5px solid var(--color-border-cool); }
+.c-btn--ghost:hover { border-color: var(--color-moss); background: var(--color-green-tint); transform: translateY(-1px); }
+.c-btn--on-blue { background: var(--color-on-blue); color: var(--color-blue-dark); }
+.c-btn--on-blue:hover { background: var(--color-bg-alt); transform: translateY(-1px); }
+
+/* =====================================================================
+   TOP UTILITY BAR / HEADER / MOBILE NAV
+   ===================================================================== */
+.c-top-bar { background: var(--color-forest); color: var(--color-on-blue); }
+.c-top-bar__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2) var(--space-6);
+  padding-block: var(--space-2);
+  font-size: var(--text-xs);
+  text-align: center;
+}
+.c-top-bar__inner a { text-decoration: underline; text-underline-offset: 2px; opacity: 0.9; }
+.c-top-bar__inner a:hover { opacity: 1; }
+@media (min-width: 700px) { .c-top-bar__inner { justify-content: space-between; } }
+
+.c-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 249, 246, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid transparent;
+  transition: box-shadow var(--duration-base) var(--ease-soft), border-color var(--duration-base) var(--ease-soft);
+}
+.c-header.is-scrolled { box-shadow: var(--shadow-sm); border-bottom-color: var(--color-border); }
+.c-header__inner { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); min-height: var(--header-h); }
+
+.c-logo { display: inline-flex; align-items: center; gap: var(--space-2); font-family: var(--font-serif); font-size: var(--text-md); font-weight: 600; color: var(--color-forest); }
+.c-logo__mark { display: grid; place-items: center; width: 38px; height: 38px; border-radius: var(--radius-md); background: var(--color-blue); color: var(--color-on-blue); flex-shrink: 0; overflow: hidden; }
+.c-logo__mark img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; }
+.c-logo__word-alt { color: var(--color-blue); }
+.c-header .c-logo { font-size: 1.4rem; }
+.c-header .c-logo__mark { width: 64px; height: 64px; }
+.c-header .c-logo__mark img { transform: scale(2.3); transform-origin: 50% 34%; }
+
+.c-nav { display: none; }
+.c-nav__list { display: flex; align-items: center; gap: var(--space-7); font-size: var(--text-sm); font-weight: 500; }
+.c-nav__list a { position: relative; padding-block: var(--space-2); color: var(--color-ink-soft); transition: color var(--duration-fast) var(--ease-soft); }
+.c-nav__list a::after {
+  content: ""; position: absolute; left: 0; bottom: -2px; width: 100%; height: 2px;
+  background: var(--color-blue); transform: scaleX(0); transform-origin: left;
+  transition: transform var(--duration-base) var(--ease-organic);
+}
+.c-nav__list a:hover, .c-nav__list a[aria-current="page"] { color: var(--color-blue); }
+.c-nav__list a:hover::after, .c-nav__list a[aria-current="page"]::after { transform: scaleX(1); }
+
+.c-header__actions { display: flex; align-items: center; gap: var(--space-4); }
+.c-header__account-link { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); font-weight: 500; color: var(--color-ink-soft); }
+.c-header__account-link:hover { color: var(--color-blue); }
+.c-header__account-link span { display: none; }
+@media (min-width: 480px) { .c-header__account-link span { display: inline; } }
+
+.c-header__cart-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  color: var(--color-ink-soft);
+  transition: color var(--duration-fast) var(--ease-soft);
+}
+.c-header__cart-link:hover { color: var(--color-blue); }
+.c-header__cart-count {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-blue);
+  color: var(--color-on-blue);
+  font-size: 0.65rem;
+  font-weight: 700;
+  line-height: 1;
+  border-radius: var(--radius-pill);
+}
+
+.c-nav-toggle { display: inline-flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 44px; height: 44px; border-radius: var(--radius-sm); }
+.c-nav-toggle span { width: 22px; height: 2px; background: var(--color-forest); border-radius: var(--radius-pill); transition: transform var(--duration-base) var(--ease-organic), opacity var(--duration-fast) var(--ease-soft); }
+.c-nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.c-nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.c-nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.c-mobile-nav {
+  position: fixed;
+  inset: var(--mobile-nav-top, 116px) 0 0 0;
+  z-index: 90;
+  background: var(--color-bg);
+  padding: var(--space-6) var(--space-5) var(--space-8);
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform var(--duration-slow) var(--ease-organic);
+}
+.c-mobile-nav.is-open { transform: translateX(0); }
+.c-mobile-nav__list { display: flex; flex-direction: column; font-family: var(--font-serif); font-size: var(--text-lg); gap: var(--space-1); }
+.c-mobile-nav__list a { display: block; padding-block: var(--space-3); border-bottom: 1px solid var(--color-border); color: var(--color-forest); }
+.c-mobile-nav__list a[aria-current="page"] { color: var(--color-blue); }
+.c-mobile-nav__cta { margin-top: var(--space-7); display: flex; flex-direction: column; gap: var(--space-3); }
+
+@media (min-width: 960px) {
+  .c-nav { display: block; }
+  .c-nav-toggle { display: none; }
+  .c-mobile-nav { display: none; }
+}
+
+/* =====================================================================
+   PAGE HEADER + BREADCRUMB
+   ===================================================================== */
+.c-page-header { padding-block: var(--space-8) var(--space-6); }
+.c-breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--color-ink-faint);
+  margin-bottom: var(--space-5);
+}
+.c-breadcrumb a { color: var(--color-ink-soft); }
+.c-breadcrumb a:hover { color: var(--color-blue); }
+.c-page-header__title { font-size: var(--text-2xl); margin-bottom: var(--space-4); }
+.c-page-header__lede { font-size: var(--text-md); color: var(--color-ink-soft); max-width: 48rem; }
+
+/* =====================================================================
+   CATALOGUE TOOLBAR — category filter pills + search + result count
+   Filters are rendered from /js/products-data.js so adding a category
+   there automatically adds a filter pill here.
+   ===================================================================== */
+.c-catalogue-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding-block: var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: var(--space-8);
+}
+@media (min-width: 900px) {
+  .c-catalogue-toolbar { flex-direction: row; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+}
+
+.c-filter-pills { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.c-filter-pill {
+  padding: 0.55rem 1.1rem;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--color-border-cool);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  background: var(--color-surface);
+  transition: background-color var(--duration-fast) var(--ease-soft),
+              color var(--duration-fast) var(--ease-soft),
+              border-color var(--duration-fast) var(--ease-soft);
+}
+.c-filter-pill:hover { border-color: var(--color-moss); }
+.c-filter-pill[aria-pressed="true"] { background: var(--color-blue); border-color: var(--color-blue); color: var(--color-on-blue); }
+
+.c-catalogue-search { position: relative; min-width: 240px; }
+.c-catalogue-search input {
+  width: 100%;
+  padding: 0.7rem var(--space-4) 0.7rem 2.6rem;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--color-border-cool);
+  background: var(--color-surface);
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+}
+.c-catalogue-search svg { position: absolute; left: var(--space-4); top: 50%; transform: translateY(-50%); color: var(--color-ink-faint); width: 16px; height: 16px; pointer-events: none; }
+
+.c-catalogue-count { font-size: var(--text-xs); color: var(--color-ink-faint); }
+
+/* =====================================================================
+   PRODUCT GRID + CARD
+   ===================================================================== */
+.c-product-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+@media (min-width: 700px) { .c-product-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { .c-product-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.c-product-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  transition: transform var(--duration-base) var(--ease-organic),
+              box-shadow var(--duration-base) var(--ease-organic),
+              border-color var(--duration-base) var(--ease-soft);
+  opacity: 0;
+  transform: translateY(18px);
+}
+.c-product-card.is-visible { opacity: 1; transform: translateY(0); }
+.c-product-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: transparent; }
+.c-product-card__top { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-5); gap: var(--space-2); }
+.c-product-card__category { font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-moss); }
+.c-product-card__stock { display: inline-flex; align-items: center; gap: 6px; font-size: var(--text-xs); font-weight: 600; color: var(--color-moss); white-space: nowrap; }
+.c-product-card__stock::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--color-moss); flex-shrink: 0; }
+.c-product-card__stock--low { color: #96631C; }
+.c-product-card__stock--low::before { background: #96631C; }
+.c-product-card__icon { width: 52px; height: 52px; border-radius: var(--radius-md); background: var(--color-blue-tint); color: var(--color-blue); display: grid; place-items: center; margin-bottom: var(--space-4); }
+.c-product-card__icon svg { width: 24px; height: 24px; }
+.c-product-card__thumb { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-md); background: var(--color-blue-tint); margin-bottom: var(--space-4); }
+.c-product-card__name { font-size: var(--text-md); margin-bottom: var(--space-2); }
+.c-product-card__meta { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); font-size: var(--text-xs); color: var(--color-ink-faint); margin-bottom: var(--space-5); }
+.c-product-card__meta strong { color: var(--color-ink-soft); font-weight: 600; }
+.c-product-card__footer { margin-top: auto; display: flex; flex-direction: column; gap: var(--space-4); padding-top: var(--space-5); border-top: 1px solid var(--color-border); }
+.c-product-card__footer-row { display: flex; align-items: center; justify-content: space-between; }
+.c-product-card__add-btn {
+  width: 100%; padding: 0.55rem 1rem; border-radius: var(--radius-md);
+  border: 1.5px solid var(--color-border-cool); background: transparent; color: var(--color-forest);
+  font-size: var(--text-xs); font-weight: 600; text-align: center;
+  transition: border-color var(--duration-fast) var(--ease-soft), background-color var(--duration-fast) var(--ease-soft);
+}
+.c-product-card__add-btn:hover { border-color: var(--color-moss); background: var(--color-green-tint); }
+.c-product-card__add-btn.is-added { border-color: var(--color-blue); background: var(--color-blue-tint); color: var(--color-blue); }
+.c-product-card__price { font-family: var(--font-serif); font-size: var(--text-md); color: var(--color-forest); }
+.c-product-card__price span { font-family: var(--font-sans); font-size: var(--text-xs); color: var(--color-ink-faint); font-weight: 500; }
+.c-product-card__link { font-size: var(--text-xs); font-weight: 700; color: var(--color-blue); display: inline-flex; align-items: center; gap: var(--space-1); }
+.c-product-card__link::after { content: "\2197"; transition: transform var(--duration-fast) var(--ease-soft); }
+.c-product-card__link:hover::after { transform: translate(2px, -2px); }
+
+.c-catalogue-loading { grid-column: 1 / -1; text-align: center; padding-block: var(--space-9); color: var(--color-ink-faint); font-size: var(--text-sm); }
+
+.c-empty-state { display: none; text-align: center; padding-block: var(--space-9); color: var(--color-ink-soft); }
+.c-empty-state.is-visible { display: block; }
+.c-empty-state h3 { margin-bottom: var(--space-3); }
+.c-empty-state p { margin-bottom: var(--space-6); }
+
+.c-toast {
+  position: fixed;
+  bottom: var(--space-6);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-forest);
+  color: var(--color-on-blue);
+  padding: var(--space-4) var(--space-6);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  z-index: 500;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-base) var(--ease-soft);
+}
+.c-toast.is-visible { opacity: 1; }
+
+.c-noscript-note {
+  max-width: 40rem;
+  margin: 0 auto var(--space-8);
+  padding: var(--space-5) var(--space-6);
+  background: var(--color-blue-tint);
+  color: var(--color-blue-dark);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  text-align: center;
+}
+
+/* =====================================================================
+   CTA BAND
+   ===================================================================== */
+.c-cta-band {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  margin-inline: var(--space-5);
+  padding: var(--space-9) var(--space-6);
+  text-align: center;
+}
+@media (min-width: 700px) { .c-cta-band { margin-inline: var(--space-7); padding: var(--space-10) var(--space-9); } }
+.c-cta-band::before {
+  content: ""; position: absolute; bottom: -30%; left: -6%; width: 320px; height: 320px;
+  background: rgba(255, 255, 255, 0.08); border-radius: var(--radius-blob);
+}
+.c-cta-band__inner { position: relative; z-index: 1; max-width: 40rem; margin-inline: auto; }
+.c-cta-band h2 { color: var(--color-on-blue); font-size: var(--text-xl); margin-bottom: var(--space-4); }
+.c-cta-band p { color: rgba(251, 251, 248, 0.85); font-size: var(--text-md); margin-bottom: var(--space-7); }
+.c-cta-band__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-4); }
+
+/* =====================================================================
+   FOOTER
+   ===================================================================== */
+.c-footer { background: var(--color-forest); color: rgba(251, 251, 248, 0.88); }
+.c-footer__top { display: grid; gap: var(--space-8); padding-block: var(--space-10); }
+@media (min-width: 700px) { .c-footer__top { grid-template-columns: 1.3fr repeat(3, 1fr); gap: var(--space-6); } }
+
+.c-footer__brand .c-logo { color: var(--color-on-blue); }
+.c-footer__brand .c-logo__word-alt { color: var(--color-blue-light); }
+.c-footer__brand .c-logo__mark { background: var(--color-blue-light); color: var(--color-forest); }
+.c-footer__brand p { margin-top: var(--space-4); font-size: var(--text-sm); color: rgba(251, 251, 248, 0.7); max-width: 26rem; }
+
+.c-footer__col h3 { font-family: var(--font-sans); font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-blue-light); margin-bottom: var(--space-5); }
+.c-footer__col ul { display: flex; flex-direction: column; gap: var(--space-3); }
+.c-footer__col a, .c-footer__col address { font-size: var(--text-sm); font-style: normal; color: rgba(251, 251, 248, 0.78); transition: color var(--duration-fast) var(--ease-soft); }
+.c-footer__col a:hover { color: var(--color-on-blue); }
+
+.c-footer__legal { border-top: 1px solid rgba(251, 251, 248, 0.14); padding-block: var(--space-6); }
+.c-footer__disclaimer { font-size: var(--text-xs); line-height: var(--leading-normal); color: rgba(251, 251, 248, 0.62); max-width: 62rem; margin-bottom: var(--space-5); }
+.c-footer__bottom-row { display: flex; flex-direction: column; gap: var(--space-3); font-size: var(--text-xs); color: rgba(251, 251, 248, 0.55); }
+@media (min-width: 700px) { .c-footer__bottom-row { flex-direction: row; justify-content: space-between; align-items: center; } }
+.c-footer__bottom-links { display: flex; gap: var(--space-5); flex-wrap: wrap; }
+.c-footer__bottom-links a:hover { color: var(--color-on-blue); }
+
+/* =====================================================================
+   UTILITIES
+   ===================================================================== */
+.u-visually-hidden {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+</style>
+</head>
+<body>
+
+<a class="c-skip-link" href="#main-content">Skip to main content</a>
+
+<div class="c-top-bar">
+  <div class="l-container c-top-bar__inner">
+    <p>For laboratory &amp; research use only. Verified institutional accounts required for fulfillment.</p>
+    <p><a href="../account/index.html">Track an order</a> &nbsp;&middot;&nbsp; <a href="#contact">Contact support</a></p>
+  </div>
+</div>
+
+<header class="c-header" id="site-header">
+  <div class="l-container c-header__inner">
+    <a class="c-logo" href="../index.html">
+      <span class="c-logo__mark" aria-hidden="true">
+        <img src="../assets/logo.png" alt="" width="38" height="38" loading="eager">
+      </span>
+      Niche<span class="c-logo__word-alt">Chems</span>
+    </a>
+
+    <nav class="c-nav" aria-label="Primary">
+      <ul class="c-nav__list">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="index.html" aria-current="page">Catalogue</a></li>
+        <li><a href="../about/index.html">About Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="c-header__actions">
+      <a class="c-header__account-link" href="../account/index.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="7.5" r="4.5"/></svg>
+        <span>Account</span>
+      </a>
+      <a class="c-header__cart-link" href="../checkout/index.html" aria-label="Cart">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6h15l-1.6 9.2a2 2 0 0 1-2 1.8H8.6a2 2 0 0 1-2-1.7L5 3H2"/><circle cx="9" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/></svg>
+        <span class="c-header__cart-count" id="cart-count" hidden>0</span>
+      </a>
+      <button class="c-nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="c-mobile-nav" id="mobile-nav" aria-label="Mobile primary">
+  <ul class="c-mobile-nav__list">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="index.html" aria-current="page">Catalogue</a></li>
+    <li><a href="../about/index.html">About Us</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="c-mobile-nav__cta">
+    <a class="c-btn c-btn--primary" href="../account/index.html">Sign In / Account</a>
+  </div>
+</nav>
+
+<main id="main-content">
+
+  <!-- ===================================================================
+       PAGE HEADER
+       =================================================================== -->
+  <div class="l-container c-page-header">
+    <nav class="c-breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Catalogue</span>
+    </nav>
+    <span class="c-eyebrow">Full Catalogue</span>
+    <h1 class="c-page-header__title">Reference standards &amp; reagents</h1>
+    <p class="c-page-header__lede">Certified materials for calibration, method validation, and analytical research. Filter by category or search by name or catalog number — full specifications, Certificates of Analysis, and Safety Data Sheets are available on each product page.</p>
+  </div>
+
+  <div class="l-container">
+    <noscript>
+      <p class="c-noscript-note">This catalogue's filtering requires JavaScript. If scripts are disabled in your browser, email <a href="mailto:research@nichechems.com" style="text-decoration:underline;">research@nichechems.com</a> for a current price list.</p>
+    </noscript>
+
+    <!-- ===================================================================
+         TOOLBAR — filter pills + search, rendered from /js/products-data.js
+         =================================================================== -->
+    <div class="c-catalogue-toolbar">
+      <div class="c-filter-pills" id="category-filters" role="group" aria-label="Filter by category"></div>
+      <div class="c-catalogue-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <label class="u-visually-hidden" for="catalogue-search">Search by name or catalog number</label>
+        <input type="search" id="catalogue-search" placeholder="Search by name or catalog #" autocomplete="off">
+      </div>
+    </div>
+
+    <p class="c-catalogue-count" id="result-count" role="status" aria-live="polite"></p>
+
+    <ul class="c-product-grid" id="product-grid" style="margin-top: var(--space-6);"></ul>
+
+    <div class="c-empty-state" id="empty-state">
+      <h3>No materials match your filters</h3>
+      <p>Try a different category or search term.</p>
+      <button class="c-btn c-btn--ghost" id="clear-filters">Clear filters</button>
+    </div>
+  </div>
+
+  <p class="c-toast" id="toast" role="status" aria-live="polite"></p>
+
+  <!-- ===================================================================
+       CTA BAND
+       =================================================================== -->
+  <section class="l-section">
+    <div class="c-cta-band l-section--blue">
+      <div class="c-cta-band__inner">
+        <h2>Can't find what you need?</h2>
+        <p>Our team can source additional reference materials and custom panels for qualified research institutions.</p>
+        <div class="c-cta-band__actions">
+          <a class="c-btn c-btn--on-blue" href="#contact">Contact Our Team</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="c-footer" id="contact">
+  <div class="l-container c-footer__top">
+    <div class="c-footer__brand">
+      <a class="c-logo" href="../index.html">
+        <span class="c-logo__mark" aria-hidden="true">
+          <img src="../assets/logo.png" alt="" width="38" height="38" loading="lazy">
+        </span>
+        Niche<span class="c-logo__word-alt">Chems</span>
+      </a>
+      <p>Certified reference standards and analytical reagents for universities, laboratories, and qualified research institutions. Research use only.</p>
+    </div>
+
+    <div class="c-footer__col">
+      <h3>Catalogue</h3>
+      <ul>
+        <li><a href="index.html?category=reference-standards">Reference Standards</a></li>
+        <li><a href="index.html?category=chromatography">Chromatography Reagents</a></li>
+        <li><a href="index.html?category=isotope-labeled">Isotope-Labeled Standards</a></li>
+        <li><a href="index.html?category=forensic">Forensic Reference Panels</a></li>
+      </ul>
+    </div>
+
+    <div class="c-footer__col">
+      <h3>Resources</h3>
+      <ul>
+        <li><a href="../about/index.html">About Us</a></li>
+        <li><a href="#contact">Safety Data Sheets</a></li>
+        <li><a href="#contact">Certificate of Analysis Requests</a></li>
+        <li><a href="#contact">Shipping &amp; Handling Policy</a></li>
+        <li><a href="#contact">Research Use Policy</a></li>
+      </ul>
+    </div>
+
+    <div class="c-footer__col">
+      <h3>Contact</h3>
+      <ul>
+        <li><a href="mailto:research@nichechems.com">research@nichechems.com</a></li>
+        <li><a href="tel:+18005550142">+1 (800) 555-0142</a></li>
+        <li><address>Laboratory Way, Suite 200<br>Cambridge, MA, USA</address></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="l-container c-footer__legal">
+    <p class="c-footer__disclaimer">
+      All products offered by NicheChems are intended strictly for in-vitro laboratory, analytical, and forensic research use by qualified professionals and institutions. They are not intended for human or veterinary use, diagnostic use, food, drug, or household purposes, and must not be used for personal consumption. NicheChems reserves the right to verify the professional or institutional status of any account prior to order fulfillment.
+    </p>
+    <div class="c-footer__bottom-row">
+      <p>&copy; 2026 NicheChems. All rights reserved.</p>
+      <div class="c-footer__bottom-links">
+        <a href="#contact">Privacy Policy</a>
+        <a href="#contact">Terms of Service</a>
+        <a href="#contact">Research Use Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase-config.js"></script>
+<script src="../js/products-data.js"></script>
+<script src="../js/icons.js"></script>
+<script src="../js/products-service.js"></script>
+<script src="../js/cart.js"></script>
+<script>
+/* =====================================================================
+   Mobile nav toggle + header scroll shadow (identical pattern to
+   home/index.html), plus the catalogue's data-driven filter/search/
+   render logic.
+   ===================================================================== */
+(function () {
+  "use strict";
+
+  var toggle = document.getElementById("nav-toggle");
+  var mobileNav = document.getElementById("mobile-nav");
+  var header = document.getElementById("site-header");
+
+  function syncMobileNavOffset() {
+    var offset = header.getBoundingClientRect().bottom;
+    document.documentElement.style.setProperty("--mobile-nav-top", offset + "px");
+  }
+
+  function closeNav() {
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "Open menu");
+    mobileNav.classList.remove("is-open");
+    document.body.style.overflow = "";
+  }
+
+  function openNav() {
+    syncMobileNavOffset();
+    toggle.setAttribute("aria-expanded", "true");
+    toggle.setAttribute("aria-label", "Close menu");
+    mobileNav.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+  }
+
+  window.addEventListener("resize", syncMobileNavOffset);
+
+  toggle.addEventListener("click", function () {
+    var isOpen = toggle.getAttribute("aria-expanded") === "true";
+    isOpen ? closeNav() : openNav();
+  });
+
+  mobileNav.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", closeNav);
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+      closeNav();
+      toggle.focus();
+    }
+  });
+
+  function updateHeaderShadow() {
+    header.classList.toggle("is-scrolled", window.scrollY > 8);
+  }
+  document.addEventListener("scroll", updateHeaderShadow, { passive: true });
+  updateHeaderShadow();
+
+  /* -- Cart badge: reflects js/cart.js's localStorage cart, updates
+     live on this tab (custom event) and across tabs (storage event). */
+  function syncCartBadge() {
+    var badge = document.getElementById("cart-count");
+    if (!badge || !window.NicheChemsCart) return;
+    var count = window.NicheChemsCart.getCartCount();
+    badge.textContent = count;
+    badge.hidden = count === 0;
+  }
+  syncCartBadge();
+  window.addEventListener("nichechems:cart-updated", syncCartBadge);
+  window.addEventListener("storage", function (e) { if (e.key === "nichechems_cart") syncCartBadge(); });
+
+  /* =====================================================================
+     CATALOGUE: filter pills, search, and product grid — data comes from
+     window.NicheChemsData (Supabase, with a static fallback), see
+     /js/products-service.js. categories/products start empty and are
+     populated once by init() below; icons.js loads synchronously since
+     it has no network dependency.
+     ===================================================================== */
+  var categories = [];
+  var products = [];
+  var icons = window.NICHECHEMS_ICONS || {};
+
+  var filtersEl = document.getElementById("category-filters");
+  var gridEl = document.getElementById("product-grid");
+  var countEl = document.getElementById("result-count");
+  var emptyStateEl = document.getElementById("empty-state");
+  var searchInput = document.getElementById("catalogue-search");
+  var clearFiltersBtn = document.getElementById("clear-filters");
+
+  var initialParams = new URLSearchParams(window.location.search);
+  var state = {
+    category: initialParams.get("category") || "all",
+    search: ""
+  };
+
+  function categoryLabel(id) {
+    var match = categories.filter(function (c) { return c.id === id; })[0];
+    return match ? match.label : id;
+  }
+
+  function iconFor(categoryId) {
+    var match = categories.filter(function (c) { return c.id === categoryId; })[0];
+    return (match && icons[match.icon]) || "";
+  }
+
+  function renderFilters() {
+    var all = [{ id: "all", label: "All Materials" }].concat(categories);
+    filtersEl.innerHTML = all.map(function (cat) {
+      var pressed = state.category === cat.id;
+      return '<button type="button" class="c-filter-pill" data-category="' + cat.id + '" aria-pressed="' + pressed + '">' + cat.label + '</button>';
+    }).join("");
+  }
+
+  function matchesSearch(product, term) {
+    if (!term) return true;
+    var haystack = (product.name + " " + product.sku).toLowerCase();
+    return haystack.indexOf(term) !== -1;
+  }
+
+  function renderProducts() {
+    var term = state.search.trim().toLowerCase();
+    var filtered = products.filter(function (p) {
+      var categoryOk = state.category === "all" || p.category === state.category;
+      return categoryOk && matchesSearch(p, term);
+    });
+
+    gridEl.innerHTML = filtered.map(function (product) {
+      var isLow = product.stock === "low-stock";
+      return (
+        '<li class="c-product-card">' +
+          '<div class="c-product-card__top">' +
+            '<span class="c-product-card__category">' + categoryLabel(product.category) + '</span>' +
+            '<span class="c-product-card__stock' + (isLow ? ' c-product-card__stock--low' : '') + '">' + (isLow ? 'Low Stock' : 'In Stock') + '</span>' +
+          '</div>' +
+          (product.imageUrl
+            ? '<img class="c-product-card__thumb" src="' + product.imageUrl + '" alt="" loading="lazy">'
+            : '<span class="c-product-card__icon" aria-hidden="true">' + iconFor(product.category) + '</span>') +
+          '<h3 class="c-product-card__name">' + product.name + '</h3>' +
+          '<p class="c-product-card__meta">' +
+            '<span><strong>Cat #</strong> ' + product.sku + '</span>' +
+            '<span><strong>Purity</strong> ' + product.purity + '</span>' +
+            '<span><strong>Format</strong> ' + product.format + '</span>' +
+          '</p>' +
+          '<div class="c-product-card__footer">' +
+            '<button type="button" class="c-product-card__add-btn" data-add-to-cart="' + product.id + '">Add to Cart</button>' +
+            '<div class="c-product-card__footer-row">' +
+              '<span class="c-product-card__price">$' + product.price + '<span> / ' + product.priceUnit + '</span></span>' +
+              '<a class="c-product-card__link" href="../product-page/index.html?id=' + product.id + '">View Details</a>' +
+            '</div>' +
+          '</div>' +
+        '</li>'
+      );
+    }).join("");
+
+    countEl.textContent = "Showing " + filtered.length + " of " + products.length + " materials";
+    emptyStateEl.classList.toggle("is-visible", filtered.length === 0);
+
+    revealCards();
+  }
+
+  function revealCards() {
+    var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var cards = gridEl.querySelectorAll(".c-product-card");
+
+    if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+      cards.forEach(function (card) { card.classList.add("is-visible"); });
+      return;
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+
+    cards.forEach(function (card, index) {
+      card.style.transitionDelay = (index % 3) * 70 + "ms";
+      observer.observe(card);
+    });
+  }
+
+  function syncUrl() {
+    var params = new URLSearchParams(window.location.search);
+    if (state.category === "all") {
+      params.delete("category");
+    } else {
+      params.set("category", state.category);
+    }
+    var query = params.toString();
+    var newUrl = window.location.pathname + (query ? "?" + query : "");
+    window.history.replaceState(null, "", newUrl);
+  }
+
+  filtersEl.addEventListener("click", function (event) {
+    var pill = event.target.closest(".c-filter-pill");
+    if (!pill) return;
+    state.category = pill.getAttribute("data-category");
+    renderFilters();
+    renderProducts();
+    syncUrl();
+  });
+
+  searchInput.addEventListener("input", function () {
+    state.search = searchInput.value;
+    renderProducts();
+  });
+
+  clearFiltersBtn.addEventListener("click", function () {
+    state.category = "all";
+    state.search = "";
+    searchInput.value = "";
+    renderFilters();
+    renderProducts();
+    syncUrl();
+  });
+
+  /* -- Add to Cart: event delegation since cards are re-rendered on
+     every filter/search change. ---------------------------------------- */
+  function showToast(message) {
+    var toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = message;
+    toast.classList.add("is-visible");
+    window.clearTimeout(showToast._t);
+    showToast._t = window.setTimeout(function () { toast.classList.remove("is-visible"); }, 2600);
+  }
+
+  gridEl.addEventListener("click", function (event) {
+    var btn = event.target.closest("[data-add-to-cart]");
+    if (!btn) return;
+    var product = products.filter(function (p) { return p.id === btn.getAttribute("data-add-to-cart"); })[0];
+    window.NicheChemsCart.addToCart(btn.getAttribute("data-add-to-cart"), 1);
+    showToast(product ? "Added “" + product.name + "” to cart." : "Added to cart.");
+    btn.classList.add("is-added");
+    btn.textContent = "Added ✓";
+    window.setTimeout(function () {
+      btn.classList.remove("is-added");
+      btn.textContent = "Add to Cart";
+    }, 1400);
+  });
+
+  async function init() {
+    gridEl.innerHTML = '<li class="c-catalogue-loading">Loading catalogue…</li>';
+    try {
+      var results = await Promise.all([
+        window.NicheChemsData.fetchCategories(),
+        window.NicheChemsData.fetchProducts()
+      ]);
+      categories = results[0];
+      products = results[1];
+    } catch (err) {
+      // NicheChemsData already falls back to static data internally; this
+      // only fires on a genuinely unexpected error, so fail to an empty
+      // catalogue rather than leaving the loading message stuck forever.
+      console.error("Catalogue: failed to load product data.", err);
+      categories = [];
+      products = [];
+    }
+    renderFilters();
+    renderProducts();
+  }
+
+  init();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard | NicheChems Admin</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#33502F">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%233B5FCC'/%3E%3Cpath d='M13 6h6v6.6l4.6 9.9a2 2 0 0 1-1.8 2.9H10.2a2 2 0 0 1-1.8-2.9L13 12.6V6z' fill='none' stroke='%23FAF9F6' stroke-width='1.7' stroke-linejoin='round' stroke-linecap='round'/%3E%3Cpath d='M11 19h10' stroke='%23A9C9A0' stroke-width='1.7' stroke-linecap='round'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+
+<!--
+  Auth model: this page checks for a valid Supabase session AND admin_users
+  membership (via the is_admin() RPC) before showing any content — see
+  requireAdmin() in the script below. That check is UX only, not the real
+  security boundary: every insert/update/delete here goes straight to
+  Supabase and is actually enforced by the RLS policies in
+  supabase/schema.sql. Even if someone bypassed this page entirely and
+  called the Supabase REST API directly, writes still fail without an
+  authenticated admin_users row.
+-->
+
+<style>
+:root {
+  --color-bg:          #FAF9F6;
+  --color-bg-alt:      #F2F0EA;
+  --color-surface:     #FFFFFF;
+  --color-border:      #E4E1D8;
+  --color-border-cool: #DCE3DE;
+
+  --color-blue:        #3B5FCC;
+  --color-blue-dark:   #2A459E;
+  --color-blue-tint:   #EDF2FD;
+
+  --color-sage:        #93AC8B;
+  --color-moss:        #5C7A52;
+  --color-forest:      #33502F;
+  --color-green-tint:  #EEF3EA;
+
+  --color-error:       #C0503D;
+  --color-error-tint:  #F5E3E0;
+  --color-warn:        #96631C;
+  --color-warn-tint:   #FBF1E4;
+
+  --color-ink:         #202722;
+  --color-ink-soft:    #545E56;
+  --color-ink-faint:   #7C877F;
+  --color-on-blue:     #FBFBF8;
+
+  --font-serif: "Fraunces", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --text-xs:  0.8125rem;
+  --text-sm:  0.9375rem;
+  --text-md:  1.0625rem;
+  --text-lg:  1.25rem;
+  --text-xl:  clamp(1.5rem, 1.3rem + 1vw, 2rem);
+  --text-2xl: clamp(1.875rem, 1.6rem + 1.4vw, 2.5rem);
+
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
+  --space-5: 1.5rem; --space-6: 2rem; --space-7: 2.5rem; --space-8: 3.25rem; --space-9: 4.5rem;
+
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 18px; --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(32, 39, 34, 0.06), 0 1px 1px rgba(32, 39, 34, 0.04);
+  --shadow-md: 0 4px 14px -8px rgba(32, 39, 34, 0.14), 0 2px 5px -3px rgba(32, 39, 34, 0.08);
+  --shadow-lg: 0 10px 26px -12px rgba(32, 39, 34, 0.18), 0 4px 10px -6px rgba(32, 39, 34, 0.08);
+
+  --ease-organic: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft:    cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 180ms;
+  --duration-base: 300ms;
+
+  --container-max: 1320px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--color-ink);
+  background: var(--color-bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3 { font-family: var(--font-serif); font-weight: 500; color: var(--color-forest); }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+input, select, textarea { font: inherit; }
+table { border-collapse: collapse; }
+
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2.5px solid var(--color-blue); outline-offset: 2px; border-radius: var(--radius-sm);
+}
+
+.l-container { width: 100%; max-width: var(--container-max); margin-inline: auto; padding-inline: var(--space-5); }
+@media (min-width: 900px) { .l-container { padding-inline: var(--space-7); } }
+
+[hidden] { display: none !important; }
+
+/* -- Auth gate ---------------------------------------------------------- */
+.c-auth-gate { flex: 1; display: flex; align-items: center; justify-content: center; color: var(--color-ink-soft); }
+
+/* -- Top bar -------------------------------------------------------------*/
+.c-admin-topbar { background: var(--color-forest); color: var(--color-on-blue); }
+.c-admin-topbar__inner {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+  padding-block: var(--space-4); flex-wrap: wrap;
+}
+.c-logo { display: inline-flex; align-items: center; gap: var(--space-2); font-family: var(--font-serif); font-size: 1.2rem; font-weight: 600; }
+.c-logo__mark { display: grid; place-items: center; width: 50px; height: 50px; border-radius: var(--radius-md); background: var(--color-blue-light, #6FA0F5); color: var(--color-forest); overflow: hidden; }
+.c-logo__mark img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; transform: scale(2.3); transform-origin: 50% 34%; }
+.c-admin-topbar__actions { display: flex; align-items: center; gap: var(--space-5); font-size: var(--text-xs); }
+.c-admin-topbar__actions a:hover { text-decoration: underline; }
+.c-admin-topbar__user { opacity: 0.8; }
+
+.c-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  padding: 0.6rem 1.25rem; border-radius: var(--radius-md); font-size: var(--text-xs); font-weight: 600;
+  transition: transform var(--duration-base) var(--ease-organic), background-color var(--duration-fast) var(--ease-soft), opacity var(--duration-fast) var(--ease-soft);
+  white-space: nowrap;
+}
+.c-btn--primary { background: var(--color-blue); color: var(--color-on-blue); }
+.c-btn--primary:hover { background: var(--color-blue-dark); transform: translateY(-1px); }
+.c-btn--primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.c-btn--ghost { background: transparent; color: var(--color-forest); border: 1.5px solid var(--color-border-cool); }
+.c-btn--ghost:hover { border-color: var(--color-moss); background: var(--color-green-tint); }
+.c-btn--danger { background: transparent; color: var(--color-error); border: 1.5px solid var(--color-error-tint); }
+.c-btn--danger:hover { background: var(--color-error-tint); }
+.c-btn--sm { padding: 0.45rem 0.9rem; }
+
+/* -- Main layout ---------------------------------------------------------*/
+.c-admin-main { flex: 1; padding-block: var(--space-8) var(--space-9); }
+
+.c-stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-5); margin-bottom: var(--space-9); }
+@media (min-width: 700px) { .c-stats-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1100px) { .c-stats-grid { grid-template-columns: repeat(5, 1fr); } }
+.c-stat-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-5) var(--space-6); }
+.c-stat-card__value { font-family: var(--font-serif); font-size: var(--text-2xl); color: var(--color-forest); line-height: 1; }
+.c-stat-card__label { font-size: var(--text-xs); color: var(--color-ink-faint); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; margin-top: var(--space-2); }
+
+.c-admin-section { margin-bottom: var(--space-9); }
+.c-admin-section__head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-5); flex-wrap: wrap; }
+.c-admin-section__head h2 { font-size: var(--text-xl); }
+.c-admin-section__head-actions { display: flex; align-items: center; gap: var(--space-3); }
+
+.c-search-input {
+  padding: 0.55rem var(--space-4); border-radius: var(--radius-pill); border: 1.5px solid var(--color-border-cool);
+  background: var(--color-surface); font-size: var(--text-xs); min-width: 220px;
+}
+
+.c-table-wrap { overflow-x: auto; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); }
+.c-table { width: 100%; min-width: 720px; }
+.c-table th, .c-table td { text-align: left; padding: var(--space-4); font-size: var(--text-xs); border-bottom: 1px solid var(--color-border); white-space: nowrap; }
+.c-table td.c-table__wrap { white-space: normal; max-width: 20rem; }
+.c-table th { text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-ink-faint); font-weight: 700; background: var(--color-bg-alt); }
+.c-table tbody tr:last-child td { border-bottom: none; }
+.c-table tbody tr:hover { background: var(--color-bg-alt); }
+.c-table__empty { text-align: center; color: var(--color-ink-faint); padding: var(--space-7); }
+
+.c-icon-chip { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: var(--radius-sm); background: var(--color-blue-tint); color: var(--color-blue); }
+.c-icon-chip svg { width: 15px; height: 15px; }
+
+.c-badge { display: inline-flex; font-size: var(--text-xs); font-weight: 600; padding: 0.2rem 0.7rem; border-radius: var(--radius-pill); background: var(--color-green-tint); color: var(--color-moss); }
+.c-badge--low { background: var(--color-warn-tint); color: var(--color-warn); }
+.c-badge--out { background: var(--color-error-tint); color: var(--color-error); }
+.c-badge--inactive { background: var(--color-bg-alt); color: var(--color-ink-faint); }
+
+.c-row-actions { display: flex; gap: var(--space-2); }
+
+/* -- Dialogs (native <dialog> — handles focus-trap/backdrop/Esc for us) --*/
+dialog.c-dialog {
+  border: none; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); padding: 0;
+  width: min(94vw, 36rem); max-height: 88vh; overflow-y: auto;
+}
+dialog.c-dialog::backdrop { background: rgba(32, 39, 34, 0.55); }
+.c-dialog__inner { padding: var(--space-7); }
+.c-dialog__inner h2 { font-size: var(--text-lg); margin-bottom: var(--space-6); }
+.c-dialog__row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+.c-dialog__actions { display: flex; justify-content: flex-end; gap: var(--space-3); margin-top: var(--space-7); }
+.c-dialog__error { min-height: 1.1em; font-size: var(--text-xs); color: var(--color-error); margin-top: var(--space-4); }
+
+.c-form-field { margin-bottom: var(--space-5); }
+.c-form-field label { display: block; font-size: var(--text-xs); font-weight: 700; color: var(--color-forest); margin-bottom: var(--space-2); }
+.c-form-field__hint { display: block; font-weight: 500; color: var(--color-ink-faint); margin-top: var(--space-1); text-transform: none; letter-spacing: 0; }
+.c-form-field input, .c-form-field select, .c-form-field textarea {
+  width: 100%; padding: 0.65rem var(--space-4); border-radius: var(--radius-sm);
+  border: 1.5px solid var(--color-border-cool); background: var(--color-bg); font-size: var(--text-sm); color: var(--color-ink);
+}
+.c-form-field textarea { resize: vertical; min-height: 4.5rem; }
+.c-form-field input:disabled { background: var(--color-bg-alt); color: var(--color-ink-faint); }
+.c-image-preview { display: block; width: 140px; height: 140px; object-fit: cover; border-radius: var(--radius-md); border: 1.5px solid var(--color-border-cool); margin-bottom: var(--space-3); background: var(--color-bg-alt); }
+.c-form-checkbox { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-5); }
+.c-form-checkbox input { width: auto; accent-color: var(--color-blue); }
+
+.c-order-detail { margin-bottom: var(--space-6); display: flex; flex-direction: column; gap: var(--space-5); }
+.c-order-detail__block h3 { font-size: var(--text-sm); margin-bottom: var(--space-2); }
+.c-order-detail__block p { font-size: var(--text-xs); color: var(--color-ink-soft); margin-bottom: var(--space-1); }
+.c-order-detail__block .c-table { min-width: 0; }
+.c-order-detail__block .c-table th, .c-order-detail__block .c-table td { padding: var(--space-2) var(--space-3); }
+
+.c-toast {
+  position: fixed; bottom: var(--space-6); left: 50%; transform: translateX(-50%) translateY(0);
+  background: var(--color-forest); color: var(--color-on-blue); padding: var(--space-4) var(--space-6);
+  border-radius: var(--radius-md); box-shadow: var(--shadow-lg); font-size: var(--text-xs); font-weight: 600;
+  z-index: 500; opacity: 0; pointer-events: none; transition: opacity var(--duration-base) var(--ease-soft);
+}
+.c-toast.is-visible { opacity: 1; }
+.c-toast.is-error { background: var(--color-error); }
+</style>
+</head>
+<body>
+
+<div class="c-auth-gate" id="auth-gate">
+  <p>Checking access…</p>
+</div>
+
+<div id="dashboard-shell" hidden>
+  <header class="c-admin-topbar">
+    <div class="l-container c-admin-topbar__inner">
+      <span class="c-logo">
+        <span class="c-logo__mark" aria-hidden="true">
+          <img src="../../assets/logo.png" alt="" width="32" height="32" loading="eager">
+        </span>
+        NicheChems Admin
+      </span>
+      <div class="c-admin-topbar__actions">
+        <span class="c-admin-topbar__user" id="user-email"></span>
+        <a href="../../index.html" target="_blank" rel="noopener">View Storefront ↗</a>
+        <button type="button" class="c-btn c-btn--ghost c-btn--sm" id="signout-btn" style="color: var(--color-on-blue); border-color: rgba(251,251,248,0.35);">Sign Out</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="c-admin-main">
+    <div class="l-container">
+
+      <div class="c-stats-grid">
+        <div class="c-stat-card"><div class="c-stat-card__value" id="stat-products">—</div><div class="c-stat-card__label">Products</div></div>
+        <div class="c-stat-card"><div class="c-stat-card__value" id="stat-categories">—</div><div class="c-stat-card__label">Categories</div></div>
+        <div class="c-stat-card"><div class="c-stat-card__value" id="stat-lowstock">—</div><div class="c-stat-card__label">Low Stock</div></div>
+        <div class="c-stat-card"><div class="c-stat-card__value" id="stat-inactive">—</div><div class="c-stat-card__label">Hidden / Inactive</div></div>
+        <div class="c-stat-card"><div class="c-stat-card__value" id="stat-pending-orders">—</div><div class="c-stat-card__label">Orders Awaiting Payment</div></div>
+      </div>
+
+      <section class="c-admin-section">
+        <div class="c-admin-section__head">
+          <h2>Categories</h2>
+          <button type="button" class="c-btn c-btn--primary" id="add-category-btn">+ Add Category</button>
+        </div>
+        <div class="c-table-wrap">
+          <table class="c-table">
+            <thead>
+              <tr><th>Icon</th><th>Label</th><th>Slug</th><th>Products</th><th>Sort</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="categories-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="c-admin-section">
+        <div class="c-admin-section__head">
+          <h2>Products</h2>
+          <div class="c-admin-section__head-actions">
+            <input type="search" class="c-search-input" id="product-search" placeholder="Search products…">
+            <button type="button" class="c-btn c-btn--primary" id="add-product-btn">+ Add Product</button>
+          </div>
+        </div>
+        <div class="c-table-wrap">
+          <table class="c-table">
+            <thead>
+              <tr><th>Image</th><th>Name</th><th>SKU</th><th>Category</th><th>Price</th><th>Stock</th><th>Visible</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="products-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="c-admin-section">
+        <div class="c-admin-section__head">
+          <h2>Orders</h2>
+          <div class="c-admin-section__head-actions">
+            <select class="c-search-input" id="order-status-filter">
+              <option value="all">All statuses</option>
+              <option value="pending_payment">Pending Payment</option>
+              <option value="awaiting_confirmation">Awaiting Confirmation</option>
+              <option value="paid">Paid</option>
+              <option value="fulfilled">Fulfilled</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+        </div>
+        <div class="c-table-wrap">
+          <table class="c-table">
+            <thead>
+              <tr><th>Order Ref</th><th>Date</th><th>Customer</th><th>Total</th><th>ETH Amount</th><th>Status</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="orders-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<!-- ===================================================================
+     CATEGORY DIALOG (add + edit)
+     =================================================================== -->
+<dialog class="c-dialog" id="category-dialog">
+  <div class="c-dialog__inner">
+    <h2 id="category-dialog-title">Add Category</h2>
+    <form id="category-form">
+      <div class="c-form-field">
+        <label for="cat-label">Label</label>
+        <input type="text" id="cat-label" required>
+      </div>
+      <div class="c-form-field">
+        <label for="cat-id">Slug (URL id)
+          <span class="c-form-field__hint" id="cat-id-hint">Lowercase letters, numbers, hyphens only. Can't be changed after creation.</span>
+        </label>
+        <input type="text" id="cat-id" pattern="[a-z0-9]+(-[a-z0-9]+)*" required>
+      </div>
+      <div class="c-form-field">
+        <label for="cat-description">Description</label>
+        <textarea id="cat-description"></textarea>
+      </div>
+      <div class="c-dialog__row">
+        <div class="c-form-field">
+          <label for="cat-icon">Icon
+            <span class="c-form-field__hint">Fixed set — ask a developer to add new icon shapes.</span>
+          </label>
+          <select id="cat-icon"></select>
+        </div>
+        <div class="c-form-field">
+          <label for="cat-sort">Sort order</label>
+          <input type="number" id="cat-sort" value="0" step="1">
+        </div>
+      </div>
+      <p class="c-dialog__error" id="category-form-error" role="alert"></p>
+      <div class="c-dialog__actions">
+        <button type="button" class="c-btn c-btn--ghost" id="category-cancel-btn">Cancel</button>
+        <button type="submit" class="c-btn c-btn--primary" id="category-save-btn">Save Category</button>
+      </div>
+    </form>
+  </div>
+</dialog>
+
+<!-- ===================================================================
+     PRODUCT DIALOG (add + edit)
+     =================================================================== -->
+<dialog class="c-dialog" id="product-dialog">
+  <div class="c-dialog__inner">
+    <h2 id="product-dialog-title">Add Product</h2>
+    <form id="product-form">
+      <div class="c-form-field">
+        <label for="prod-name">Name</label>
+        <input type="text" id="prod-name" required>
+      </div>
+      <div class="c-dialog__row">
+        <div class="c-form-field">
+          <label for="prod-id">Slug (URL id)
+            <span class="c-form-field__hint" id="prod-id-hint">Can't be changed after creation.</span>
+          </label>
+          <input type="text" id="prod-id" pattern="[a-z0-9]+(-[a-z0-9]+)*" required>
+        </div>
+        <div class="c-form-field">
+          <label for="prod-sku">Catalog # (SKU)</label>
+          <input type="text" id="prod-sku" required>
+        </div>
+      </div>
+      <div class="c-form-field">
+        <label for="prod-category">Category</label>
+        <select id="prod-category" required></select>
+      </div>
+      <div class="c-form-field">
+        <label for="prod-image-input">Product Image
+          <span class="c-form-field__hint">JPG/PNG/WebP, up to 5&nbsp;MB. Leave empty to keep using the category icon.</span>
+        </label>
+        <img class="c-image-preview" id="prod-image-preview" alt="" hidden>
+        <input type="file" id="prod-image-input" accept="image/png,image/jpeg,image/webp">
+        <button type="button" class="c-btn c-btn--ghost c-btn--sm" id="prod-image-remove-btn" hidden style="margin-top: var(--space-3);">Remove image</button>
+      </div>
+      <div class="c-form-field">
+        <label for="prod-description">Description</label>
+        <textarea id="prod-description"></textarea>
+      </div>
+      <div class="c-dialog__row">
+        <div class="c-form-field">
+          <label for="prod-purity">Purity</label>
+          <input type="text" id="prod-purity" placeholder="e.g. ≥99.5%">
+        </div>
+        <div class="c-form-field">
+          <label for="prod-format">Packaging / Format</label>
+          <input type="text" id="prod-format" placeholder="e.g. 1 mL ampoule">
+        </div>
+      </div>
+      <div class="c-dialog__row">
+        <div class="c-form-field">
+          <label for="prod-price">Price (USD)</label>
+          <input type="number" id="prod-price" min="0" step="0.01" required>
+        </div>
+        <div class="c-form-field">
+          <label for="prod-price-unit">Price unit</label>
+          <input type="text" id="prod-price-unit" placeholder="unit, set, panel…" value="unit">
+        </div>
+      </div>
+      <div class="c-dialog__row">
+        <div class="c-form-field">
+          <label for="prod-stock">Stock status</label>
+          <select id="prod-stock">
+            <option value="in-stock">In Stock</option>
+            <option value="low-stock">Low Stock</option>
+            <option value="out-of-stock">Out of Stock</option>
+          </select>
+        </div>
+        <div class="c-form-field" style="display:flex; align-items:flex-end;">
+          <div class="c-form-checkbox" style="margin-bottom: 0.65rem;">
+            <input type="checkbox" id="prod-active" checked>
+            <label for="prod-active" style="margin: 0; text-transform: none; letter-spacing: 0;">Visible on storefront</label>
+          </div>
+        </div>
+      </div>
+      <div class="c-form-field">
+        <label for="prod-cas">CAS Number <span class="c-form-field__hint">Placeholder text shown on the product page, e.g. "Available on Certificate of Analysis".</span></label>
+        <input type="text" id="prod-cas">
+      </div>
+      <div class="c-form-field">
+        <label for="prod-formula">Molecular Formula <span class="c-form-field__hint">Placeholder text, same as above.</span></label>
+        <input type="text" id="prod-formula">
+      </div>
+      <div class="c-form-field">
+        <label for="prod-storage">Storage Conditions</label>
+        <textarea id="prod-storage"></textarea>
+      </div>
+      <div class="c-form-field">
+        <label for="prod-hazard">Hazard Information</label>
+        <textarea id="prod-hazard"></textarea>
+      </div>
+      <p class="c-dialog__error" id="product-form-error" role="alert"></p>
+      <div class="c-dialog__actions">
+        <button type="button" class="c-btn c-btn--ghost" id="product-cancel-btn">Cancel</button>
+        <button type="submit" class="c-btn c-btn--primary" id="product-save-btn">Save Product</button>
+      </div>
+    </form>
+  </div>
+</dialog>
+
+<!-- ===================================================================
+     ORDER DETAIL / EDIT DIALOG
+     =================================================================== -->
+<dialog class="c-dialog" id="order-dialog">
+  <div class="c-dialog__inner">
+    <h2 id="order-dialog-title">Order</h2>
+
+    <div class="c-order-detail" id="order-detail-body">
+      <div class="c-order-detail__block">
+        <h3>Customer</h3>
+        <p id="order-detail-customer"></p>
+        <p id="order-detail-shipping"></p>
+        <p id="order-detail-notes"></p>
+      </div>
+
+      <div class="c-order-detail__block">
+        <h3>Items</h3>
+        <table class="c-table" id="order-items-table">
+          <thead><tr><th>Product</th><th>SKU</th><th>Qty</th><th>Unit</th><th>Line total</th></tr></thead>
+          <tbody id="order-items-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <form id="order-form">
+      <div class="c-dialog__row">
+        <div class="c-form-field">
+          <label for="order-status">Status</label>
+          <select id="order-status">
+            <option value="pending_payment">Pending Payment</option>
+            <option value="awaiting_confirmation">Awaiting Confirmation</option>
+            <option value="paid">Paid</option>
+            <option value="fulfilled">Fulfilled</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </div>
+        <div class="c-form-field">
+          <label for="order-eth-tx">ETH Transaction Hash
+            <span class="c-form-field__hint">Fill in once you've confirmed it on-chain.</span>
+          </label>
+          <input type="text" id="order-eth-tx" placeholder="0x…">
+        </div>
+      </div>
+      <p class="c-dialog__error" id="order-form-error" role="alert"></p>
+      <div class="c-dialog__actions">
+        <button type="button" class="c-btn c-btn--ghost" id="order-cancel-btn">Close</button>
+        <button type="submit" class="c-btn c-btn--primary" id="order-save-btn">Save Order</button>
+      </div>
+    </form>
+  </div>
+</dialog>
+
+<p class="c-toast" id="toast" role="status" aria-live="polite"></p>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../js/supabase-config.js"></script>
+<script src="../../js/icons.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  var client = window.supabaseClient;
+  var icons = window.NICHECHEMS_ICONS || {};
+  var authGate = document.getElementById("auth-gate");
+  var shell = document.getElementById("dashboard-shell");
+
+  var state = { categories: [], products: [], orders: [], search: "", orderStatusFilter: "all" };
+
+  // Image upload for the product dialog is staged client-side (pendingImageFile)
+  // and only actually uploaded to Supabase Storage on save — avoids orphaned
+  // files in the bucket if the admin picks an image then cancels the dialog.
+  var pendingImageFile = null;
+  var currentImageUrl = null;
+  var imageRemoved = false;
+  var MAX_IMAGE_BYTES = 5 * 1024 * 1024;
+
+  // -----------------------------------------------------------------
+  // Auth guard — see the top-of-file comment: this is UX, RLS is the
+  // real boundary.
+  // -----------------------------------------------------------------
+  async function requireAdmin() {
+    if (!client) {
+      authGate.innerHTML = "<p>Can't reach the authentication service. Check your connection and reload.</p>";
+      return null;
+    }
+    var sessionResult = await client.auth.getSession();
+    var user = sessionResult.data && sessionResult.data.session && sessionResult.data.session.user;
+    if (!user) {
+      window.location.href = "../index.html";
+      return null;
+    }
+    var rpcResult = await client.rpc("is_admin", { uid: user.id });
+    if (rpcResult.error || rpcResult.data !== true) {
+      await client.auth.signOut();
+      window.location.href = "../index.html";
+      return null;
+    }
+    return user;
+  }
+
+  function showToast(message, isError) {
+    var toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.className = "c-toast is-visible" + (isError ? " is-error" : "");
+    window.clearTimeout(showToast._t);
+    showToast._t = window.setTimeout(function () { toast.classList.remove("is-visible"); }, 3200);
+  }
+
+  async function logAudit(action, tableName, recordId, adminEmail) {
+    try {
+      await client.from("admin_audit_log").insert({
+        admin_email: adminEmail, action: action, table_name: tableName, record_id: String(recordId)
+      });
+    } catch (err) {
+      console.warn("Audit log write failed (non-blocking):", err);
+    }
+  }
+
+  function slugify(text) {
+    return text.toLowerCase().trim()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  }
+
+  // -----------------------------------------------------------------
+  // Data loading
+  // -----------------------------------------------------------------
+  async function loadData() {
+    var results = await Promise.all([
+      client.from("categories").select("*").order("sort_order"),
+      client.from("products").select("*").order("name"),
+      client.from("orders").select("*").order("created_at", { ascending: false })
+    ]);
+    if (results[0].error) throw results[0].error;
+    if (results[1].error) throw results[1].error;
+    if (results[2].error) throw results[2].error;
+    state.categories = results[0].data;
+    state.products = results[1].data;
+    state.orders = results[2].data;
+    renderAll();
+  }
+
+  function renderAll() {
+    renderStats();
+    renderCategoriesTable();
+    renderProductsTable();
+    renderOrdersTable();
+    populateCategorySelect();
+  }
+
+  function renderStats() {
+    document.getElementById("stat-products").textContent = state.products.length;
+    document.getElementById("stat-categories").textContent = state.categories.length;
+    document.getElementById("stat-lowstock").textContent = state.products.filter(function (p) { return p.stock_status === "low-stock"; }).length;
+    document.getElementById("stat-inactive").textContent = state.products.filter(function (p) { return !p.active; }).length;
+    document.getElementById("stat-pending-orders").textContent = state.orders.filter(function (o) { return o.status === "pending_payment" || o.status === "awaiting_confirmation"; }).length;
+  }
+
+  function stockBadge(status) {
+    if (status === "low-stock") return '<span class="c-badge c-badge--low">Low Stock</span>';
+    if (status === "out-of-stock") return '<span class="c-badge c-badge--out">Out of Stock</span>';
+    return '<span class="c-badge">In Stock</span>';
+  }
+
+  function categoryLabel(id) {
+    var match = state.categories.filter(function (c) { return c.id === id; })[0];
+    return match ? match.label : (id || "—");
+  }
+
+  // -----------------------------------------------------------------
+  // Categories table
+  // -----------------------------------------------------------------
+  function renderCategoriesTable() {
+    var tbody = document.getElementById("categories-tbody");
+    if (state.categories.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="6" class="c-table__empty">No categories yet.</td></tr>';
+      return;
+    }
+    tbody.innerHTML = state.categories.map(function (cat) {
+      var count = state.products.filter(function (p) { return p.category_id === cat.id; }).length;
+      return (
+        "<tr>" +
+          '<td><span class="c-icon-chip" aria-hidden="true">' + (icons[cat.icon] || "") + "</span></td>" +
+          "<td>" + cat.label + "</td>" +
+          "<td>" + cat.id + "</td>" +
+          "<td>" + count + "</td>" +
+          "<td>" + cat.sort_order + "</td>" +
+          '<td><div class="c-row-actions">' +
+            '<button type="button" class="c-btn c-btn--ghost c-btn--sm" data-edit-category="' + cat.id + '">Edit</button>' +
+            '<button type="button" class="c-btn c-btn--danger c-btn--sm" data-delete-category="' + cat.id + '">Delete</button>' +
+          "</div></td>" +
+        "</tr>"
+      );
+    }).join("");
+  }
+
+  function populateCategorySelect() {
+    var select = document.getElementById("prod-category");
+    var current = select.value;
+    select.innerHTML = state.categories.map(function (c) {
+      return '<option value="' + c.id + '">' + c.label + "</option>";
+    }).join("");
+    if (current) select.value = current;
+  }
+
+  function openCategoryDialog(existing) {
+    var dialog = document.getElementById("category-dialog");
+    var form = document.getElementById("category-form");
+    form.reset();
+    document.getElementById("category-form-error").textContent = "";
+
+    var iconSelect = document.getElementById("cat-icon");
+    iconSelect.innerHTML = Object.keys(icons).map(function (key) {
+      return '<option value="' + key + '">' + key + "</option>";
+    }).join("");
+
+    var idInput = document.getElementById("cat-id");
+    document.getElementById("category-dialog-title").textContent = existing ? "Edit Category" : "Add Category";
+    form.dataset.mode = existing ? "edit" : "add";
+    form.dataset.editingId = existing ? existing.id : "";
+    idInput.disabled = !!existing;
+
+    if (existing) {
+      document.getElementById("cat-label").value = existing.label;
+      idInput.value = existing.id;
+      document.getElementById("cat-description").value = existing.description || "";
+      iconSelect.value = existing.icon;
+      document.getElementById("cat-sort").value = existing.sort_order;
+    } else {
+      document.getElementById("cat-sort").value = state.categories.length;
+    }
+    dialog.showModal();
+  }
+
+  document.getElementById("add-category-btn").addEventListener("click", function () { openCategoryDialog(null); });
+  document.getElementById("category-cancel-btn").addEventListener("click", function () { document.getElementById("category-dialog").close(); });
+
+  // Auto-slug from label while adding a new category (not editing).
+  document.getElementById("cat-label").addEventListener("input", function () {
+    var form = document.getElementById("category-form");
+    if (form.dataset.mode === "add") {
+      document.getElementById("cat-id").value = slugify(this.value);
+    }
+  });
+
+  document.getElementById("category-form").addEventListener("submit", async function (event) {
+    event.preventDefault();
+    var errorEl = document.getElementById("category-form-error");
+    var saveBtn = document.getElementById("category-save-btn");
+    var mode = this.dataset.mode;
+    var id = document.getElementById("cat-id").value.trim();
+
+    if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(id)) {
+      errorEl.textContent = "Slug must be lowercase letters, numbers, and hyphens only.";
+      return;
+    }
+
+    var payload = {
+      label: document.getElementById("cat-label").value.trim(),
+      description: document.getElementById("cat-description").value.trim(),
+      icon: document.getElementById("cat-icon").value,
+      sort_order: parseInt(document.getElementById("cat-sort").value, 10) || 0
+    };
+
+    saveBtn.disabled = true;
+    try {
+      var user = (await client.auth.getSession()).data.session.user;
+      if (mode === "add") {
+        payload.id = id;
+        var insertResult = await client.from("categories").insert(payload);
+        if (insertResult.error) throw insertResult.error;
+        await logAudit("insert", "categories", id, user.email);
+      } else {
+        var updateResult = await client.from("categories").update(payload).eq("id", this.dataset.editingId);
+        if (updateResult.error) throw updateResult.error;
+        await logAudit("update", "categories", this.dataset.editingId, user.email);
+      }
+      document.getElementById("category-dialog").close();
+      showToast("Category saved.");
+      await loadData();
+    } catch (err) {
+      errorEl.textContent = err.message || "Couldn't save that category.";
+    } finally {
+      saveBtn.disabled = false;
+    }
+  });
+
+  document.getElementById("categories-tbody").addEventListener("click", async function (event) {
+    var editBtn = event.target.closest("[data-edit-category]");
+    var deleteBtn = event.target.closest("[data-delete-category]");
+
+    if (editBtn) {
+      var cat = state.categories.filter(function (c) { return c.id === editBtn.getAttribute("data-edit-category"); })[0];
+      if (cat) openCategoryDialog(cat);
+      return;
+    }
+
+    if (deleteBtn) {
+      var id = deleteBtn.getAttribute("data-delete-category");
+      var cat2 = state.categories.filter(function (c) { return c.id === id; })[0];
+      var affected = state.products.filter(function (p) { return p.category_id === id; }).length;
+      var message = affected > 0
+        ? 'Delete "' + cat2.label + '"? ' + affected + " product(s) will become uncategorized."
+        : 'Delete "' + cat2.label + '"?';
+      if (!window.confirm(message)) return;
+
+      try {
+        var user = (await client.auth.getSession()).data.session.user;
+        var result = await client.from("categories").delete().eq("id", id);
+        if (result.error) throw result.error;
+        await logAudit("delete", "categories", id, user.email);
+        showToast("Category deleted.");
+        await loadData();
+      } catch (err) {
+        showToast(err.message || "Couldn't delete that category.", true);
+      }
+    }
+  });
+
+  // -----------------------------------------------------------------
+  // Products table
+  // -----------------------------------------------------------------
+  function renderProductsTable() {
+    var tbody = document.getElementById("products-tbody");
+    var term = state.search.trim().toLowerCase();
+    var filtered = state.products.filter(function (p) {
+      if (!term) return true;
+      return (p.name + " " + p.sku).toLowerCase().indexOf(term) !== -1;
+    });
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="8" class="c-table__empty">No products match.</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = filtered.map(function (p) {
+      var cat = state.categories.filter(function (c) { return c.id === p.category_id; })[0];
+      var thumb = p.image_url
+        ? '<img src="' + p.image_url + '" alt="" width="36" height="36" style="object-fit:cover;border-radius:8px;">'
+        : '<span class="c-icon-chip" aria-hidden="true">' + (cat ? (icons[cat.icon] || "") : "") + "</span>";
+      return (
+        "<tr>" +
+          "<td>" + thumb + "</td>" +
+          "<td>" + p.name + "</td>" +
+          "<td>" + p.sku + "</td>" +
+          "<td>" + categoryLabel(p.category_id) + "</td>" +
+          "<td>$" + Number(p.price).toFixed(2) + " / " + p.price_unit + "</td>" +
+          "<td>" + stockBadge(p.stock_status) + "</td>" +
+          "<td><label style=\"display:inline-flex;align-items:center;gap:6px;\"><input type=\"checkbox\" data-toggle-active=\"" + p.id + "\"" + (p.active ? " checked" : "") + "> " + (p.active ? "Visible" : "Hidden") + "</label></td>" +
+          '<td><div class="c-row-actions">' +
+            '<button type="button" class="c-btn c-btn--ghost c-btn--sm" data-edit-product="' + p.id + '">Edit</button>' +
+            '<button type="button" class="c-btn c-btn--danger c-btn--sm" data-delete-product="' + p.id + '">Delete</button>' +
+          "</div></td>" +
+        "</tr>"
+      );
+    }).join("");
+  }
+
+  document.getElementById("product-search").addEventListener("input", function () {
+    state.search = this.value;
+    renderProductsTable();
+  });
+
+  function openProductDialog(existing) {
+    var dialog = document.getElementById("product-dialog");
+    var form = document.getElementById("product-form");
+    form.reset();
+    document.getElementById("product-form-error").textContent = "";
+    populateCategorySelect();
+
+    var idInput = document.getElementById("prod-id");
+    document.getElementById("product-dialog-title").textContent = existing ? "Edit Product" : "Add Product";
+    form.dataset.mode = existing ? "edit" : "add";
+    form.dataset.editingId = existing ? existing.id : "";
+    idInput.disabled = !!existing;
+
+    pendingImageFile = null;
+    imageRemoved = false;
+    currentImageUrl = (existing && existing.image_url) || null;
+    document.getElementById("prod-image-input").value = "";
+    var imgPreview = document.getElementById("prod-image-preview");
+    var imgRemoveBtn = document.getElementById("prod-image-remove-btn");
+    if (currentImageUrl) {
+      imgPreview.src = currentImageUrl;
+      imgPreview.hidden = false;
+      imgRemoveBtn.hidden = false;
+    } else {
+      imgPreview.src = "";
+      imgPreview.hidden = true;
+      imgRemoveBtn.hidden = true;
+    }
+
+    if (existing) {
+      document.getElementById("prod-name").value = existing.name;
+      idInput.value = existing.id;
+      document.getElementById("prod-sku").value = existing.sku;
+      document.getElementById("prod-category").value = existing.category_id || "";
+      document.getElementById("prod-description").value = existing.description || "";
+      document.getElementById("prod-purity").value = existing.purity || "";
+      document.getElementById("prod-format").value = existing.format || "";
+      document.getElementById("prod-price").value = existing.price;
+      document.getElementById("prod-price-unit").value = existing.price_unit || "unit";
+      document.getElementById("prod-stock").value = existing.stock_status || "in-stock";
+      document.getElementById("prod-active").checked = existing.active !== false;
+      document.getElementById("prod-cas").value = existing.cas_number || "";
+      document.getElementById("prod-formula").value = existing.molecular_formula || "";
+      document.getElementById("prod-storage").value = existing.storage_conditions || "";
+      document.getElementById("prod-hazard").value = existing.hazard_info || "";
+    } else {
+      document.getElementById("prod-price-unit").value = "unit";
+      document.getElementById("prod-active").checked = true;
+    }
+    dialog.showModal();
+  }
+
+  document.getElementById("add-product-btn").addEventListener("click", function () { openProductDialog(null); });
+  document.getElementById("product-cancel-btn").addEventListener("click", function () { document.getElementById("product-dialog").close(); });
+
+  document.getElementById("prod-image-input").addEventListener("change", function () {
+    var errorEl = document.getElementById("product-form-error");
+    var file = this.files[0];
+    if (!file) return;
+
+    if (file.size > MAX_IMAGE_BYTES) {
+      errorEl.textContent = "Image is too large — 5 MB max.";
+      this.value = "";
+      return;
+    }
+    errorEl.textContent = "";
+
+    pendingImageFile = file;
+    imageRemoved = false;
+
+    var preview = document.getElementById("prod-image-preview");
+    var reader = new FileReader();
+    reader.onload = function (event) {
+      preview.src = event.target.result;
+      preview.hidden = false;
+      document.getElementById("prod-image-remove-btn").hidden = false;
+    };
+    reader.readAsDataURL(file);
+  });
+
+  document.getElementById("prod-image-remove-btn").addEventListener("click", function () {
+    pendingImageFile = null;
+    imageRemoved = true;
+    document.getElementById("prod-image-input").value = "";
+    var preview = document.getElementById("prod-image-preview");
+    preview.src = "";
+    preview.hidden = true;
+    this.hidden = true;
+  });
+
+  document.getElementById("prod-name").addEventListener("input", function () {
+    var form = document.getElementById("product-form");
+    if (form.dataset.mode === "add") {
+      document.getElementById("prod-id").value = slugify(this.value);
+    }
+  });
+
+  document.getElementById("product-form").addEventListener("submit", async function (event) {
+    event.preventDefault();
+    var errorEl = document.getElementById("product-form-error");
+    var saveBtn = document.getElementById("product-save-btn");
+    var mode = this.dataset.mode;
+    var id = document.getElementById("prod-id").value.trim();
+
+    if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(id)) {
+      errorEl.textContent = "Slug must be lowercase letters, numbers, and hyphens only.";
+      return;
+    }
+
+    var payload = {
+      name: document.getElementById("prod-name").value.trim(),
+      sku: document.getElementById("prod-sku").value.trim(),
+      category_id: document.getElementById("prod-category").value || null,
+      description: document.getElementById("prod-description").value.trim(),
+      purity: document.getElementById("prod-purity").value.trim(),
+      format: document.getElementById("prod-format").value.trim(),
+      price: parseFloat(document.getElementById("prod-price").value) || 0,
+      price_unit: document.getElementById("prod-price-unit").value.trim() || "unit",
+      stock_status: document.getElementById("prod-stock").value,
+      active: document.getElementById("prod-active").checked,
+      cas_number: document.getElementById("prod-cas").value.trim(),
+      molecular_formula: document.getElementById("prod-formula").value.trim(),
+      storage_conditions: document.getElementById("prod-storage").value.trim(),
+      hazard_info: document.getElementById("prod-hazard").value.trim(),
+      image_url: currentImageUrl
+    };
+
+    saveBtn.disabled = true;
+    try {
+      if (pendingImageFile) {
+        var ext = (pendingImageFile.name.split(".").pop() || "jpg").toLowerCase();
+        var path = id + "-" + Date.now() + "." + ext;
+        var uploadResult = await client.storage.from("product-images").upload(path, pendingImageFile, { upsert: true });
+        if (uploadResult.error) throw uploadResult.error;
+        payload.image_url = client.storage.from("product-images").getPublicUrl(path).data.publicUrl;
+      } else if (imageRemoved) {
+        payload.image_url = null;
+      }
+
+      var user = (await client.auth.getSession()).data.session.user;
+      if (mode === "add") {
+        payload.id = id;
+        var insertResult = await client.from("products").insert(payload);
+        if (insertResult.error) throw insertResult.error;
+        await logAudit("insert", "products", id, user.email);
+      } else {
+        var updateResult = await client.from("products").update(payload).eq("id", this.dataset.editingId);
+        if (updateResult.error) throw updateResult.error;
+        await logAudit("update", "products", this.dataset.editingId, user.email);
+      }
+      document.getElementById("product-dialog").close();
+      showToast("Product saved.");
+      await loadData();
+    } catch (err) {
+      errorEl.textContent = err.message || "Couldn't save that product.";
+    } finally {
+      saveBtn.disabled = false;
+    }
+  });
+
+  document.getElementById("products-tbody").addEventListener("click", async function (event) {
+    var editBtn = event.target.closest("[data-edit-product]");
+    var deleteBtn = event.target.closest("[data-delete-product]");
+
+    if (editBtn) {
+      var product = state.products.filter(function (p) { return p.id === editBtn.getAttribute("data-edit-product"); })[0];
+      if (product) openProductDialog(product);
+      return;
+    }
+
+    if (deleteBtn) {
+      var id = deleteBtn.getAttribute("data-delete-product");
+      var product2 = state.products.filter(function (p) { return p.id === id; })[0];
+      if (!window.confirm('Delete "' + product2.name + '"? This can\'t be undone.')) return;
+
+      try {
+        var user = (await client.auth.getSession()).data.session.user;
+        var result = await client.from("products").delete().eq("id", id);
+        if (result.error) throw result.error;
+        await logAudit("delete", "products", id, user.email);
+        showToast("Product deleted.");
+        await loadData();
+      } catch (err) {
+        showToast(err.message || "Couldn't delete that product.", true);
+      }
+    }
+  });
+
+  document.getElementById("products-tbody").addEventListener("change", async function (event) {
+    var checkbox = event.target.closest("[data-toggle-active]");
+    if (!checkbox) return;
+    var id = checkbox.getAttribute("data-toggle-active");
+    checkbox.disabled = true;
+    try {
+      var user = (await client.auth.getSession()).data.session.user;
+      var result = await client.from("products").update({ active: checkbox.checked }).eq("id", id);
+      if (result.error) throw result.error;
+      await logAudit("update", "products", id, user.email);
+      showToast(checkbox.checked ? "Product is now visible." : "Product hidden from storefront.");
+      await loadData();
+    } catch (err) {
+      showToast(err.message || "Couldn't update visibility.", true);
+      checkbox.checked = !checkbox.checked;
+      checkbox.disabled = false;
+    }
+  });
+
+  // -----------------------------------------------------------------
+  // Orders table
+  // -----------------------------------------------------------------
+  var ORDER_STATUS_LABELS = {
+    pending_payment: "Pending Payment",
+    awaiting_confirmation: "Awaiting Confirmation",
+    paid: "Paid",
+    fulfilled: "Fulfilled",
+    cancelled: "Cancelled"
+  };
+
+  function orderStatusBadge(status) {
+    var cls = "c-badge";
+    if (status === "pending_payment" || status === "awaiting_confirmation") cls = "c-badge c-badge--low";
+    if (status === "cancelled") cls = "c-badge c-badge--out";
+    if (status === "fulfilled" || status === "paid") cls = "c-badge";
+    return '<span class="' + cls + '">' + (ORDER_STATUS_LABELS[status] || status) + "</span>";
+  }
+
+  function renderOrdersTable() {
+    var tbody = document.getElementById("orders-tbody");
+    var filtered = state.orders.filter(function (o) {
+      return state.orderStatusFilter === "all" || o.status === state.orderStatusFilter;
+    });
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="7" class="c-table__empty">No orders match.</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = filtered.map(function (o) {
+      var ref = o.id.slice(0, 8).toUpperCase();
+      var date = new Date(o.created_at).toLocaleDateString();
+      var eth = o.eth_amount != null ? Number(o.eth_amount).toFixed(6) + " ETH" : "—";
+      return (
+        "<tr>" +
+          "<td>" + ref + "</td>" +
+          "<td>" + date + "</td>" +
+          "<td>" + o.customer_name + "<br><span style=\"color:var(--color-ink-faint);\">" + o.customer_email + "</span></td>" +
+          "<td>$" + Number(o.subtotal).toFixed(2) + "</td>" +
+          "<td>" + eth + "</td>" +
+          "<td>" + orderStatusBadge(o.status) + "</td>" +
+          '<td><div class="c-row-actions">' +
+            '<button type="button" class="c-btn c-btn--ghost c-btn--sm" data-view-order="' + o.id + '">View / Edit</button>' +
+          "</div></td>" +
+        "</tr>"
+      );
+    }).join("");
+  }
+
+  document.getElementById("order-status-filter").addEventListener("change", function () {
+    state.orderStatusFilter = this.value;
+    renderOrdersTable();
+  });
+
+  async function openOrderDialog(order) {
+    var dialog = document.getElementById("order-dialog");
+    document.getElementById("order-dialog-title").textContent = "Order " + order.id.slice(0, 8).toUpperCase();
+    document.getElementById("order-form").dataset.orderId = order.id;
+    document.getElementById("order-form-error").textContent = "";
+
+    document.getElementById("order-detail-customer").innerHTML =
+      "<strong>" + order.customer_name + "</strong> — " + order.customer_email +
+      (order.institution ? " (" + order.institution + ")" : "") +
+      (order.phone ? " — " + order.phone : "");
+    document.getElementById("order-detail-shipping").textContent = "Ship to: " + order.shipping_address;
+    document.getElementById("order-detail-notes").textContent = order.notes ? "Notes: " + order.notes : "";
+
+    document.getElementById("order-status").value = order.status;
+    document.getElementById("order-eth-tx").value = order.eth_tx_hash || "";
+
+    var itemsTbody = document.getElementById("order-items-tbody");
+    itemsTbody.innerHTML = '<tr><td colspan="5" class="c-table__empty">Loading items…</td></tr>';
+    dialog.showModal();
+
+    try {
+      var result = await client.from("order_items").select("*").eq("order_id", order.id);
+      if (result.error) throw result.error;
+      itemsTbody.innerHTML = result.data.map(function (item) {
+        return (
+          "<tr>" +
+            "<td>" + item.product_name + "</td>" +
+            "<td>" + item.sku + "</td>" +
+            "<td>" + item.quantity + "</td>" +
+            "<td>$" + Number(item.unit_price).toFixed(2) + "</td>" +
+            "<td>$" + Number(item.line_total).toFixed(2) + "</td>" +
+          "</tr>"
+        );
+      }).join("") || '<tr><td colspan="5" class="c-table__empty">No items found.</td></tr>';
+    } catch (err) {
+      itemsTbody.innerHTML = '<tr><td colspan="5" class="c-table__empty">Couldn\'t load items.</td></tr>';
+    }
+  }
+
+  document.getElementById("orders-tbody").addEventListener("click", function (event) {
+    var viewBtn = event.target.closest("[data-view-order]");
+    if (!viewBtn) return;
+    var order = state.orders.filter(function (o) { return o.id === viewBtn.getAttribute("data-view-order"); })[0];
+    if (order) openOrderDialog(order);
+  });
+
+  document.getElementById("order-cancel-btn").addEventListener("click", function () {
+    document.getElementById("order-dialog").close();
+  });
+
+  document.getElementById("order-form").addEventListener("submit", async function (event) {
+    event.preventDefault();
+    var errorEl = document.getElementById("order-form-error");
+    var saveBtn = document.getElementById("order-save-btn");
+    var orderId = this.dataset.orderId;
+
+    var payload = {
+      status: document.getElementById("order-status").value,
+      eth_tx_hash: document.getElementById("order-eth-tx").value.trim() || null
+    };
+
+    saveBtn.disabled = true;
+    try {
+      var user = (await client.auth.getSession()).data.session.user;
+      var result = await client.from("orders").update(payload).eq("id", orderId);
+      if (result.error) throw result.error;
+      await logAudit("update", "orders", orderId, user.email);
+      document.getElementById("order-dialog").close();
+      showToast("Order updated.");
+      await loadData();
+    } catch (err) {
+      errorEl.textContent = err.message || "Couldn't save that order.";
+    } finally {
+      saveBtn.disabled = false;
+    }
+  });
+
+  // -----------------------------------------------------------------
+  // Sign out
+  // -----------------------------------------------------------------
+  document.getElementById("signout-btn").addEventListener("click", async function () {
+    await client.auth.signOut();
+    window.location.href = "../index.html";
+  });
+
+  // -----------------------------------------------------------------
+  // Boot
+  // -----------------------------------------------------------------
+  (async function init() {
+    var user = await requireAdmin();
+    if (!user) return;
+
+    document.getElementById("user-email").textContent = user.email;
+    authGate.hidden = true;
+    shell.hidden = false;
+
+    try {
+      await loadData();
+    } catch (err) {
+      showToast(err.message || "Couldn't load catalogue data.", true);
+    }
+  })();
+})();
+</script>
+</body>
+</html>
