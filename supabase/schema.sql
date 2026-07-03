@@ -48,12 +48,16 @@ create table if not exists public.products (
   coa_url             text,                   -- null until a real COA file/link exists
   sds_url             text,                   -- null until a real SDS file/link exists
   image_url           text,                   -- public URL into the product-images storage bucket, null falls back to the category icon
+  discount_tiers      jsonb not null default '[]'::jsonb,
+                        -- quantity-break pricing, e.g. [{"min_qty":2,"discount_pct":3},{"min_qty":5,"discount_pct":10}]
+                        -- applied client-side in js/cart.js resolveCart() against the highest min_qty the cart quantity meets
   created_at          timestamptz not null default now(),
   updated_at          timestamptz not null default now()
 );
 
--- Covers instances where this script already ran before image_url existed.
+-- Covers instances where this script already ran before these columns existed.
 alter table public.products add column if not exists image_url text;
+alter table public.products add column if not exists discount_tiers jsonb not null default '[]'::jsonb;
 
 create index if not exists idx_products_category on public.products(category_id);
 

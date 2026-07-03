@@ -44,7 +44,8 @@ window.NicheChemsData = (function () {
       hazardInfo: row.hazard_info || "For laboratory research use only. See Safety Data Sheet for full hazard classification.",
       coaUrl: row.coa_url || null,
       sdsUrl: row.sds_url || null,
-      imageUrl: row.image_url || null
+      imageUrl: row.image_url || null,
+      discountTiers: Array.isArray(row.discount_tiers) ? row.discount_tiers : []
     };
   }
 
@@ -71,7 +72,8 @@ window.NicheChemsData = (function () {
         hazardInfo: "For laboratory research use only. See Safety Data Sheet for full hazard classification.",
         coaUrl: null,
         sdsUrl: null,
-        imageUrl: null
+        imageUrl: null,
+        discountTiers: []
       }, p);
     });
   }

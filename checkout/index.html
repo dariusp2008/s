@@ -56,9 +56,9 @@
   --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
   --space-5: 1.5rem; --space-6: 2rem; --space-7: 2.5rem; --space-8: 3.25rem; --space-9: 4.5rem; --space-10: 6rem;
 
-  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 18px;
+  --radius-sm: 2px; --radius-md: 3px; --radius-lg: 4px;
   --radius-blob: 62% 38% 55% 45% / 48% 45% 55% 52%;
-  --radius-pill: 999px;
+  --radius-pill: 4px;
 
   --shadow-sm: 0 1px 2px rgba(32, 39, 34, 0.06), 0 1px 1px rgba(32, 39, 34, 0.04);
   --shadow-md: 0 4px 14px -8px rgba(32, 39, 34, 0.14), 0 2px 5px -3px rgba(32, 39, 34, 0.08);
@@ -225,6 +225,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .c-cart-line__name { font-size: var(--text-sm); font-weight: 600; color: var(--color-forest); }
 .c-cart-line__meta { font-size: var(--text-xs); color: var(--color-ink-faint); margin-top: 2px; }
 .c-cart-line__price { font-size: var(--text-xs); color: var(--color-ink-faint); margin-top: 4px; }
+.c-cart-line__discount { color: var(--color-moss); font-weight: 700; }
 
 .c-qty-stepper { display: inline-flex; align-items: center; border: 1.5px solid var(--color-border-cool); border-radius: var(--radius-pill); overflow: hidden; flex-shrink: 0; }
 .c-qty-stepper__btn { width: 2.1rem; height: 2.3rem; display: flex; align-items: center; justify-content: center; font-size: 1rem; color: var(--color-forest); }
@@ -422,6 +423,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
             <h2>Order summary</h2>
             <div class="c-order-summary__row"><span id="summary-count">0 items</span><span id="summary-subtotal">$0.00</span></div>
             <div class="c-order-summary__row c-order-summary__row--total"><span>Total (USD)</span><span id="summary-total">$0.00</span></div>
+            <p class="c-cart-line__discount" id="summary-savings" style="margin-bottom: var(--space-3);" hidden></p>
             <p class="c-order-summary__note">Shipping and any applicable fees are confirmed by email after checkout. The next step converts this total to its ETH equivalent for payment — NicheChems accepts Ethereum only.</p>
             <p class="c-order-summary__min-note" id="min-order-note" role="alert" hidden></p>
             <button type="submit" form="checkout-form" class="c-btn c-btn--primary" id="continue-btn">Continue to Payment</button>
@@ -570,7 +572,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
           '<div class="c-cart-line__info">' +
             '<div class="c-cart-line__name">' + p.name + '</div>' +
             '<div class="c-cart-line__meta">Cat # ' + p.sku + '</div>' +
-            '<div class="c-cart-line__price">$' + p.price.toFixed(2) + ' / ' + p.priceUnit + '</div>' +
+            '<div class="c-cart-line__price">' +
+              (line.discountPct > 0
+                ? '<s style="color:var(--color-ink-faint);">$' + line.originalUnitPrice.toFixed(2) + '</s> $' + line.unitPrice.toFixed(2) + ' / ' + p.priceUnit +
+                  ' <span class="c-cart-line__discount">' + line.discountPct + '% off</span>'
+                : '$' + p.price.toFixed(2) + ' / ' + p.priceUnit) +
+            '</div>' +
           '</div>' +
           '<div class="c-qty-stepper">' +
             '<button type="button" class="c-qty-stepper__btn" data-qty-decrease="' + p.id + '" aria-label="Decrease quantity">&minus;</button>' +
@@ -592,6 +599,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     document.getElementById("summary-count").textContent = resolved.itemCount + (resolved.itemCount === 1 ? " item" : " items");
     document.getElementById("summary-subtotal").textContent = "$" + resolved.subtotal.toFixed(2);
     document.getElementById("summary-total").textContent = "$" + resolved.subtotal.toFixed(2);
+
+    var savingsEl = document.getElementById("summary-savings");
+    if (savingsEl) {
+      savingsEl.hidden = resolved.totalSavings <= 0;
+      if (resolved.totalSavings > 0) savingsEl.textContent = "You're saving $" + resolved.totalSavings.toFixed(2) + " with quantity discounts.";
+    }
 
     var belowMin = resolved.subtotal < MIN_ORDER_USD;
     var minNote = document.getElementById("min-order-note");
@@ -704,7 +717,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
           product_id: line.product.id,
           product_name: line.product.name,
           sku: line.product.sku,
-          unit_price: line.product.price,
+          unit_price: line.unitPrice,
           quantity: line.quantity,
           line_total: line.lineTotal
         };

@@ -64,7 +64,7 @@
   --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
   --space-5: 1.5rem; --space-6: 2rem; --space-7: 2.5rem; --space-8: 3.25rem; --space-9: 4.5rem;
 
-  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 18px; --radius-pill: 999px;
+  --radius-sm: 2px; --radius-md: 3px; --radius-lg: 4px; --radius-pill: 4px;
 
   --shadow-sm: 0 1px 2px rgba(32, 39, 34, 0.06), 0 1px 1px rgba(32, 39, 34, 0.04);
   --shadow-md: 0 4px 14px -8px rgba(32, 39, 34, 0.14), 0 2px 5px -3px rgba(32, 39, 34, 0.08);
@@ -199,6 +199,10 @@ dialog.c-dialog::backdrop { background: rgba(32, 39, 34, 0.55); }
 .c-form-field textarea { resize: vertical; min-height: 4.5rem; }
 .c-form-field input:disabled { background: var(--color-bg-alt); color: var(--color-ink-faint); }
 .c-image-preview { display: block; width: 140px; height: 140px; object-fit: cover; border-radius: var(--radius-md); border: 1.5px solid var(--color-border-cool); margin-bottom: var(--space-3); background: var(--color-bg-alt); }
+.c-tier-row { display: flex; align-items: center; gap: var(--space-2); margin-top: var(--space-2); font-size: var(--text-xs); color: var(--color-ink-soft); }
+.c-tier-row input { width: 5.5rem; padding: 0.5rem var(--space-3); border-radius: var(--radius-sm); border: 1.5px solid var(--color-border-cool); background: var(--color-bg); font-size: var(--text-sm); }
+.c-tier-row__remove { flex-shrink: 0; color: var(--color-error); font-size: var(--text-md); line-height: 1; padding: 0 var(--space-2); }
+.c-tier-row__remove:hover { opacity: 0.7; }
 .c-form-checkbox { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-5); }
 .c-form-checkbox input { width: auto; accent-color: var(--color-blue); }
 
@@ -411,7 +415,16 @@ dialog.c-dialog::backdrop { background: rgba(32, 39, 34, 0.55); }
         </div>
         <div class="c-form-field">
           <label for="prod-price-unit">Price unit</label>
-          <input type="text" id="prod-price-unit" placeholder="unit, set, panel…" value="unit">
+          <select id="prod-price-unit">
+            <option value="unit">unit</option>
+            <option value="set">set</option>
+            <option value="panel">panel</option>
+            <option value="kit">kit</option>
+            <option value="g">g (grams)</option>
+            <option value="mg">mg (milligrams)</option>
+            <option value="mcg">mcg / µg (micrograms)</option>
+            <option value="mL">mL (milliliters)</option>
+          </select>
         </div>
       </div>
       <div class="c-dialog__row">
@@ -429,6 +442,13 @@ dialog.c-dialog::backdrop { background: rgba(32, 39, 34, 0.55); }
             <label for="prod-active" style="margin: 0; text-transform: none; letter-spacing: 0;">Visible on storefront</label>
           </div>
         </div>
+      </div>
+      <div class="c-form-field">
+        <label>Quantity Discounts
+          <span class="c-form-field__hint">Buy this many or more of this product, get a % off automatically at checkout.</span>
+        </label>
+        <div id="prod-discount-tiers"></div>
+        <button type="button" class="c-btn c-btn--ghost c-btn--sm" id="add-discount-tier-btn" style="margin-top: var(--space-3);">+ Add Tier</button>
       </div>
       <div class="c-form-field">
         <label for="prod-cas">CAS Number <span class="c-form-field__hint">Placeholder text shown on the product page, e.g. "Available on Certificate of Analysis".</span></label>
@@ -530,6 +550,47 @@ dialog.c-dialog::backdrop { background: rgba(32, 39, 34, 0.55); }
   var currentImageUrl = null;
   var imageRemoved = false;
   var MAX_IMAGE_BYTES = 5 * 1024 * 1024;
+
+  // Quantity-discount tiers staged client-side while the product dialog is
+  // open, same pattern as the image fields above.
+  var discountTiers = [];
+
+  function renderDiscountTiers() {
+    var container = document.getElementById("prod-discount-tiers");
+    container.innerHTML = discountTiers.map(function (tier, i) {
+      return (
+        '<div class="c-tier-row" data-tier-index="' + i + '">' +
+          '<span>Buy</span>' +
+          '<input type="number" min="2" step="1" placeholder="qty" data-tier-field="min_qty" value="' + (tier.min_qty != null ? tier.min_qty : "") + '">' +
+          '<span>or more, take</span>' +
+          '<input type="number" min="0" max="100" step="0.1" placeholder="%" data-tier-field="discount_pct" value="' + (tier.discount_pct != null ? tier.discount_pct : "") + '">' +
+          '<span>% off</span>' +
+          '<button type="button" class="c-tier-row__remove" data-remove-tier="' + i + '" aria-label="Remove tier">&times;</button>' +
+        "</div>"
+      );
+    }).join("") || '<p style="font-size: var(--text-xs); color: var(--color-ink-faint); margin-top: var(--space-2);">No quantity discounts set.</p>';
+  }
+
+  document.getElementById("add-discount-tier-btn").addEventListener("click", function () {
+    discountTiers.push({ min_qty: "", discount_pct: "" });
+    renderDiscountTiers();
+  });
+
+  document.getElementById("prod-discount-tiers").addEventListener("click", function (event) {
+    var removeBtn = event.target.closest("[data-remove-tier]");
+    if (!removeBtn) return;
+    discountTiers.splice(parseInt(removeBtn.getAttribute("data-remove-tier"), 10), 1);
+    renderDiscountTiers();
+  });
+
+  document.getElementById("prod-discount-tiers").addEventListener("input", function (event) {
+    var input = event.target.closest("[data-tier-field]");
+    if (!input) return;
+    var row = input.closest("[data-tier-index]");
+    var index = parseInt(row.getAttribute("data-tier-index"), 10);
+    var field = input.getAttribute("data-tier-field");
+    discountTiers[index][field] = input.value === "" ? "" : parseFloat(input.value);
+  });
 
   // -----------------------------------------------------------------
   // Auth guard — see the top-of-file comment: this is UX, RLS is the
@@ -831,6 +892,9 @@ dialog.c-dialog::backdrop { background: rgba(32, 39, 34, 0.55); }
     form.dataset.editingId = existing ? existing.id : "";
     idInput.disabled = !!existing;
 
+    discountTiers = (existing && Array.isArray(existing.discount_tiers)) ? existing.discount_tiers.map(function (t) { return { min_qty: t.min_qty, discount_pct: t.discount_pct }; }) : [];
+    renderDiscountTiers();
+
     pendingImageFile = null;
     imageRemoved = false;
     currentImageUrl = (existing && existing.image_url) || null;
@@ -856,7 +920,15 @@ dialog.c-dialog::backdrop { background: rgba(32, 39, 34, 0.55); }
       document.getElementById("prod-purity").value = existing.purity || "";
       document.getElementById("prod-format").value = existing.format || "";
       document.getElementById("prod-price").value = existing.price;
-      document.getElementById("prod-price-unit").value = existing.price_unit || "unit";
+      var puSelect = document.getElementById("prod-price-unit");
+      var puValue = existing.price_unit || "unit";
+      if (!Array.prototype.some.call(puSelect.options, function (o) { return o.value === puValue; })) {
+        var puOpt = document.createElement("option");
+        puOpt.value = puValue;
+        puOpt.textContent = puValue;
+        puSelect.appendChild(puOpt);
+      }
+      puSelect.value = puValue;
       document.getElementById("prod-stock").value = existing.stock_status || "in-stock";
       document.getElementById("prod-active").checked = existing.active !== false;
       document.getElementById("prod-cas").value = existing.cas_number || "";
@@ -927,6 +999,18 @@ dialog.c-dialog::backdrop { background: rgba(32, 39, 34, 0.55); }
       return;
     }
 
+    var cleanTiers = [];
+    for (var ti = 0; ti < discountTiers.length; ti++) {
+      var t = discountTiers[ti];
+      if (t.min_qty === "" && t.discount_pct === "") continue;
+      if (!(t.min_qty >= 2) || !(t.discount_pct > 0 && t.discount_pct <= 100)) {
+        errorEl.textContent = "Each discount tier needs a quantity of 2 or more and a discount between 0 and 100%.";
+        return;
+      }
+      cleanTiers.push({ min_qty: t.min_qty, discount_pct: t.discount_pct });
+    }
+    cleanTiers.sort(function (a, b) { return a.min_qty - b.min_qty; });
+
     var payload = {
       name: document.getElementById("prod-name").value.trim(),
       sku: document.getElementById("prod-sku").value.trim(),
@@ -942,7 +1026,8 @@ dialog.c-dialog::backdrop { background: rgba(32, 39, 34, 0.55); }
       molecular_formula: document.getElementById("prod-formula").value.trim(),
       storage_conditions: document.getElementById("prod-storage").value.trim(),
       hazard_info: document.getElementById("prod-hazard").value.trim(),
-      image_url: currentImageUrl
+      image_url: currentImageUrl,
+      discount_tiers: cleanTiers
     };
 
     saveBtn.disabled = true;

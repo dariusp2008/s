@@ -89,11 +89,34 @@ window.NicheChemsCart = (function () {
   }
 
   /**
+   * Picks the best applicable quantity-break discount for a given quantity
+   * from a product's discountTiers ([{minQty, discountPct}, ...] — admin-
+   * defined in the dashboard). Highest minQty that the quantity still
+   * meets wins, not just the first match.
+   * @param {Array<{minQty: number, discountPct: number}>} tiers
+   * @param {number} quantity
+   * @returns {{minQty: number, discountPct: number}|null}
+   */
+  function bestTier(tiers, quantity) {
+    if (!Array.isArray(tiers) || tiers.length === 0) return null;
+    var best = null;
+    tiers.forEach(function (t) {
+      var minQty = t.minQty != null ? t.minQty : t.min_qty;
+      var discountPct = t.discountPct != null ? t.discountPct : t.discount_pct;
+      if (quantity >= minQty && (!best || minQty > best.minQty)) {
+        best = { minQty: minQty, discountPct: discountPct };
+      }
+    });
+    return best;
+  }
+
+  /**
    * Joins the stored {id, quantity} lines with live product data, drops
-   * any line whose product has since been deleted or deactivated, and
-   * computes line/grand totals. This is what checkout.html renders from.
+   * any line whose product has since been deleted or deactivated, applies
+   * quantity-break discounts, and computes line/grand totals. This is what
+   * checkout.html renders from.
    * @param {Array<Object>} products - result of NicheChemsData.fetchProducts()
-   * @returns {{lines: Array<Object>, subtotal: number, itemCount: number}}
+   * @returns {{lines: Array<Object>, subtotal: number, itemCount: number, totalSavings: number}}
    */
   function resolveCart(products) {
     var byId = {};
@@ -103,18 +126,28 @@ window.NicheChemsCart = (function () {
       .map(function (item) {
         var product = byId[item.id];
         if (!product) return null;
+        var tier = bestTier(product.discountTiers, item.quantity);
+        var discountPct = tier ? tier.discountPct : 0;
+        var unitPrice = tier ? product.price * (1 - discountPct / 100) : product.price;
+        var lineTotal = unitPrice * item.quantity;
+        var originalLineTotal = product.price * item.quantity;
         return {
           product: product,
           quantity: item.quantity,
-          lineTotal: product.price * item.quantity
+          unitPrice: unitPrice,
+          originalUnitPrice: product.price,
+          discountPct: discountPct,
+          lineTotal: lineTotal,
+          savings: originalLineTotal - lineTotal
         };
       })
       .filter(Boolean);
 
     var subtotal = lines.reduce(function (sum, l) { return sum + l.lineTotal; }, 0);
     var itemCount = lines.reduce(function (sum, l) { return sum + l.quantity; }, 0);
+    var totalSavings = lines.reduce(function (sum, l) { return sum + l.savings; }, 0);
 
-    return { lines: lines, subtotal: subtotal, itemCount: itemCount };
+    return { lines: lines, subtotal: subtotal, itemCount: itemCount, totalSavings: totalSavings };
   }
 
   return {
