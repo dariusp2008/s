@@ -16,26 +16,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 
 <!--
-  BACKEND INTEGRATION NOTE (not yet implemented — see project brief's
-  <backend>/<admin_dashboard> sections):
+  Real customer auth via Supabase Auth (see js/supabase-config.js) plus
+  a public.customers profile table for the fields auth.users itself
+  doesn't have room for (first/last name, institution) — see
+  supabase/schema.sql's CUSTOMER ACCOUNTS section.
 
-  These two forms are fully validated client-side but do not submit
-  anywhere yet, since there is no server. Once the Node/Express API
-  exists they should POST to /api/auth/register and /api/auth/login,
-  which would sit in front of a SQL "customers" table roughly shaped:
-
-    id             INTEGER PRIMARY KEY
-    email          TEXT UNIQUE NOT NULL
-    password_hash  TEXT NOT NULL        -- bcrypt, never store plaintext
-    first_name     TEXT NOT NULL
-    last_name      TEXT NOT NULL
-    institution    TEXT
-    role           TEXT DEFAULT 'customer'
-    created_at     DATETIME DEFAULT CURRENT_TIMESTAMP
-
-  Sessions should use HttpOnly, SameSite=Strict cookies scoped separately
-  from the admin-auth system used at /admin (customers and admin users
-  are not the same table or the same login).
+  Deliberately separate from the admin-auth system at /admin: any
+  Supabase Auth signup here is immediately a valid customer, no
+  allowlist/approval step, unlike admin login which additionally
+  requires a manual admin_users row. Same auth.users pool, different
+  authorization tables (customers vs admin_users) and different RLS
+  policies, so a customer session can never pass the is_admin() check.
 -->
 
 <style>
@@ -307,6 +298,24 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   .c-account-grid { grid-template-columns: 0.85fr 1.15fr; gap: var(--space-10); align-items: start; }
 }
 
+.c-account-dashboard-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-6); flex-wrap: wrap; }
+.c-account-dashboard-head h2 { font-size: var(--text-xl); }
+.c-account-dashboard-head .c-btn { width: auto; }
+
+.c-table-wrap { overflow-x: auto; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); }
+.c-table { width: 100%; min-width: 480px; border-collapse: collapse; }
+.c-table th, .c-table td { text-align: left; padding: var(--space-4); font-size: var(--text-xs); border-bottom: 1px solid var(--color-border); white-space: nowrap; }
+.c-table th { text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-ink-faint); font-weight: 700; background: var(--color-bg-alt); }
+.c-table tbody tr:last-child td { border-bottom: none; }
+.c-table__empty { text-align: center; color: var(--color-ink-faint); padding: var(--space-7); white-space: normal; }
+
+.c-order-status { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: var(--color-moss); }
+.c-order-status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--color-moss); flex-shrink: 0; }
+.c-order-status--pending { color: var(--color-warn, #96631C); }
+.c-order-status--pending::before { background: var(--color-warn, #96631C); }
+.c-order-status--cancelled { color: var(--color-error); }
+.c-order-status--cancelled::before { background: var(--color-error); }
+
 .c-account-benefits h2 { font-size: var(--text-xl); margin-bottom: var(--space-3); }
 .c-account-benefits > p { font-size: var(--text-sm); color: var(--color-ink-soft); }
 .c-account-benefits ul { display: flex; flex-direction: column; gap: var(--space-5); margin-top: var(--space-7); }
@@ -323,12 +332,6 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   box-shadow: var(--shadow-md); padding: var(--space-6);
 }
 @media (min-width: 600px) { .c-account-card { padding: var(--space-8); } }
-
-.c-account-notice {
-  display: flex; gap: var(--space-3); align-items: flex-start; background: var(--color-blue-tint); color: var(--color-blue-dark);
-  border-radius: var(--radius-md); padding: var(--space-4) var(--space-5); font-size: var(--text-xs); margin-bottom: var(--space-7);
-}
-.c-account-notice svg { flex-shrink: 0; margin-top: 1px; }
 
 .c-tabs { display: flex; gap: var(--space-1); background: var(--color-bg-alt); border-radius: var(--radius-pill); padding: var(--space-1); margin-bottom: var(--space-7); }
 .c-tabs__btn {
@@ -451,6 +454,11 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 
 <main id="main-content">
 
+<div id="auth-check" class="l-container" style="padding-block: var(--space-9); color: var(--color-ink-soft);">
+  <p>Checking session…</p>
+</div>
+
+<div id="signed-out-view" hidden>
   <div class="l-container c-page-header">
     <nav class="c-breadcrumb" aria-label="Breadcrumb">
       <a href="../index.html">Home</a>
@@ -499,11 +507,6 @@ a:focus-visible, button:focus-visible, input:focus-visible {
       </div>
 
       <div class="c-account-card">
-        <div class="c-account-notice" role="note">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M12 16.5h.01"/><circle cx="12" cy="12" r="9"/></svg>
-          <span>Account sign-in isn't connected to our database yet. You can fill out either form below, we'll email you as soon as accounts go live.</span>
-        </div>
-
         <div class="c-tabs" role="tablist" aria-label="Account forms">
           <button type="button" class="c-tabs__btn" id="tab-signin" role="tab" aria-selected="true" aria-controls="panel-signin">Sign In</button>
           <button type="button" class="c-tabs__btn" id="tab-register" role="tab" aria-selected="false" aria-controls="panel-register" tabindex="-1">Create Account</button>
@@ -582,6 +585,28 @@ a:focus-visible, button:focus-visible, input:focus-visible {
       </div>
     </div>
   </section>
+</div>
+
+<div id="signed-in-view" hidden>
+  <div class="l-container c-page-header">
+    <span class="c-eyebrow">Customer Account</span>
+    <h1 class="c-page-header__title" id="dashboard-greeting">Welcome back</h1>
+    <p class="c-page-header__lede" id="dashboard-email"></p>
+  </div>
+
+  <section class="l-container c-account-section">
+    <div class="c-account-dashboard-head">
+      <h2>Order History</h2>
+      <button type="button" class="c-btn c-btn--ghost" id="signout-btn">Sign Out</button>
+    </div>
+    <div class="c-table-wrap">
+      <table class="c-table">
+        <thead><tr><th>Order Ref</th><th>Date</th><th>Total</th><th>Status</th></tr></thead>
+        <tbody id="orders-tbody"><tr><td colspan="4" class="c-table__empty">Loading…</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+</div>
 
 </main>
 
@@ -642,6 +667,8 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase-config.js"></script>
 <script src="../js/cart.js"></script>
 <script>
 (function () {
@@ -767,6 +794,94 @@ a:focus-visible, button:focus-visible, input:focus-visible {
     return EMAIL_PATTERN.test(value.trim()) ? "" : "Enter a valid email address.";
   }
 
+  /* -- Real customer auth (Supabase) --------------------------------- */
+  var client = window.supabaseClient;
+  var authCheck = document.getElementById("auth-check");
+  var signedOutView = document.getElementById("signed-out-view");
+  var signedInView = document.getElementById("signed-in-view");
+
+  function showSignedOut() {
+    authCheck.hidden = true;
+    signedInView.hidden = true;
+    signedOutView.hidden = false;
+  }
+
+  async function showSignedIn(user) {
+    authCheck.hidden = true;
+    signedOutView.hidden = true;
+    signedInView.hidden = false;
+
+    var greeting = document.getElementById("dashboard-greeting");
+    var emailEl = document.getElementById("dashboard-email");
+    emailEl.textContent = user.email;
+
+    try {
+      var profileResult = await client.from("customers").select("first_name").eq("id", user.id).maybeSingle();
+      var firstNameVal = profileResult.data && profileResult.data.first_name;
+      greeting.textContent = firstNameVal ? "Welcome back, " + firstNameVal : "Welcome back";
+    } catch (err) {
+      greeting.textContent = "Welcome back";
+    }
+
+    loadOrders(user.id);
+  }
+
+  function orderStatusLabel(status) {
+    var labels = {
+      pending_payment: "Pending Payment",
+      awaiting_confirmation: "Awaiting Confirmation",
+      paid: "Paid",
+      fulfilled: "Fulfilled",
+      cancelled: "Cancelled"
+    };
+    var cls = "c-order-status";
+    if (status === "pending_payment" || status === "awaiting_confirmation") cls += " c-order-status--pending";
+    if (status === "cancelled") cls += " c-order-status--cancelled";
+    return '<span class="' + cls + '">' + (labels[status] || status) + "</span>";
+  }
+
+  async function loadOrders(userId) {
+    var tbody = document.getElementById("orders-tbody");
+    try {
+      var result = await client.from("orders").select("*").eq("customer_id", userId).order("created_at", { ascending: false });
+      if (result.error) throw result.error;
+      if (result.data.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" class="c-table__empty">No orders yet. Orders placed while signed in will show up here.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = result.data.map(function (o) {
+        var ref = o.id.slice(0, 8).toUpperCase();
+        var date = new Date(o.created_at).toLocaleDateString();
+        return (
+          "<tr>" +
+            "<td>" + ref + "</td>" +
+            "<td>" + date + "</td>" +
+            "<td>$" + Number(o.subtotal).toFixed(2) + "</td>" +
+            "<td>" + orderStatusLabel(o.status) + "</td>" +
+          "</tr>"
+        );
+      }).join("");
+    } catch (err) {
+      tbody.innerHTML = '<tr><td colspan="4" class="c-table__empty">Couldn\'t load your orders. Try reloading the page.</td></tr>';
+    }
+  }
+
+  document.getElementById("signout-btn").addEventListener("click", async function () {
+    await client.auth.signOut();
+    showSignedOut();
+  });
+
+  (async function checkSession() {
+    if (!client) { showSignedOut(); return; }
+    var sessionResult = await client.auth.getSession();
+    var user = sessionResult.data && sessionResult.data.session && sessionResult.data.session.user;
+    if (user) {
+      showSignedIn(user);
+    } else {
+      showSignedOut();
+    }
+  })();
+
   /* -- Sign in form ------------------------------------------------- */
   var signinForm = document.getElementById("panel-signin");
   var signinEmail = document.getElementById("signin-email");
@@ -776,14 +891,37 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   var checkSigninEmail = bindField(signinEmail, emailValidator);
   var checkSigninPassword = bindField(signinPassword, required("Password"));
 
-  signinForm.addEventListener("submit", function (event) {
+  signinForm.addEventListener("submit", async function (event) {
     event.preventDefault();
     var emailOk = checkSigninEmail();
     var passwordOk = checkSigninPassword();
     if (!emailOk || !passwordOk) return;
 
-    signinStatus.textContent = "Thanks. Customer sign-in isn't connected to our database yet. We'll email " + signinEmail.value.trim() + " once accounts are live.";
-    signinStatus.classList.add("is-success");
+    if (!client) {
+      signinStatus.textContent = "Can't reach the authentication service right now. Check your connection and reload.";
+      signinStatus.classList.remove("is-success");
+      return;
+    }
+
+    var submitBtn = signinForm.querySelector("button[type=submit]");
+    submitBtn.disabled = true;
+    signinStatus.textContent = "Signing in…";
+    signinStatus.classList.remove("is-success");
+
+    var result = await client.auth.signInWithPassword({
+      email: signinEmail.value.trim(),
+      password: signinPassword.value
+    });
+
+    submitBtn.disabled = false;
+
+    if (result.error) {
+      signinStatus.textContent = result.error.message || "Sign-in failed. Check your email and password.";
+      return;
+    }
+
+    signinStatus.textContent = "";
+    showSignedIn(result.data.user);
   });
 
   /* -- Create account form ------------------------------------------- */
@@ -791,6 +929,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   var firstName = document.getElementById("register-first-name");
   var lastName = document.getElementById("register-last-name");
   var email = document.getElementById("register-email");
+  var institution = document.getElementById("register-institution");
   var password = document.getElementById("register-password");
   var confirmPassword = document.getElementById("register-confirm-password");
   var terms = document.getElementById("register-terms");
@@ -809,7 +948,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
     return value === password.value ? "" : "Passwords don't match.";
   });
 
-  registerForm.addEventListener("submit", function (event) {
+  registerForm.addEventListener("submit", async function (event) {
     event.preventDefault();
     var results = [
       checkFirstName(), checkLastName(), checkEmail(),
@@ -821,9 +960,54 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 
     if (results.indexOf(false) !== -1) return;
 
-    registerStatus.textContent = "Thanks, " + firstName.value.trim() + ". Account creation isn't connected to our database yet. We'll email " + email.value.trim() + " as soon as it's ready.";
-    registerStatus.classList.add("is-success");
+    if (!client) {
+      registerStatus.textContent = "Can't reach the authentication service right now. Check your connection and reload.";
+      registerStatus.classList.remove("is-success");
+      return;
+    }
+
+    var submitBtn = registerForm.querySelector("button[type=submit]");
+    submitBtn.disabled = true;
+    registerStatus.textContent = "Creating account…";
+    registerStatus.classList.remove("is-success");
+
+    var signUpResult = await client.auth.signUp({
+      email: email.value.trim(),
+      password: password.value
+    });
+
+    submitBtn.disabled = false;
+
+    if (signUpResult.error) {
+      registerStatus.textContent = signUpResult.error.message || "Couldn't create that account.";
+      return;
+    }
+
+    var newUser = signUpResult.data.user;
+    var newSession = signUpResult.data.session;
+
+    if (newUser) {
+      try {
+        await client.from("customers").insert({
+          id: newUser.id,
+          first_name: firstName.value.trim(),
+          last_name: lastName.value.trim(),
+          institution: institution.value.trim() || null
+        });
+      } catch (err) {
+        console.warn("Couldn't save profile details (non-blocking):", err);
+      }
+    }
+
     registerForm.reset();
+
+    if (newSession) {
+      registerStatus.textContent = "";
+      showSignedIn(newUser);
+    } else {
+      registerStatus.textContent = "Account created. Check your email to confirm it, then sign in.";
+      registerStatus.classList.add("is-success");
+    }
   });
 })();
 </script>

@@ -271,24 +271,59 @@ values
 on conflict (id) do nothing;
 
 -- =====================================================================
+-- CUSTOMER ACCOUNTS
+--
+-- Separate from admin_users entirely: any Supabase Auth signup here is
+-- immediately a valid customer, no allowlist/approval step (unlike admin
+-- login, which additionally requires a manual admin_users row). This
+-- table just holds the profile fields account/index.html's registration
+-- form collects that auth.users itself doesn't have a place for.
+-- =====================================================================
+create table if not exists public.customers (
+  id          uuid primary key references auth.users(id) on delete cascade,
+  first_name  text,
+  last_name   text,
+  institution text,
+  created_at  timestamptz not null default now()
+);
+
+alter table public.customers enable row level security;
+
+-- a customer can read/write only their own profile row; no public access,
+-- no way to enumerate other customers
+drop policy if exists customers_self_select on public.customers;
+create policy customers_self_select on public.customers
+  for select using (auth.uid() = id);
+
+drop policy if exists customers_self_insert on public.customers;
+create policy customers_self_insert on public.customers
+  for insert with check (auth.uid() = id);
+
+drop policy if exists customers_self_update on public.customers;
+create policy customers_self_update on public.customers
+  for update using (auth.uid() = id) with check (auth.uid() = id);
+
+-- =====================================================================
 -- ORDERS / CHECKOUT
 --
--- There is no customer-login system yet (account/index.html is still an
--- honest "not connected yet" placeholder), so checkout writes orders as
--- an anonymous (anon) insert. That means orders/order_items must NOT be
--- publicly readable — they contain customer name/email/address — so
--- unlike categories/products there is no `select using (true)` policy
--- here. Only admins can read/update/delete orders (this is what the
--- admin dashboard's future "view customer orders" panel will query).
+-- Checkout writes orders as an anonymous (anon) insert either way (guest
+-- checkout is still supported), but if the shopper is signed in via
+-- account/index.html at checkout time, the order's customer_id links it
+-- to their account so it shows up in their order history. That means
+-- orders/order_items must NOT be publicly readable, they contain
+-- customer name/email/address, so unlike categories/products there is
+-- no `select using (true)` policy here. Only admins, and the customer_id
+-- owner (see CUSTOMER ACCOUNTS above), can read orders.
 --
--- The checkout page never needs to read orders back from Supabase: it
--- already has the full order in memory right after building it, and
--- hands that off to payment/index.html via sessionStorage — so the
--- browser is never left needing an anon SELECT policy to display an
--- order it just created.
+-- The checkout page never needs to read orders back from Supabase to
+-- render the payment step: it already has the full order in memory
+-- right after building it, and hands that off to payment/index.html via
+-- sessionStorage.
 -- =====================================================================
 create table if not exists public.orders (
   id                uuid primary key default gen_random_uuid(),
+  customer_id       uuid references auth.users(id) on delete set null,
+                      -- null for guest checkout; set when the shopper was signed in
   status            text not null default 'pending_payment'
                       check (status in ('pending_payment', 'awaiting_confirmation', 'paid', 'fulfilled', 'cancelled')),
   payment_method    text not null default 'ethereum',
@@ -304,6 +339,10 @@ create table if not exists public.orders (
   created_at        timestamptz not null default now(),
   updated_at        timestamptz not null default now()
 );
+
+-- Covers instances where this script already ran before customer_id existed.
+alter table public.orders add column if not exists customer_id uuid references auth.users(id) on delete set null;
+create index if not exists idx_orders_customer on public.orders(customer_id);
 
 drop trigger if exists trg_orders_updated_at on public.orders;
 create trigger trg_orders_updated_at
@@ -343,6 +382,11 @@ drop policy if exists orders_admin_delete on public.orders;
 create policy orders_admin_delete on public.orders
   for delete using (is_admin(auth.uid()));
 
+-- customers can read their own order history (see CUSTOMER ACCOUNTS below)
+drop policy if exists orders_customer_read on public.orders;
+create policy orders_customer_read on public.orders
+  for select using (auth.uid() = customer_id);
+
 drop policy if exists order_items_insert_anyone on public.order_items;
 create policy order_items_insert_anyone on public.order_items
   for insert with check (true);
@@ -350,6 +394,16 @@ create policy order_items_insert_anyone on public.order_items
 drop policy if exists order_items_admin_read on public.order_items;
 create policy order_items_admin_read on public.order_items
   for select using (is_admin(auth.uid()));
+
+drop policy if exists order_items_customer_read on public.order_items;
+create policy order_items_customer_read on public.order_items
+  for select using (
+    exists (
+      select 1 from public.orders
+      where orders.id = order_items.order_id
+        and orders.customer_id = auth.uid()
+    )
+  );
 
 drop policy if exists order_items_admin_update on public.order_items;
 create policy order_items_admin_update on public.order_items

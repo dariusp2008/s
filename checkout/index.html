@@ -704,6 +704,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     };
 
     try {
+      // Link the order to a customer account if they're signed in (see
+      // account/index.html) — guest checkout still works, customer_id
+      // just stays null and the order won't show in anyone's history.
+      var sessionResult = await window.supabaseClient.auth.getSession();
+      var loggedInUser = sessionResult.data && sessionResult.data.session && sessionResult.data.session.user;
+      if (loggedInUser) orderPayload.customer_id = loggedInUser.id;
+
       var orderResult = await window.supabaseClient.from("orders").insert(orderPayload).select().single();
       if (orderResult.error) throw orderResult.error;
       var order = orderResult.data;

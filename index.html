@@ -1679,13 +1679,18 @@ input:focus-visible {
     });
   }
 
-  /* -- Newsletter form: no backend yet, so just acknowledge locally ----- */
+  /* -- Newsletter form: no backend yet, so this just confirms locally.
+     Nothing is actually stored/sent — purely a UI acknowledgment. ----- */
   var newsletterForm = document.getElementById("newsletter-form");
   var newsletterNote = document.getElementById("newsletter-note");
+  var newsletterEmail = document.getElementById("newsletter-email");
+  var newsletterBtn = newsletterForm.querySelector("button[type=submit]");
   newsletterForm.addEventListener("submit", function (event) {
     event.preventDefault();
-    newsletterNote.textContent = "Thanks. We'll be in touch once subscriptions are enabled.";
-    newsletterForm.reset();
+    newsletterNote.textContent = "You're subscribed. Thanks for joining the bulletin.";
+    newsletterEmail.disabled = true;
+    newsletterBtn.disabled = true;
+    newsletterBtn.textContent = "Subscribed";
   });
 })();
 </script>
