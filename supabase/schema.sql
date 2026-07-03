@@ -199,14 +199,14 @@ on conflict (id) do nothing;
 insert into public.products
   (id, sku, category_id, name, description, purity, format, price, price_unit, stock_status, active, cas_number, molecular_formula, storage_conditions, hazard_info)
 values
-  ('nc-1042', 'NC-1042', 'reference-standards', 'Certified Reference Standard — Series A',
+  ('nc-1042', 'NC-1042', 'reference-standards', 'Certified Reference Standard, Series A',
    'A certified single-analyte reference standard for calibration and quality-control workflows, supplied with full lot documentation.',
    '≥99.5%', '1 mL ampoule', 184, 'unit', 'in-stock', true,
    'Available on Certificate of Analysis', 'See Certificate of Analysis',
    'Store at 2–8°C in original sealed packaging, away from light.',
    'For laboratory research use only. Handle with standard PPE (gloves, eye protection) per institutional safety protocols. See Safety Data Sheet for full hazard classification.'),
 
-  ('nc-1043', 'NC-1043', 'reference-standards', 'Certified Reference Standard — Series B',
+  ('nc-1043', 'NC-1043', 'reference-standards', 'Certified Reference Standard, Series B',
    'A second certified single-analyte reference standard, lot-tested for use alongside Series A in comparative calibration studies.',
    '≥99.3%', '1 mL ampoule', 179, 'unit', 'in-stock', true,
    'Available on Certificate of Analysis', 'See Certificate of Analysis',
@@ -230,28 +230,28 @@ values
   ('nc-3311', 'NC-3311', 'chromatography', 'HPLC-Grade Chromatography Standard Mix',
    'A ten-component mixed standard for HPLC method development and validation, each analyte independently verified.',
    '≥99% per component', '10 × 1 mL set', 465, 'set', 'in-stock', true,
-   'Mixture — see Certificate of Analysis', 'Mixture — see Certificate of Analysis',
+   'Mixture, see Certificate of Analysis', 'Mixture, see Certificate of Analysis',
    'Store at 2–8°C in original sealed packaging, away from light.',
    'For laboratory research use only. Handle with standard PPE (gloves, eye protection) per institutional safety protocols. See Safety Data Sheet for full hazard classification.'),
 
   ('nc-3325', 'NC-3325', 'chromatography', 'GC-Grade Chromatography Standard Mix',
    'An eight-component mixed standard formulated for gas-chromatography method validation and instrument qualification.',
    '≥99% per component', '8 × 1 mL set', 410, 'set', 'in-stock', true,
-   'Mixture — see Certificate of Analysis', 'Mixture — see Certificate of Analysis',
+   'Mixture, see Certificate of Analysis', 'Mixture, see Certificate of Analysis',
    'Store at 2–8°C in original sealed packaging, away from light.',
    'For laboratory research use only. Handle with standard PPE (gloves, eye protection) per institutional safety protocols. See Safety Data Sheet for full hazard classification.'),
 
   ('nc-4460', 'NC-4460', 'buffers', 'Buffered Calibration Solution, pH 7.00',
    'A traceable pH 7.00 buffer solution for routine calibration and verification of laboratory pH meters.',
    '±0.01 pH', '500 mL bottle', 58, 'unit', 'in-stock', true,
-   'Not applicable — buffered aqueous solution', 'Not applicable — buffered aqueous solution',
+   'Not applicable, buffered aqueous solution', 'Not applicable, buffered aqueous solution',
    'Store at room temperature, tightly sealed.',
    'For laboratory research use only. Handle with standard PPE (gloves, eye protection) per institutional safety protocols. See Safety Data Sheet for full hazard classification.'),
 
   ('nc-4461', 'NC-4461', 'buffers', 'Buffered Calibration Solution, pH 4.01',
    'A traceable pH 4.01 buffer solution, commonly paired with the pH 7.00 solution for two-point meter calibration.',
    '±0.01 pH', '500 mL bottle', 58, 'unit', 'in-stock', true,
-   'Not applicable — buffered aqueous solution', 'Not applicable — buffered aqueous solution',
+   'Not applicable, buffered aqueous solution', 'Not applicable, buffered aqueous solution',
    'Store at room temperature, tightly sealed.',
    'For laboratory research use only. Handle with standard PPE (gloves, eye protection) per institutional safety protocols. See Safety Data Sheet for full hazard classification.'),
 
@@ -265,7 +265,7 @@ values
   ('nc-6084', 'NC-6084', 'forensic', 'Forensic Toxicology Reference Panel',
    'A twelve-analyte reference panel formulated for forensic toxicology screening method validation.',
    '≥98% per analyte', '12-analyte panel', 720, 'panel', 'in-stock', true,
-   'Mixture — see Certificate of Analysis', 'Mixture — see Certificate of Analysis',
+   'Mixture, see Certificate of Analysis', 'Mixture, see Certificate of Analysis',
    'Store at -20°C, tightly sealed, protect from light and moisture.',
    'For laboratory research use only. Handle with standard PPE (gloves, eye protection) per institutional safety protocols. See Safety Data Sheet for full hazard classification.')
 on conflict (id) do nothing;

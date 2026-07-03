@@ -246,7 +246,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
     toggleToSignupWrap.hidden = true;
     toggleToSigninWrap.hidden = false;
     cardTitle.textContent = "Create an admin account";
-    cardSub.textContent = "New accounts still need to be approved before they can manage the catalogue — see below.";
+    cardSub.textContent = "New accounts still need to be approved before they can manage the catalogue. See below.";
     statusEl.textContent = "";
     statusEl.className = "c-admin-card__status";
   });
@@ -338,7 +338,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
       return;
     }
 
-    statusEl.textContent = "Signed in — redirecting…";
+    statusEl.textContent = "Signed in, redirecting…";
     statusEl.className = "c-admin-card__status is-success";
     window.location.href = "dashboard/index.html";
   });

@@ -59,8 +59,8 @@ window.NICHECHEMS_CATEGORIES = [
 ];
 
 window.NICHECHEMS_PRODUCTS = [
-  { id: "nc-1042", sku: "NC-1042", category: "reference-standards", name: "Certified Reference Standard — Series A", purity: "≥99.5%", format: "1 mL ampoule", price: 184, priceUnit: "unit", stock: "in-stock", active: true },
-  { id: "nc-1043", sku: "NC-1043", category: "reference-standards", name: "Certified Reference Standard — Series B", purity: "≥99.3%", format: "1 mL ampoule", price: 179, priceUnit: "unit", stock: "in-stock", active: true },
+  { id: "nc-1042", sku: "NC-1042", category: "reference-standards", name: "Certified Reference Standard, Series A", purity: "≥99.5%", format: "1 mL ampoule", price: 184, priceUnit: "unit", stock: "in-stock", active: true },
+  { id: "nc-1043", sku: "NC-1043", category: "reference-standards", name: "Certified Reference Standard, Series B", purity: "≥99.3%", format: "1 mL ampoule", price: 179, priceUnit: "unit", stock: "in-stock", active: true },
   { id: "nc-2078", sku: "NC-2078", category: "isotope-labeled", name: "Isotope-Labeled Internal Standard, D6", purity: "≥99% (isotopic)", format: "5 mg vial", price: 310, priceUnit: "unit", stock: "in-stock", active: true },
   { id: "nc-2091", sku: "NC-2091", category: "isotope-labeled", name: "Isotope-Labeled Internal Standard, C13", purity: "≥99% (isotopic)", format: "5 mg vial", price: 328, priceUnit: "unit", stock: "low-stock", active: true },
   { id: "nc-3311", sku: "NC-3311", category: "chromatography", name: "HPLC-Grade Chromatography Standard Mix", purity: "≥99% per component", format: "10 × 1 mL set", price: 465, priceUnit: "set", stock: "in-stock", active: true },

@@ -235,14 +235,6 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2.5px soli
 .c-guide-step li { font-size: var(--text-sm); color: var(--color-ink-soft); padding-left: var(--space-5); position: relative; }
 .c-guide-step li::before { content: "\2022"; position: absolute; left: var(--space-1); color: var(--color-blue); font-weight: 700; }
 
-.c-callout {
-  display: flex; gap: var(--space-4); background: var(--color-warn-tint); border: 1px solid rgba(150, 99, 28, 0.25);
-  border-radius: var(--radius-lg); padding: var(--space-6); margin-top: var(--space-8);
-}
-.c-callout__icon { flex-shrink: 0; width: 36px; height: 36px; border-radius: var(--radius-sm); background: rgba(150, 99, 28, 0.14); color: var(--color-warn); display: grid; place-items: center; }
-.c-callout h3 { font-size: var(--text-md); color: var(--color-warn); margin-bottom: var(--space-2); }
-.c-callout p { font-size: var(--text-sm); color: var(--color-ink-soft); margin: 0; }
-
 .c-cta-band { position: relative; overflow: hidden; border-radius: var(--radius-lg); margin-inline: var(--space-5); padding: var(--space-9) var(--space-6); text-align: center; }
 @media (min-width: 700px) { .c-cta-band { margin-inline: var(--space-7); padding: var(--space-10) var(--space-9); } }
 .c-cta-band::before { content: ""; position: absolute; bottom: -30%; left: -6%; width: 320px; height: 320px; background: rgba(255, 255, 255, 0.08); border-radius: var(--radius-blob); }
@@ -298,7 +290,6 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2.5px soli
         <li><a href="../index.html">Home</a></li>
         <li><a href="../catalogue/index.html">Catalogue</a></li>
         <li><a href="index.html" aria-current="page">About Us</a></li>
-        <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
 
@@ -323,7 +314,6 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2.5px soli
     <li><a href="../index.html">Home</a></li>
     <li><a href="../catalogue/index.html">Catalogue</a></li>
     <li><a href="index.html" aria-current="page">About Us</a></li>
-    <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="c-mobile-nav__cta">
     <a class="c-btn c-btn--primary" href="../catalogue/index.html">Browse Catalogue</a>
@@ -344,7 +334,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2.5px soli
     </nav>
     <span class="c-eyebrow">About NicheChems</span>
     <h1 class="c-page-header__title">Certified reference materials, straightforward crypto checkout.</h1>
-    <p class="c-page-header__lede">Who we are, and a plain-language walkthrough of buying Ethereum and paying with a wallet — since that's the only way we currently accept payment.</p>
+    <p class="c-page-header__lede">Who we are, and a plain-language walkthrough of buying Ethereum and paying with a wallet, since that's the only way we currently accept payment.</p>
   </div>
 
   <!-- ===================================================================
@@ -352,8 +342,8 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2.5px soli
        =================================================================== -->
   <section class="l-section" style="padding-top: 0;">
     <div class="l-container c-prose">
-      <p>NicheChems supplies research chemicals, isotope-labeled internal standards, calibration buffers, high-purity solvents, and forensic reference panels to verified research professionals worldwide. Every lot ships with a Certificate of Analysis and Safety Data Sheet, and every product on the site is managed through our internal catalogue tools — what you see here reflects current stock and pricing, not a stale spec sheet.</p>
-      <p>We run a lean, research-focused operation. To keep overhead down (and pass that through in pricing) we accept payment in Ethereum (ETH) only — no card processors, no invoicing delays. If you've never paid with crypto before, the guide below covers everything you need: buying ETH, moving it to a wallet you control, and sending payment at checkout.</p>
+      <p>NicheChems supplies research chemicals, isotope-labeled internal standards, calibration buffers, high-purity solvents, and forensic reference panels to verified research professionals worldwide. Every lot ships with a Certificate of Analysis and Safety Data Sheet, and every product on the site is managed through our internal catalogue tools, so what you see here reflects current stock and pricing, not a stale spec sheet.</p>
+      <p>We run a lean, research-focused operation. To keep overhead down, and pass that through in pricing, we accept payment in Ethereum (ETH) only: no card processors, no invoicing delays. If you've never paid with crypto before, the guide below covers everything you need: buying ETH, moving it to a wallet you control, and connecting that wallet at checkout.</p>
     </div>
   </section>
 
@@ -365,59 +355,43 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2.5px soli
       <div class="c-section-head">
         <span class="c-eyebrow">Paying With Ethereum</span>
         <h2>A guide to buying ETH and connecting a wallet</h2>
-        <p>Five steps, start to finish. Budget 15–20 minutes if this is your first time — most of that is exchange identity verification, not the crypto part.</p>
+        <p>Four steps, start to finish. Budget 15–20 minutes if this is your first time, most of that is exchange identity verification, not the crypto part.</p>
       </div>
 
       <ol class="c-guide-list">
         <li class="c-guide-step">
           <h3>Buy ETH on an exchange</h3>
-          <p>Sign up with a reputable exchange — Coinbase, Kraken, and Binance are the largest and all support bank transfers or card purchases. Complete their identity verification (required by law), then buy the ETH amount you need.</p>
-          <p>Check your order total in USD at checkout first — ETH's price moves, so buy a little extra to cover network fees and price movement between purchase and payment.</p>
+          <p>Sign up with a reputable exchange. Coinbase, Kraken, and Binance are the largest and all support bank transfers or card purchases. Complete their identity verification (required by law), then buy the ETH amount you need.</p>
+          <p>Check your order total in USD at checkout first, since ETH's price moves. Buy a little extra to cover network fees and price movement between purchase and payment.</p>
         </li>
 
         <li class="c-guide-step">
           <h3>Move it to a wallet you control</h3>
-          <p>An exchange account isn't a wallet — you don't hold the private keys. Install a self-custody wallet before you pay us:</p>
+          <p>An exchange account isn't a wallet, you don't hold the private keys. Install a self-custody wallet before you pay us:</p>
           <ul>
             <li>MetaMask (browser extension + mobile)</li>
             <li>Rainbow (mobile)</li>
             <li>Trust Wallet (mobile)</li>
           </ul>
-          <p>Set it up, securely back up the seed phrase it gives you, then withdraw your ETH from the exchange to your new wallet's address.</p>
+          <p>Set it up, securely back up the seed phrase it gives you, then withdraw your ETH from the exchange to your new wallet.</p>
         </li>
 
         <li class="c-guide-step">
-          <h3>Head to checkout</h3>
-          <p>Add products to your cart and proceed to <a href="../checkout/index.html" style="color: var(--color-blue); text-decoration: underline;">Checkout</a>. The payment step shows the exact ETH amount due and our receiving address.</p>
-        </li>
-
-        <li class="c-guide-step">
-          <h3>Connect your wallet</h3>
-          <p>Click <strong>Connect Wallet</strong> on the payment page. Your wallet extension or app opens a popup:</p>
+          <h3>Connect your wallet at checkout</h3>
+          <p>Add products to your cart and proceed to <a href="../checkout/index.html" style="color: var(--color-blue); text-decoration: underline;">Checkout</a>. On the payment page, click <strong>Connect Wallet</strong>. Your wallet extension or app opens a popup:</p>
           <ul>
             <li>Pick the account you want to pay from, then approve the connection</li>
-            <li>Check the network shown is <strong>Ethereum Mainnet</strong> — switch it in your wallet if it shows anything else</li>
-            <li>Confirm the ETH amount and receiving address in the popup match what's shown on our payment page</li>
-            <li>Approve / sign the transaction — your wallet will prompt you once more before anything sends</li>
+            <li>Check the network shown is <strong>Ethereum Mainnet</strong>, switch it in your wallet if it shows anything else</li>
+            <li>Confirm the ETH amount in the popup matches your order total</li>
+            <li>Approve / sign the transaction, your wallet will prompt you once more before anything sends</li>
           </ul>
-          <p>Prefer not to connect a wallet to a site? Skip this and use "send manually" instead — copy our address, send from any wallet app, no connection needed.</p>
         </li>
 
         <li class="c-guide-step">
           <h3>Confirm your payment</h3>
-          <p>Either way you paid, copy the transaction hash from your wallet's activity log and email it to us along with your order reference (both are on the payment page) so we can confirm it on-chain and fulfill your order.</p>
+          <p>After sending, copy the transaction hash from your wallet's activity log and email it to us along with your order reference (both are on the payment page) so we can confirm it on-chain and fulfill your order.</p>
         </li>
       </ol>
-
-      <div class="c-callout">
-        <span class="c-callout__icon" aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 16.5h.01"/><path d="M10.3 3.9 2.5 17.5A1.8 1.8 0 0 0 4 20.3h16a1.8 1.8 0 0 0 1.5-2.8L13.7 3.9a1.8 1.8 0 0 0-3.4 0Z"/></svg>
-        </span>
-        <div>
-          <h3>Before you send anything</h3>
-          <p>Double- and triple-check the receiving address on the payment page character-by-character before sending — Ethereum transactions can't be reversed. For a large order, consider sending a small test amount first. Never share your wallet's seed phrase with anyone, including anyone claiming to be NicheChems support — we will never ask for it.</p>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -475,7 +449,6 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2.5px soli
       <h3>Contact</h3>
       <ul>
         <li><a href="mailto:research@nichechems.com">research@nichechems.com</a></li>
-        <li><a href="tel:+18005550142">+1 (800) 555-0142</a></li>
         <li><address>Laboratory Way, Suite 200<br>Cambridge, MA, USA</address></li>
       </ul>
     </div>

@@ -437,7 +437,6 @@ a:focus-visible, button:focus-visible, input:focus-visible {
         <li><a href="../index.html">Home</a></li>
         <li><a href="../catalogue/index.html" aria-current="page">Catalogue</a></li>
         <li><a href="../about/index.html">About Us</a></li>
-        <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
 
@@ -462,7 +461,6 @@ a:focus-visible, button:focus-visible, input:focus-visible {
     <li><a href="../index.html">Home</a></li>
     <li><a href="../catalogue/index.html" aria-current="page">Catalogue</a></li>
     <li><a href="../about/index.html">About Us</a></li>
-    <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="c-mobile-nav__cta">
     <a class="c-btn c-btn--primary" href="../account/index.html">Sign In / Account</a>
@@ -591,7 +589,6 @@ a:focus-visible, button:focus-visible, input:focus-visible {
       <h3>Contact</h3>
       <ul>
         <li><a href="mailto:research@nichechems.com">research@nichechems.com</a></li>
-        <li><a href="tel:+18005550142">+1 (800) 555-0142</a></li>
         <li><address>Laboratory Way, Suite 200<br>Cambridge, MA, USA</address></li>
       </ul>
     </div>
@@ -763,7 +760,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 
     // -- Title / meta --
     document.getElementById("page-title").textContent = product.name + " | NicheChems";
-    document.getElementById("page-description").setAttribute("content", product.description || (product.name + " — catalog #" + product.sku + ". Certified for laboratory research use."));
+    document.getElementById("page-description").setAttribute("content", product.description || (product.name + ", catalog #" + product.sku + ". Certified for laboratory research use."));
     document.getElementById("page-canonical").setAttribute("href", "https://nichechems.com/product-page/?id=" + product.id);
 
     // -- Visual column --
@@ -790,7 +787,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
     document.getElementById("product-sku").textContent = "Catalog #" + product.sku;
     document.getElementById("product-description").textContent = product.description || "Full specifications are available on request.";
 
-    var requestSubject = encodeURIComponent("Pricing & availability — " + product.sku);
+    var requestSubject = encodeURIComponent("Pricing & availability, " + product.sku);
     var requestBody = encodeURIComponent("I'd like pricing and availability for " + product.name + " (Catalog #" + product.sku + ").");
     document.getElementById("request-link").href = "mailto:research@nichechems.com?subject=" + requestSubject + "&body=" + requestBody;
     document.getElementById("category-link").href = catHref;

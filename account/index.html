@@ -419,7 +419,6 @@ a:focus-visible, button:focus-visible, input:focus-visible {
         <li><a href="../index.html">Home</a></li>
         <li><a href="../catalogue/index.html">Catalogue</a></li>
         <li><a href="../about/index.html">About Us</a></li>
-        <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
 
@@ -444,7 +443,6 @@ a:focus-visible, button:focus-visible, input:focus-visible {
     <li><a href="../index.html">Home</a></li>
     <li><a href="../catalogue/index.html">Catalogue</a></li>
     <li><a href="../about/index.html">About Us</a></li>
-    <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="c-mobile-nav__cta">
     <a class="c-btn c-btn--primary" href="../catalogue/index.html">Browse Catalogue</a>
@@ -503,7 +501,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
       <div class="c-account-card">
         <div class="c-account-notice" role="note">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M12 16.5h.01"/><circle cx="12" cy="12" r="9"/></svg>
-          <span>Account sign-in isn't connected to our database yet. You can fill out either form below — we'll email you as soon as accounts go live.</span>
+          <span>Account sign-in isn't connected to our database yet. You can fill out either form below, we'll email you as soon as accounts go live.</span>
         </div>
 
         <div class="c-tabs" role="tablist" aria-label="Account forms">
@@ -624,7 +622,6 @@ a:focus-visible, button:focus-visible, input:focus-visible {
       <h3>Contact</h3>
       <ul>
         <li><a href="mailto:research@nichechems.com">research@nichechems.com</a></li>
-        <li><a href="tel:+18005550142">+1 (800) 555-0142</a></li>
         <li><address>Laboratory Way, Suite 200<br>Cambridge, MA, USA</address></li>
       </ul>
     </div>
@@ -785,7 +782,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
     var passwordOk = checkSigninPassword();
     if (!emailOk || !passwordOk) return;
 
-    signinStatus.textContent = "Thanks — customer sign-in isn't connected to our database yet. We'll email " + signinEmail.value.trim() + " once accounts are live.";
+    signinStatus.textContent = "Thanks. Customer sign-in isn't connected to our database yet. We'll email " + signinEmail.value.trim() + " once accounts are live.";
     signinStatus.classList.add("is-success");
   });
 
@@ -824,7 +821,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 
     if (results.indexOf(false) !== -1) return;
 
-    registerStatus.textContent = "Thanks, " + firstName.value.trim() + " — account creation isn't connected to our database yet. We'll email " + email.value.trim() + " as soon as it's ready.";
+    registerStatus.textContent = "Thanks, " + firstName.value.trim() + ". Account creation isn't connected to our database yet. We'll email " + email.value.trim() + " as soon as it's ready.";
     registerStatus.classList.add("is-success");
     registerForm.reset();
   });

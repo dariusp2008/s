@@ -341,7 +341,7 @@ dialog.c-dialog::backdrop { background: rgba(32, 39, 34, 0.55); }
       <div class="c-dialog__row">
         <div class="c-form-field">
           <label for="cat-icon">Icon
-            <span class="c-form-field__hint">Fixed set — ask a developer to add new icon shapes.</span>
+            <span class="c-form-field__hint">Fixed set. Ask a developer to add new icon shapes.</span>
           </label>
           <select id="cat-icon"></select>
         </div>
@@ -951,7 +951,7 @@ dialog.c-dialog::backdrop { background: rgba(32, 39, 34, 0.55); }
     if (!file) return;
 
     if (file.size > MAX_IMAGE_BYTES) {
-      errorEl.textContent = "Image is too large — 5 MB max.";
+      errorEl.textContent = "Image is too large. 5 MB max.";
       this.value = "";
       return;
     }
@@ -1172,9 +1172,9 @@ dialog.c-dialog::backdrop { background: rgba(32, 39, 34, 0.55); }
     document.getElementById("order-form-error").textContent = "";
 
     document.getElementById("order-detail-customer").innerHTML =
-      "<strong>" + order.customer_name + "</strong> — " + order.customer_email +
+      "<strong>" + order.customer_name + "</strong>, " + order.customer_email +
       (order.institution ? " (" + order.institution + ")" : "") +
-      (order.phone ? " — " + order.phone : "");
+      (order.phone ? ", " + order.phone : "");
     document.getElementById("order-detail-shipping").textContent = "Ship to: " + order.shipping_address;
     document.getElementById("order-detail-notes").textContent = order.notes ? "Notes: " + order.notes : "";
 

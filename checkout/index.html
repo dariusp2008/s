@@ -313,7 +313,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
         <li><a href="../index.html">Home</a></li>
         <li><a href="../catalogue/index.html">Catalogue</a></li>
         <li><a href="../about/index.html">About Us</a></li>
-        <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
 
@@ -338,7 +337,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     <li><a href="../index.html">Home</a></li>
     <li><a href="../catalogue/index.html">Catalogue</a></li>
     <li><a href="../about/index.html">About Us</a></li>
-    <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="c-mobile-nav__cta">
     <a class="c-btn c-btn--primary" href="../catalogue/index.html">Browse Catalogue</a>
@@ -424,7 +422,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
             <div class="c-order-summary__row"><span id="summary-count">0 items</span><span id="summary-subtotal">$0.00</span></div>
             <div class="c-order-summary__row c-order-summary__row--total"><span>Total (USD)</span><span id="summary-total">$0.00</span></div>
             <p class="c-cart-line__discount" id="summary-savings" style="margin-bottom: var(--space-3);" hidden></p>
-            <p class="c-order-summary__note">Shipping and any applicable fees are confirmed by email after checkout. The next step converts this total to its ETH equivalent for payment — NicheChems accepts Ethereum only.</p>
+            <p class="c-order-summary__note">Shipping and any applicable fees are confirmed by email after checkout. The next step converts this total to its ETH equivalent for payment. NicheChems accepts Ethereum only.</p>
             <p class="c-order-summary__min-note" id="min-order-note" role="alert" hidden></p>
             <button type="submit" form="checkout-form" class="c-btn c-btn--primary" id="continue-btn">Continue to Payment</button>
             <p class="c-order-summary__error" id="checkout-error" role="alert"></p>
@@ -473,7 +471,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
       <h3>Contact</h3>
       <ul>
         <li><a href="mailto:research@nichechems.com">research@nichechems.com</a></li>
-        <li><a href="tel:+18005550142">+1 (800) 555-0142</a></li>
         <li><address>Laboratory Way, Suite 200<br>Cambridge, MA, USA</address></li>
       </ul>
     </div>
@@ -610,7 +607,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     var minNote = document.getElementById("min-order-note");
     var continueBtn = document.getElementById("continue-btn");
     minNote.hidden = !belowMin;
-    if (belowMin) minNote.textContent = "Minimum order is $" + MIN_ORDER_USD.toFixed(2) + " — add $" + (MIN_ORDER_USD - resolved.subtotal).toFixed(2) + " more to check out.";
+    if (belowMin) minNote.textContent = "Minimum order is $" + MIN_ORDER_USD.toFixed(2) + ". Add $" + (MIN_ORDER_USD - resolved.subtotal).toFixed(2) + " more to check out.";
     continueBtn.disabled = belowMin;
   }
 

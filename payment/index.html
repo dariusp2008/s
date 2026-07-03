@@ -213,7 +213,7 @@ a:focus-visible, button:focus-visible { outline: 2.5px solid var(--color-blue); 
 
 <div class="c-top-bar">
   <div class="l-container c-top-bar__inner">
-    <p>Secure checkout &mdash; Ethereum (ETH) payments only.</p>
+    <p>Secure checkout. Ethereum (ETH) payments only.</p>
   </div>
 </div>
 
@@ -242,7 +242,7 @@ a:focus-visible, button:focus-visible { outline: 2.5px solid var(--color-blue); 
       <div class="c-page-header">
         <span class="c-eyebrow">Payment</span>
         <h1 class="c-page-header__title">Pay with Ethereum</h1>
-        <p class="c-page-header__lede">NicheChems accepts Ethereum (ETH) only — no cards, no other chains.</p>
+        <p class="c-page-header__lede">NicheChems accepts Ethereum (ETH) only. No cards, no other chains.</p>
         <p class="c-order-ref">Order reference: <strong id="order-ref"></strong></p>
       </div>
 
@@ -252,7 +252,7 @@ a:focus-visible, button:focus-visible { outline: 2.5px solid var(--color-blue); 
           <div class="c-payment-card">
             <h2>Order total</h2>
             <div class="c-amount-row"><span id="summary-count">0 items</span><span id="summary-usd">$0.00</span></div>
-            <div class="c-amount-row c-amount-row--eth"><span>Amount due</span><span id="summary-eth">&mdash; ETH</span></div>
+            <div class="c-amount-row c-amount-row--eth"><span>Amount due</span><span id="summary-eth">&hellip; ETH</span></div>
             <p class="c-rate-note" id="rate-note">Fetching the current ETH/USD rate&hellip;</p>
           </div>
 
@@ -311,7 +311,7 @@ a:focus-visible, button:focus-visible { outline: 2.5px solid var(--color-blue); 
       await navigator.clipboard.writeText(ETH_RECEIVING_ADDRESS);
       showToast("Address copied.");
     } catch (err) {
-      showToast("Couldn't copy automatically — please select and copy the address manually.");
+      showToast("Couldn't copy automatically. Please select and copy the address manually.");
     }
   });
 
@@ -342,7 +342,7 @@ a:focus-visible, button:focus-visible { outline: 2.5px solid var(--color-blue); 
   document.getElementById("summary-count").textContent = stored.itemCount + (stored.itemCount === 1 ? " item" : " items");
   document.getElementById("summary-usd").textContent = "$" + stored.subtotal.toFixed(2);
 
-  var mailSubject = encodeURIComponent("Payment confirmation — order " + stored.orderId.slice(0, 8).toUpperCase());
+  var mailSubject = encodeURIComponent("Payment confirmation, order " + stored.orderId.slice(0, 8).toUpperCase());
   var mailBody = encodeURIComponent(
     "Order reference: " + stored.orderId + "\n" +
     "Amount: $" + stored.subtotal.toFixed(2) + " USD\n" +
@@ -356,7 +356,7 @@ a:focus-visible, button:focus-visible { outline: 2.5px solid var(--color-blue); 
     document.getElementById("summary-eth").textContent = ethAmount.toFixed(6) + " ETH";
     document.getElementById("rate-note").textContent = isLive
       ? "Based on the current rate of 1 ETH ≈ $" + rate.toLocaleString() + " USD."
-      : "Estimated using a fallback rate of 1 ETH ≈ $" + rate.toLocaleString() + " USD (live rate unavailable) — we'll confirm the exact amount by email.";
+      : "Estimated using a fallback rate of 1 ETH ≈ $" + rate.toLocaleString() + " USD (live rate unavailable). We'll confirm the exact amount by email.";
   }
 
   fetch("https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd")
