@@ -195,12 +195,10 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 
 .c-logo { display: inline-flex; align-items: center; gap: var(--space-2); font-family: var(--font-serif); font-size: var(--text-md); font-weight: 600; color: var(--color-forest); }
 .c-logo__mark { display: grid; place-items: center; width: 38px; height: 38px; border-radius: var(--radius-md); background: var(--color-blue); color: var(--color-on-blue); flex-shrink: 0; overflow: hidden; }
-.c-logo__mark img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; }
+.c-logo__mark img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
 .c-logo__word-alt { color: var(--color-blue); }
 .c-header .c-logo { font-size: 1.4rem; }
 .c-header .c-logo__mark { width: 64px; height: 64px; }
-.c-header .c-logo__mark img { transform: scale(2.3); transform-origin: 50% 34%; }
-
 .c-nav { display: none; }
 .c-nav__list { display: flex; align-items: center; gap: var(--space-7); font-size: var(--text-sm); font-weight: 500; }
 .c-nav__list a { position: relative; padding-block: var(--space-2); color: var(--color-ink-soft); transition: color var(--duration-fast) var(--ease-soft); }
@@ -286,7 +284,26 @@ a:focus-visible, button:focus-visible, input:focus-visible {
    PRODUCT DETAIL
    ===================================================================== */
 .c-product-detail { padding-block: var(--space-4) var(--space-9); }
-.c-product-detail__grid { display: grid; gap: var(--space-8); max-width: 42rem; }
+.c-product-detail__grid { display: grid; gap: var(--space-8); }
+@media (min-width: 960px) {
+  .c-product-detail__grid { grid-template-columns: 0.8fr 1.2fr; gap: var(--space-10); align-items: start; }
+}
+
+.c-product-visual {
+  background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md); display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: var(--space-8) var(--space-6);
+}
+@media (min-width: 960px) { .c-product-visual { position: sticky; top: calc(var(--header-h) + var(--space-6)); } }
+.c-product-visual__photo {
+  width: 100%; max-width: 320px; aspect-ratio: 1 / 1; object-fit: cover;
+  border-radius: var(--radius-lg);
+}
+.c-product-visual__icon {
+  width: 110px; height: 110px; border-radius: var(--radius-lg); background: var(--color-blue-tint);
+  color: var(--color-blue); display: grid; place-items: center;
+}
+.c-product-visual__icon svg { width: 52px; height: 52px; }
 
 .c-product-info__stock {
   display: inline-flex; align-items: center; gap: 7px;
@@ -476,6 +493,11 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   <section class="c-product-detail" id="product-detail" hidden>
     <div class="l-container">
       <div class="c-product-detail__grid">
+
+        <div class="c-product-visual">
+          <img class="c-product-visual__photo" id="product-photo" alt="" hidden>
+          <span class="c-product-visual__icon" aria-hidden="true" id="product-icon"></span>
+        </div>
 
         <div class="c-product-info">
           <p class="c-product-info__category" id="product-category"></p>
@@ -741,6 +763,19 @@ a:focus-visible, button:focus-visible, input:focus-visible {
     document.getElementById("page-title").textContent = product.name + " | NicheChems";
     document.getElementById("page-description").setAttribute("content", product.description || (product.name + ", catalog #" + product.sku + ". Certified for laboratory research use."));
     document.getElementById("page-canonical").setAttribute("href", "https://nichechems.com/product-page/?id=" + product.id);
+
+    // -- Visual column --
+    var photoEl = document.getElementById("product-photo");
+    var iconEl = document.getElementById("product-icon");
+    if (product.imageUrl) {
+      photoEl.src = product.imageUrl;
+      photoEl.hidden = false;
+      iconEl.hidden = true;
+    } else {
+      iconEl.innerHTML = iconFor(categories, product.category);
+      iconEl.hidden = false;
+      photoEl.hidden = true;
+    }
 
     var isLow = product.stock === "low-stock";
     var stockBadge = document.getElementById("product-stock-badge");
