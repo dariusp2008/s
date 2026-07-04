@@ -407,6 +407,41 @@ create policy order_items_admin_delete on public.order_items
   for delete using (is_admin(auth.uid()));
 
 -- =====================================================================
+-- LIVE CHAT (Telegram-backed)
+--
+-- Each chat session maps 1:1 to a forum topic ("branch") inside a
+-- Telegram supergroup, created/deleted by the chat-* Edge Functions.
+-- These tables are read/written ONLY by Edge Functions using the
+-- service-role key — RLS is enabled with zero policies, so neither the
+-- anon nor authenticated role can select/insert/update/delete here
+-- directly. This is deliberate: the anon key is public (embedded in
+-- js/supabase-config.js), so any anon-readable policy would let anyone
+-- dump every visitor's chat transcript.
+-- =====================================================================
+create table if not exists public.chat_sessions (
+  id                 uuid primary key default gen_random_uuid(),
+  browser_token      uuid not null default gen_random_uuid(),
+  telegram_thread_id bigint,
+  status             text not null default 'pending' check (status in ('pending','open','closed')),
+  customer_name      text,
+  customer_email     text,
+  created_at         timestamptz not null default now(),
+  closed_at          timestamptz
+);
+
+create table if not exists public.chat_messages (
+  id         uuid primary key default gen_random_uuid(),
+  session_id uuid not null references public.chat_sessions(id) on delete cascade,
+  sender     text not null check (sender in ('customer','agent')),
+  body       text not null,
+  created_at timestamptz not null default now()
+);
+
+alter table public.chat_sessions enable row level security;
+alter table public.chat_messages enable row level security;
+-- No policies on purpose — see comment above.
+
+-- =====================================================================
 -- ADMIN BOOTSTRAP (manual step — run AFTER your first admin signs up)
 -- =====================================================================
 -- 1. Go to /admin/ on the live site and use "Create account" (or the

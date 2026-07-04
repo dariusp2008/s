@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | NicheChems</title>
+<meta name="description" content="Get in touch with NicheChems by email, or start a live chat with our team.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://nichechems.com/contact/">
+<meta name="theme-color" content="#3B5FCC">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%233B5FCC'/%3E%3Cpath d='M13 6h6v6.6l4.6 9.9a2 2 0 0 1-1.8 2.9H10.2a2 2 0 0 1-1.8-2.9L13 12.6V6z' fill='none' stroke='%23FAF9F6' stroke-width='1.7' stroke-linejoin='round' stroke-linecap='round'/%3E%3Cpath d='M11 19h10' stroke='%23A9C9A0' stroke-width='1.7' stroke-linecap='round'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+
+<style>
+/* Design tokens, reset, header/nav/footer are identical to the rest of
+   the site — see catalogue/index.html's section-1 comment. */
+:root {
+  --color-bg:          #FAF9F6;
+  --color-bg-alt:      #F2F0EA;
+  --color-bg-cool:     #EFF2F0;
+  --color-surface:     #FFFFFF;
+  --color-border:      #E4E1D8;
+  --color-border-cool: #DCE3DE;
+
+  --color-blue-light:  #6FA0F5;
+  --color-blue:        #3B5FCC;
+  --color-blue-dark:   #2A459E;
+  --color-blue-tint:   #EDF2FD;
+
+  --color-sage:        #93AC8B;
+  --color-moss:        #5C7A52;
+  --color-forest:      #33502F;
+  --color-green-tint:  #EEF3EA;
+
+  --color-warn:        #96631C;
+  --color-warn-tint:   #FBF1E4;
+  --color-error:       #C0503D;
+  --color-error-tint:  #F5E3E0;
+
+  --color-ink:         #202722;
+  --color-ink-soft:    #545E56;
+  --color-ink-faint:   #7C877F;
+  --color-on-blue:     #FBFBF8;
+
+  --font-serif: "Fraunces", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-mono:  ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --text-xs:   clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
+  --text-sm:   clamp(0.875rem, 0.84rem + 0.15vw, 0.9375rem);
+  --text-base: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+  --text-md:   clamp(1.125rem, 1.05rem + 0.3vw, 1.3125rem);
+  --text-lg:   clamp(1.375rem, 1.2rem + 0.7vw, 1.75rem);
+  --text-xl:   clamp(1.75rem, 1.4rem + 1.4vw, 2.375rem);
+  --text-2xl:  clamp(2.25rem, 1.7rem + 2.4vw, 3.375rem);
+
+  --leading-tight: 1.15;
+  --leading-snug:  1.35;
+  --leading-normal: 1.6;
+
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
+  --space-5: 1.5rem; --space-6: 2rem; --space-7: 2.5rem; --space-8: 3.25rem; --space-9: 4.5rem; --space-10: 6rem;
+
+  --radius-sm: 2px; --radius-md: 3px; --radius-lg: 4px;
+  --radius-blob: 62% 38% 55% 45% / 48% 45% 55% 52%;
+  --radius-pill: 4px;
+
+  --shadow-sm: 0 1px 2px rgba(32, 39, 34, 0.06), 0 1px 1px rgba(32, 39, 34, 0.04);
+  --shadow-md: 0 4px 14px -8px rgba(32, 39, 34, 0.14), 0 2px 5px -3px rgba(32, 39, 34, 0.08);
+  --shadow-lg: 0 10px 26px -12px rgba(32, 39, 34, 0.18), 0 4px 10px -6px rgba(32, 39, 34, 0.08);
+  --shadow-blue: 0 6px 16px -8px rgba(59, 95, 204, 0.32);
+
+  --ease-organic: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft:    cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 180ms;
+  --duration-base: 340ms;
+  --duration-slow: 620ms;
+
+  --container-max: 1320px;
+  --header-h: 76px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans); font-size: var(--text-base); line-height: var(--leading-normal);
+  color: var(--color-ink); background: var(--color-bg);
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
+img, svg { display: block; max-width: 100%; }
+ul, ol { list-style: none; padding: 0; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+input, textarea { font: inherit; }
+h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 500; line-height: var(--leading-tight); color: var(--color-forest); text-wrap: balance; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2.5px solid var(--color-blue); outline-offset: 3px; border-radius: var(--radius-sm); }
+
+.c-skip-link {
+  position: absolute; left: var(--space-4); top: -60px; z-index: 1000;
+  background: var(--color-forest); color: var(--color-on-blue);
+  padding: var(--space-3) var(--space-5); border-radius: var(--radius-sm);
+  font-weight: 600; transition: top var(--duration-fast) var(--ease-soft);
+}
+.c-skip-link:focus { top: var(--space-4); }
+
+.l-container { width: 100%; max-width: var(--container-max); margin-inline: auto; padding-inline: var(--space-5); }
+@media (min-width: 600px) { .l-container { padding-inline: var(--space-7); } }
+@media (min-width: 1200px) { .l-container { padding-inline: var(--space-8); } }
+
+.l-section { padding-block: var(--space-9); }
+@media (min-width: 900px) { .l-section { padding-block: var(--space-10); } }
+.l-section--alt { background: var(--color-bg-alt); }
+
+.c-eyebrow {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--color-moss); margin-bottom: var(--space-4);
+}
+.c-eyebrow::before { content: ""; width: 22px; height: 2px; background: var(--color-moss); border-radius: var(--radius-pill); }
+
+.c-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  padding: 0.9rem 1.75rem; border-radius: var(--radius-md); font-size: var(--text-sm); font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: transform var(--duration-base) var(--ease-organic), box-shadow var(--duration-base) var(--ease-organic), background-color var(--duration-fast) var(--ease-soft), color var(--duration-fast) var(--ease-soft);
+  white-space: nowrap;
+}
+.c-btn--primary { background: var(--color-blue); color: var(--color-on-blue); box-shadow: var(--shadow-blue); }
+.c-btn--primary:hover { background: var(--color-blue-dark); transform: translateY(-1px); }
+.c-btn--primary:disabled { opacity: 0.6; cursor: default; transform: none; }
+.c-btn--ghost { background: transparent; color: var(--color-forest); border: 1.5px solid var(--color-border-cool); }
+.c-btn--ghost:hover { border-color: var(--color-moss); background: var(--color-green-tint); transform: translateY(-1px); }
+
+/* -- Top bar / header / mobile nav — identical to catalogue/index.html -- */
+.c-top-bar { background: var(--color-forest); color: var(--color-on-blue); }
+.c-top-bar__inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--space-2) var(--space-6); padding-block: var(--space-2); font-size: var(--text-xs); text-align: center; }
+.c-top-bar__inner a { text-decoration: underline; text-underline-offset: 2px; opacity: 0.9; }
+.c-top-bar__inner a:hover { opacity: 1; }
+@media (min-width: 700px) { .c-top-bar__inner { justify-content: space-between; } }
+
+.c-header { position: sticky; top: 0; z-index: 100; background: rgba(250, 249, 246, 0.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid transparent; transition: box-shadow var(--duration-base) var(--ease-soft), border-color var(--duration-base) var(--ease-soft); }
+.c-header.is-scrolled { box-shadow: var(--shadow-sm); border-bottom-color: var(--color-border); }
+.c-header__inner { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); min-height: var(--header-h); }
+
+.c-logo { display: inline-flex; align-items: center; gap: var(--space-2); font-family: var(--font-serif); font-size: var(--text-md); font-weight: 600; color: var(--color-forest); }
+.c-logo__mark { display: grid; place-items: center; width: 38px; height: 38px; border-radius: var(--radius-md); background: var(--color-blue); color: var(--color-on-blue); flex-shrink: 0; overflow: hidden; }
+.c-logo__mark img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; }
+.c-logo__word-alt { color: var(--color-blue); }
+.c-header .c-logo { font-size: 1.4rem; }
+.c-header .c-logo__mark { width: 64px; height: 64px; }
+.c-header .c-logo__mark img { transform: scale(2.3); transform-origin: 50% 34%; }
+
+.c-nav { display: none; }
+.c-nav__list { display: flex; align-items: center; gap: var(--space-7); font-size: var(--text-sm); font-weight: 500; }
+.c-nav__list a { position: relative; padding-block: var(--space-2); color: var(--color-ink-soft); transition: color var(--duration-fast) var(--ease-soft); }
+.c-nav__list a::after { content: ""; position: absolute; left: 0; bottom: -2px; width: 100%; height: 2px; background: var(--color-blue); transform: scaleX(0); transform-origin: left; transition: transform var(--duration-base) var(--ease-organic); }
+.c-nav__list a:hover, .c-nav__list a[aria-current="page"] { color: var(--color-blue); }
+.c-nav__list a:hover::after, .c-nav__list a[aria-current="page"]::after { transform: scaleX(1); }
+
+.c-header__actions { display: flex; align-items: center; gap: var(--space-4); }
+.c-header__account-link { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); font-weight: 500; color: var(--color-ink-soft); }
+.c-header__account-link:hover { color: var(--color-blue); }
+.c-header__account-link span { display: none; }
+@media (min-width: 480px) { .c-header__account-link span { display: inline; } }
+
+.c-header__cart-link { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 28px; color: var(--color-ink-soft); transition: color var(--duration-fast) var(--ease-soft); }
+.c-header__cart-link:hover { color: var(--color-blue); }
+.c-header__cart-count { position: absolute; top: -8px; right: -10px; min-width: 17px; height: 17px; padding: 0 3px; display: flex; align-items: center; justify-content: center; background: var(--color-blue); color: var(--color-on-blue); font-size: 0.65rem; font-weight: 700; line-height: 1; border-radius: var(--radius-pill); }
+
+.c-nav-toggle { display: inline-flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 44px; height: 44px; border-radius: var(--radius-sm); }
+.c-nav-toggle span { width: 22px; height: 2px; background: var(--color-forest); border-radius: var(--radius-pill); transition: transform var(--duration-base) var(--ease-organic), opacity var(--duration-fast) var(--ease-soft); }
+.c-nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.c-nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.c-nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.c-mobile-nav { position: fixed; inset: var(--mobile-nav-top, 116px) 0 0 0; z-index: 90; background: var(--color-bg); padding: var(--space-6) var(--space-5) var(--space-8); overflow-y: auto; transform: translateX(100%); transition: transform var(--duration-slow) var(--ease-organic); }
+.c-mobile-nav.is-open { transform: translateX(0); }
+.c-mobile-nav__list { display: flex; flex-direction: column; font-family: var(--font-serif); font-size: var(--text-lg); gap: var(--space-1); }
+.c-mobile-nav__list a { display: block; padding-block: var(--space-3); border-bottom: 1px solid var(--color-border); color: var(--color-forest); }
+.c-mobile-nav__list a[aria-current="page"] { color: var(--color-blue); }
+.c-mobile-nav__cta { margin-top: var(--space-7); display: flex; flex-direction: column; gap: var(--space-3); }
+
+@media (min-width: 960px) {
+  .c-nav { display: block; }
+  .c-nav-toggle { display: none; }
+  .c-mobile-nav { display: none; }
+}
+
+/* -- Page header / breadcrumb -- */
+.c-page-header { padding-block: var(--space-8) var(--space-6); }
+.c-breadcrumb { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-2); font-size: var(--text-xs); color: var(--color-ink-faint); margin-bottom: var(--space-5); }
+.c-breadcrumb a { color: var(--color-ink-soft); }
+.c-breadcrumb a:hover { color: var(--color-blue); }
+.c-page-header__title { font-size: var(--text-2xl); margin-bottom: var(--space-4); max-width: 40rem; }
+.c-page-header__lede { font-size: var(--text-md); color: var(--color-ink-soft); max-width: 46rem; }
+
+/* -- Contact form fields — identical to checkout/index.html -- */
+.c-form-field { margin-bottom: var(--space-5); }
+.c-form-field__row { display: grid; grid-template-columns: 1fr; gap: var(--space-4); }
+@media (min-width: 500px) { .c-form-field__row { grid-template-columns: 1fr 1fr; } }
+.c-form-field label { display: block; font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.02em; color: var(--color-forest); margin-bottom: var(--space-2); }
+.c-form-field__optional { font-weight: 500; color: var(--color-ink-faint); text-transform: none; letter-spacing: 0; }
+.c-hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.c-form-field input, .c-form-field textarea {
+  width: 100%; padding: 0.8rem var(--space-4); border-radius: var(--radius-sm); border: 1.5px solid var(--color-border-cool);
+  background: var(--color-bg); font-size: var(--text-sm); color: var(--color-ink); transition: border-color var(--duration-fast) var(--ease-soft);
+}
+.c-form-field textarea { resize: vertical; min-height: 4.5rem; }
+.c-form-field input:focus, .c-form-field textarea:focus { border-color: var(--color-blue); }
+.c-form-field input[aria-invalid="true"], .c-form-field textarea[aria-invalid="true"] { border-color: var(--color-error); }
+.c-form-field-error { min-height: 1.1em; font-size: var(--text-xs); color: var(--color-error); margin-top: var(--space-2); }
+
+/* -- Contact method cards -- */
+.c-contact-grid { display: grid; gap: var(--space-6); }
+@media (min-width: 860px) { .c-contact-grid { grid-template-columns: 1fr 1fr; align-items: start; } }
+.c-contact-card {
+  background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md); padding: var(--space-7);
+}
+.c-contact-card h2 { font-size: var(--text-lg); margin-bottom: var(--space-3); }
+.c-contact-card > p { color: var(--color-ink-soft); font-size: var(--text-sm); margin-bottom: var(--space-6); }
+.c-contact-card__note { font-size: var(--text-xs); color: var(--color-ink-faint); margin-top: var(--space-4); }
+.c-form-status { font-size: var(--text-xs); margin-top: var(--space-4); min-height: 1.1em; }
+.c-form-status--error { color: var(--color-error); }
+.c-form-status--ok { color: var(--color-moss); }
+
+/* -- Live chat widget -- */
+.c-chat-fab {
+  position: fixed; right: var(--space-5); bottom: var(--space-5); z-index: 95;
+  width: 58px; height: 58px; border-radius: 50%; background: var(--color-blue); color: var(--color-on-blue);
+  display: grid; place-items: center; box-shadow: var(--shadow-blue);
+  transition: transform var(--duration-base) var(--ease-organic), background-color var(--duration-fast) var(--ease-soft);
+}
+.c-chat-fab:hover { background: var(--color-blue-dark); transform: translateY(-2px); }
+.c-chat-fab svg { width: 26px; height: 26px; }
+
+.c-chat-panel {
+  position: fixed; right: var(--space-5); bottom: calc(var(--space-5) + 74px); z-index: 96;
+  width: min(360px, calc(100vw - 2 * var(--space-5))); height: min(520px, calc(100vh - 160px));
+  background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg); display: flex; flex-direction: column; overflow: hidden;
+  transform: translateY(16px) scale(0.98); opacity: 0; pointer-events: none;
+  transition: transform var(--duration-base) var(--ease-organic), opacity var(--duration-base) var(--ease-soft);
+}
+.c-chat-panel.is-open { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
+
+.c-chat-panel__head { background: var(--color-forest); color: var(--color-on-blue); padding: var(--space-4) var(--space-5); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+.c-chat-panel__head h2 { color: var(--color-on-blue); font-size: var(--text-md); }
+.c-chat-panel__head p { font-size: var(--text-xs); color: rgba(251, 251, 248, 0.7); margin-top: 2px; }
+.c-chat-panel__close { color: var(--color-on-blue); opacity: 0.8; padding: var(--space-2); }
+.c-chat-panel__close:hover { opacity: 1; }
+
+.c-chat-panel__body { flex: 1; overflow-y: auto; padding: var(--space-5); }
+.c-chat-panel__body .c-form-field:last-child { margin-bottom: 0; }
+
+.c-chat-thread { display: flex; flex-direction: column; gap: var(--space-3); }
+.c-chat-msg { max-width: 84%; padding: var(--space-3) var(--space-4); border-radius: var(--radius-lg); font-size: var(--text-sm); line-height: var(--leading-snug); white-space: pre-wrap; overflow-wrap: break-word; }
+.c-chat-msg--customer { align-self: flex-end; background: var(--color-blue); color: var(--color-on-blue); }
+.c-chat-msg--agent { align-self: flex-start; background: var(--color-bg-alt); color: var(--color-ink); }
+.c-chat-msg--system { align-self: center; background: none; color: var(--color-ink-faint); font-size: var(--text-xs); text-align: center; max-width: 100%; }
+
+.c-chat-panel__foot { border-top: 1px solid var(--color-border); padding: var(--space-4); flex-shrink: 0; }
+.c-chat-compose { display: flex; gap: var(--space-3); align-items: flex-end; }
+.c-chat-compose textarea { flex: 1; resize: none; min-height: 2.75rem; max-height: 6rem; padding: 0.7rem var(--space-4); border-radius: var(--radius-sm); border: 1.5px solid var(--color-border-cool); background: var(--color-bg); font-size: var(--text-sm); }
+.c-chat-compose textarea:focus { border-color: var(--color-blue); }
+.c-chat-compose button { flex-shrink: 0; width: 2.75rem; height: 2.75rem; border-radius: var(--radius-sm); background: var(--color-blue); color: var(--color-on-blue); display: grid; place-items: center; }
+.c-chat-compose button:hover { background: var(--color-blue-dark); }
+.c-chat-compose button:disabled { opacity: 0.5; cursor: default; }
+.c-chat-end { display: block; width: 100%; text-align: center; margin-top: var(--space-3); font-size: var(--text-xs); color: var(--color-ink-faint); }
+.c-chat-end:hover { color: var(--color-error); }
+
+/* -- Footer — identical to catalogue/index.html -- */
+.c-footer { background: var(--color-forest); color: rgba(251, 251, 248, 0.88); }
+.c-footer__top { display: grid; gap: var(--space-8); padding-block: var(--space-10); }
+@media (min-width: 700px) { .c-footer__top { grid-template-columns: 1.3fr repeat(3, 1fr); gap: var(--space-6); } }
+.c-footer__brand .c-logo { color: var(--color-on-blue); }
+.c-footer__brand .c-logo__word-alt { color: var(--color-blue-light); }
+.c-footer__brand .c-logo__mark { background: var(--color-blue-light); color: var(--color-forest); }
+.c-footer__brand p { margin-top: var(--space-4); font-size: var(--text-sm); color: rgba(251, 251, 248, 0.7); max-width: 26rem; }
+.c-footer__col h3 { font-family: var(--font-sans); font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-blue-light); margin-bottom: var(--space-5); }
+.c-footer__col ul { display: flex; flex-direction: column; gap: var(--space-3); }
+.c-footer__col a, .c-footer__col address { font-size: var(--text-sm); font-style: normal; color: rgba(251, 251, 248, 0.78); transition: color var(--duration-fast) var(--ease-soft); }
+.c-footer__col a:hover { color: var(--color-on-blue); }
+.c-footer__legal { border-top: 1px solid rgba(251, 251, 248, 0.14); padding-block: var(--space-6); }
+.c-footer__disclaimer { font-size: var(--text-xs); line-height: var(--leading-normal); color: rgba(251, 251, 248, 0.62); max-width: 62rem; margin-bottom: var(--space-5); }
+.c-footer__bottom-row { display: flex; flex-direction: column; gap: var(--space-3); font-size: var(--text-xs); color: rgba(251, 251, 248, 0.55); }
+@media (min-width: 700px) { .c-footer__bottom-row { flex-direction: row; justify-content: space-between; align-items: center; } }
+.c-footer__bottom-links { display: flex; gap: var(--space-5); flex-wrap: wrap; }
+.c-footer__bottom-links a:hover { color: var(--color-on-blue); }
+
+.u-visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+</style>
+</head>
+<body>
+
+<a class="c-skip-link" href="#main-content">Skip to main content</a>
+
+<div class="c-top-bar">
+  <div class="l-container c-top-bar__inner">
+    <p>For laboratory &amp; research use only. Verified institutional accounts required for fulfillment.</p>
+    <p><a href="../account/index.html">Track an order</a> &nbsp;&middot;&nbsp; <a href="index.html">Contact support</a></p>
+  </div>
+</div>
+
+<header class="c-header" id="site-header">
+  <div class="l-container c-header__inner">
+    <a class="c-logo" href="../index.html">
+      <span class="c-logo__mark" aria-hidden="true">
+        <img src="../assets/logo.png" alt="" width="38" height="38" loading="eager">
+      </span>
+      Niche<span class="c-logo__word-alt">Chems</span>
+    </a>
+
+    <nav class="c-nav" aria-label="Primary">
+      <ul class="c-nav__list">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../catalogue/index.html">Catalogue</a></li>
+        <li><a href="../about/index.html">About Us</a></li>
+        <li><a href="index.html" aria-current="page">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="c-header__actions">
+      <a class="c-header__account-link" href="../account/index.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="7.5" r="4.5"/></svg>
+        <span>Account</span>
+      </a>
+      <a class="c-header__cart-link" href="../checkout/index.html" aria-label="Cart">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6h15l-1.6 9.2a2 2 0 0 1-2 1.8H8.6a2 2 0 0 1-2-1.7L5 3H2"/><circle cx="9" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/></svg>
+        <span class="c-header__cart-count" id="cart-count" hidden>0</span>
+      </a>
+      <button class="c-nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="c-mobile-nav" id="mobile-nav" aria-label="Mobile primary">
+  <ul class="c-mobile-nav__list">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../catalogue/index.html">Catalogue</a></li>
+    <li><a href="../about/index.html">About Us</a></li>
+    <li><a href="index.html" aria-current="page">Contact</a></li>
+  </ul>
+  <div class="c-mobile-nav__cta">
+    <a class="c-btn c-btn--primary" href="../catalogue/index.html">Browse Catalogue</a>
+    <a class="c-btn c-btn--ghost" href="../account/index.html">Sign In / Account</a>
+  </div>
+</nav>
+
+<main id="main-content">
+
+  <!-- ===================================================================
+       PAGE HEADER
+       =================================================================== -->
+  <div class="l-container c-page-header">
+    <nav class="c-breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Contact</span>
+    </nav>
+    <span class="c-eyebrow">Get In Touch</span>
+    <h1 class="c-page-header__title">Questions about an order, a product, or your account?</h1>
+    <p class="c-page-header__lede">Email us and we'll reply within one business day, or start a live chat below for a faster answer during business hours.</p>
+  </div>
+
+  <!-- ===================================================================
+       CONTACT METHODS
+       =================================================================== -->
+  <section class="l-section" style="padding-top: 0;">
+    <div class="l-container c-contact-grid">
+
+      <div class="c-contact-card">
+        <h2>Send us an email</h2>
+        <p>Fill this out and it'll open a pre-filled email to our team from your own email client.</p>
+        <form id="email-form" novalidate>
+          <div class="c-form-field">
+            <label for="contact-name">Full name</label>
+            <input type="text" id="contact-name" required autocomplete="name">
+          </div>
+          <div class="c-form-field">
+            <label for="contact-email">Email address</label>
+            <input type="email" id="contact-email" required autocomplete="email">
+          </div>
+          <div class="c-form-field">
+            <label for="contact-subject">Subject</label>
+            <input type="text" id="contact-subject" required>
+          </div>
+          <div class="c-form-field">
+            <label for="contact-message">Message</label>
+            <textarea id="contact-message" required rows="5"></textarea>
+          </div>
+          <!-- Honeypot: invisible to real users, bots that auto-fill every
+               field trip it. Caught in the submit handler below. -->
+          <div class="c-hp-field" aria-hidden="true">
+            <label for="contact-company">Company</label>
+            <input type="text" id="contact-company" name="company" tabindex="-1" autocomplete="off">
+          </div>
+          <button type="submit" class="c-btn c-btn--primary">Open Email</button>
+          <p class="c-form-status" id="email-form-status"></p>
+        </form>
+      </div>
+
+      <div class="c-contact-card">
+        <h2>Live chat</h2>
+        <p>Talk to our team directly. A new private chat opens as soon as you send your first message.</p>
+        <button type="button" class="c-btn c-btn--primary" id="open-chat-card-btn">Start Live Chat</button>
+        <p class="c-contact-card__note">Typical reply time: a few minutes during business hours, longer outside them.</p>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="c-footer" id="contact">
+  <div class="l-container c-footer__top">
+    <div class="c-footer__brand">
+      <a class="c-logo" href="../index.html">
+        <span class="c-logo__mark" aria-hidden="true">
+          <img src="../assets/logo.png" alt="" width="38" height="38" loading="lazy">
+        </span>
+        Niche<span class="c-logo__word-alt">Chems</span>
+      </a>
+      <p>Research chemicals and certified reference materials for verified research professionals. Research use only.</p>
+    </div>
+
+    <div class="c-footer__col">
+      <h3>Catalogue</h3>
+      <ul>
+        <li><a href="../catalogue/index.html?category=reference-standards">Reference Standards</a></li>
+        <li><a href="../catalogue/index.html?category=chromatography">Chromatography Standards</a></li>
+        <li><a href="../catalogue/index.html?category=isotope-labeled">Isotope-Labeled Standards</a></li>
+        <li><a href="../catalogue/index.html?category=forensic">Forensic Reference Panels</a></li>
+      </ul>
+    </div>
+
+    <div class="c-footer__col">
+      <h3>Resources</h3>
+      <ul>
+        <li><a href="../about/index.html">About Us</a></li>
+        <li><a href="index.html">Safety Data Sheets</a></li>
+        <li><a href="index.html">Certificate of Analysis Requests</a></li>
+        <li><a href="index.html">Shipping &amp; Handling Policy</a></li>
+      </ul>
+    </div>
+
+    <div class="c-footer__col">
+      <h3>Contact</h3>
+      <ul>
+        <li><a href="mailto:research@nichechems.com">research@nichechems.com</a></li>
+        <li><address>Laboratory Way, Suite 200<br>Cambridge, MA, USA</address></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="l-container c-footer__legal">
+    <p class="c-footer__disclaimer">
+      All products offered by NicheChems are intended strictly for in-vitro laboratory, analytical, and forensic research use by qualified professionals and institutions. They are not intended for human or veterinary use, diagnostic use, food, drug, or household purposes, and must not be used for personal consumption. NicheChems reserves the right to verify the professional or institutional status of any account prior to order fulfillment.
+    </p>
+    <div class="c-footer__bottom-row">
+      <p>&copy; 2026 NicheChems. All rights reserved.</p>
+      <div class="c-footer__bottom-links">
+        <a href="index.html">Privacy Policy</a>
+        <a href="index.html">Terms of Service</a>
+        <a href="index.html">Research Use Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================================================================
+     LIVE CHAT WIDGET
+     =================================================================== -->
+<button type="button" class="c-chat-fab" id="chat-fab" aria-expanded="false" aria-controls="chat-panel" aria-label="Open live chat">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 1 1-3.2-6.4L21 4l-1 4.1A7.96 7.96 0 0 1 21 12Z"/><path d="M3 20l1.3-3.9"/></svg>
+</button>
+
+<section class="c-chat-panel" id="chat-panel" aria-label="Live chat">
+  <div class="c-chat-panel__head">
+    <div>
+      <h2>Live Chat</h2>
+      <p id="chat-panel-subtitle">We usually reply in a few minutes</p>
+    </div>
+    <button type="button" class="c-chat-panel__close" id="chat-panel-close" aria-label="Close chat window">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+
+  <div class="c-chat-panel__body" id="chat-panel-body">
+    <form id="chat-prechat-form" novalidate>
+      <div class="c-form-field">
+        <label for="chat-name">Your name</label>
+        <input type="text" id="chat-name" required autocomplete="name">
+      </div>
+      <div class="c-form-field">
+        <label for="chat-email">Email <span class="c-form-field__optional">(optional)</span></label>
+        <input type="email" id="chat-email" autocomplete="email">
+      </div>
+      <div class="c-form-field">
+        <label for="chat-first-message">What can we help with?</label>
+        <textarea id="chat-first-message" required rows="3"></textarea>
+      </div>
+      <div class="c-hp-field" aria-hidden="true">
+        <label for="chat-company">Company</label>
+        <input type="text" id="chat-company" name="company" tabindex="-1" autocomplete="off">
+      </div>
+      <button type="submit" class="c-btn c-btn--primary" id="chat-start-btn" style="width: 100%;">Start Chat</button>
+      <p class="c-form-status" id="chat-prechat-status"></p>
+    </form>
+
+    <div class="c-chat-thread" id="chat-thread" hidden></div>
+  </div>
+
+  <div class="c-chat-panel__foot" id="chat-panel-foot" hidden>
+    <form class="c-chat-compose" id="chat-compose-form">
+      <textarea id="chat-input" placeholder="Type a message…" required></textarea>
+      <button type="submit" aria-label="Send message">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7Z"/></svg>
+      </button>
+    </form>
+    <button type="button" class="c-chat-end" id="chat-end-btn">End chat</button>
+  </div>
+</section>
+
+<script src="../js/cart.js"></script>
+<script src="../js/supabase-config.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  var toggle = document.getElementById("nav-toggle");
+  var mobileNav = document.getElementById("mobile-nav");
+  var header = document.getElementById("site-header");
+
+  function syncMobileNavOffset() {
+    var offset = header.getBoundingClientRect().bottom;
+    document.documentElement.style.setProperty("--mobile-nav-top", offset + "px");
+  }
+
+  function closeNav() {
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "Open menu");
+    mobileNav.classList.remove("is-open");
+    document.body.style.overflow = "";
+  }
+
+  function openNav() {
+    syncMobileNavOffset();
+    toggle.setAttribute("aria-expanded", "true");
+    toggle.setAttribute("aria-label", "Close menu");
+    mobileNav.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+  }
+
+  window.addEventListener("resize", syncMobileNavOffset);
+
+  toggle.addEventListener("click", function () {
+    var isOpen = toggle.getAttribute("aria-expanded") === "true";
+    isOpen ? closeNav() : openNav();
+  });
+
+  mobileNav.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", closeNav);
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+      closeNav();
+      toggle.focus();
+    }
+  });
+
+  function updateHeaderShadow() {
+    header.classList.toggle("is-scrolled", window.scrollY > 8);
+  }
+  document.addEventListener("scroll", updateHeaderShadow, { passive: true });
+  updateHeaderShadow();
+
+  function syncCartBadge() {
+    var badge = document.getElementById("cart-count");
+    if (!badge || !window.NicheChemsCart) return;
+    var count = window.NicheChemsCart.getCartCount();
+    badge.textContent = count;
+    badge.hidden = count === 0;
+  }
+  syncCartBadge();
+  window.addEventListener("nichechems:cart-updated", syncCartBadge);
+  window.addEventListener("storage", function (e) { if (e.key === "nichechems_cart") syncCartBadge(); });
+
+  // -------------------------------------------------------------------
+  // EMAIL FORM — builds a mailto: link, no backend involved.
+  // -------------------------------------------------------------------
+  var emailForm = document.getElementById("email-form");
+  emailForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    var statusEl = document.getElementById("email-form-status");
+    statusEl.className = "c-form-status";
+    statusEl.textContent = "";
+
+    if (document.getElementById("contact-company").value.trim()) return; // honeypot tripped, silently drop
+
+    var name = document.getElementById("contact-name").value.trim();
+    var email = document.getElementById("contact-email").value.trim();
+    var subject = document.getElementById("contact-subject").value.trim();
+    var message = document.getElementById("contact-message").value.trim();
+
+    if (!name || !email || !subject || !message) {
+      statusEl.className = "c-form-status c-form-status--error";
+      statusEl.textContent = "Please fill in every field.";
+      return;
+    }
+
+    var body = message + "\n\n— " + name + " (" + email + ")";
+    var mailto = "mailto:research@nichechems.com?subject=" + encodeURIComponent(subject) +
+      "&body=" + encodeURIComponent(body);
+    window.location.href = mailto;
+    statusEl.className = "c-form-status c-form-status--ok";
+    statusEl.textContent = "Opening your email client…";
+  });
+
+  // -------------------------------------------------------------------
+  // LIVE CHAT WIDGET — each chat is a Telegram forum topic created by
+  // the chat-open Edge Function and deleted by chat-close. Messages are
+  // relayed both ways through Edge Functions (see supabase/functions/),
+  // polled every 3s rather than using Realtime, since the anon key here
+  // is public and these tables intentionally have no anon RLS policies.
+  // -------------------------------------------------------------------
+  var STORAGE_SESSION = "nichechems_chat_session_id";
+  var STORAGE_TOKEN = "nichechems_chat_browser_token";
+
+  var fab = document.getElementById("chat-fab");
+  var panel = document.getElementById("chat-panel");
+  var panelClose = document.getElementById("chat-panel-close");
+  var openChatCardBtn = document.getElementById("open-chat-card-btn");
+  var prechatForm = document.getElementById("chat-prechat-form");
+  var prechatStatus = document.getElementById("chat-prechat-status");
+  var startBtn = document.getElementById("chat-start-btn");
+  var thread = document.getElementById("chat-thread");
+  var panelFoot = document.getElementById("chat-panel-foot");
+  var composeForm = document.getElementById("chat-compose-form");
+  var chatInput = document.getElementById("chat-input");
+  var endBtn = document.getElementById("chat-end-btn");
+  var subtitle = document.getElementById("chat-panel-subtitle");
+
+  var pollTimer = null;
+  var lastMessageAt = null;
+  var renderedIds = {};
+
+  function functionUrl(name) {
+    return window.NICHECHEMS_SUPABASE_URL + "/functions/v1/" + name;
+  }
+
+  function callFunction(name, payload, keepalive) {
+    return fetch(functionUrl(name), {
+      method: "POST",
+      keepalive: !!keepalive,
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": window.NICHECHEMS_SUPABASE_ANON_KEY,
+        "Authorization": "Bearer " + window.NICHECHEMS_SUPABASE_ANON_KEY,
+      },
+      body: JSON.stringify(payload),
+    }).then(function (res) {
+      return res.json().then(function (data) {
+        if (!res.ok) throw new Error(data.error || "request failed");
+        return data;
+      });
+    });
+  }
+
+  function getSession() {
+    var id = sessionStorage.getItem(STORAGE_SESSION);
+    var token = sessionStorage.getItem(STORAGE_TOKEN);
+    return id && token ? { session_id: id, browser_token: token } : null;
+  }
+
+  function setSession(id, token) {
+    sessionStorage.setItem(STORAGE_SESSION, id);
+    sessionStorage.setItem(STORAGE_TOKEN, token);
+  }
+
+  function clearSession() {
+    sessionStorage.removeItem(STORAGE_SESSION);
+    sessionStorage.removeItem(STORAGE_TOKEN);
+  }
+
+  function appendMessage(msg) {
+    if (renderedIds[msg.id]) return;
+    renderedIds[msg.id] = true;
+    var div = document.createElement("div");
+    div.className = "c-chat-msg c-chat-msg--" + msg.sender;
+    div.textContent = msg.body;
+    thread.appendChild(div);
+    thread.scrollTop = thread.scrollHeight;
+    if (!lastMessageAt || msg.created_at > lastMessageAt) lastMessageAt = msg.created_at;
+  }
+
+  function appendSystemNote(text) {
+    var div = document.createElement("div");
+    div.className = "c-chat-msg c-chat-msg--system";
+    div.textContent = text;
+    thread.appendChild(div);
+    thread.scrollTop = thread.scrollHeight;
+  }
+
+  function showThreadView() {
+    prechatForm.hidden = true;
+    thread.hidden = false;
+    panelFoot.hidden = false;
+    subtitle.textContent = "Chatting with our team";
+  }
+
+  function showPrechatView() {
+    prechatForm.hidden = false;
+    thread.hidden = true;
+    panelFoot.hidden = true;
+    subtitle.textContent = "We usually reply in a few minutes";
+    thread.innerHTML = "";
+    renderedIds = {};
+    lastMessageAt = null;
+  }
+
+  function stopPolling() {
+    if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+  }
+
+  function poll() {
+    var session = getSession();
+    if (!session) { stopPolling(); return; }
+    callFunction("chat-poll", { session_id: session.session_id, browser_token: session.browser_token, after: lastMessageAt })
+      .then(function (data) {
+        (data.messages || []).forEach(appendMessage);
+        if (data.status === "closed") {
+          appendSystemNote("This chat was closed.");
+          clearSession();
+          stopPolling();
+        }
+      })
+      .catch(function () {
+        // Session likely gone (closed elsewhere or expired) - reset quietly.
+        clearSession();
+        stopPolling();
+        showPrechatView();
+      });
+  }
+
+  function startPolling() {
+    stopPolling();
+    pollTimer = setInterval(poll, 3000);
+  }
+
+  function openPanel() {
+    panel.classList.add("is-open");
+    fab.setAttribute("aria-expanded", "true");
+    var session = getSession();
+    if (session) {
+      showThreadView();
+      poll();
+      startPolling();
+    } else {
+      showPrechatView();
+    }
+  }
+
+  function closePanelUI() {
+    panel.classList.remove("is-open");
+    fab.setAttribute("aria-expanded", "false");
+  }
+
+  fab.addEventListener("click", function () {
+    var isOpen = panel.classList.contains("is-open");
+    isOpen ? closePanelUI() : openPanel();
+  });
+  panelClose.addEventListener("click", closePanelUI);
+  openChatCardBtn.addEventListener("click", openPanel);
+
+  prechatForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    prechatStatus.className = "c-form-status";
+    prechatStatus.textContent = "";
+
+    if (document.getElementById("chat-company").value.trim()) return; // honeypot tripped, silently drop
+
+    var name = document.getElementById("chat-name").value.trim();
+    var email = document.getElementById("chat-email").value.trim();
+    var message = document.getElementById("chat-first-message").value.trim();
+    if (!name || !message) {
+      prechatStatus.className = "c-form-status c-form-status--error";
+      prechatStatus.textContent = "Please tell us your name and how we can help.";
+      return;
+    }
+
+    startBtn.disabled = true;
+    prechatStatus.textContent = "Connecting…";
+    callFunction("chat-open", { name: name, email: email, message: message })
+      .then(function (data) {
+        setSession(data.session_id, data.browser_token);
+        showThreadView();
+        appendMessage({ id: "local-first", sender: "customer", body: message, created_at: new Date().toISOString() });
+        startPolling();
+      })
+      .catch(function (err) {
+        prechatStatus.className = "c-form-status c-form-status--error";
+        prechatStatus.textContent = "Couldn't start the chat (" + err.message + "). Please try again.";
+      })
+      .finally(function () { startBtn.disabled = false; });
+  });
+
+  composeForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    var session = getSession();
+    if (!session) return;
+    var text = chatInput.value.trim();
+    if (!text) return;
+
+    chatInput.value = "";
+    appendMessage({ id: "local-" + Date.now(), sender: "customer", body: text, created_at: new Date().toISOString() });
+
+    callFunction("chat-send", { session_id: session.session_id, browser_token: session.browser_token, body: text })
+      .catch(function () {
+        appendSystemNote("That message may not have sent. Please try again.");
+      });
+  });
+
+  chatInput.addEventListener("keydown", function (event) {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      composeForm.requestSubmit();
+    }
+  });
+
+  function endChat(keepalive) {
+    var session = getSession();
+    if (!session) return;
+    clearSession();
+    stopPolling();
+    callFunction("chat-close", { session_id: session.session_id, browser_token: session.browser_token }, keepalive).catch(function () {});
+  }
+
+  endBtn.addEventListener("click", function () {
+    endChat(false);
+    showPrechatView();
+  });
+
+  window.addEventListener("pagehide", function () { endChat(true); });
+})();
+</script>
+</body>
+</html>
