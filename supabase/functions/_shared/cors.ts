@@ -17,3 +17,11 @@ export function jsonResponse(body: unknown, status = 200): Response {
     headers: { ...corsHeaders, "Content-Type": "application/json" },
   });
 }
+
+// Postgrest/Telegram errors are plain objects, not `Error` instances, so
+// `err instanceof Error` alone loses the real message.
+export function errorMessage(err: unknown): string {
+  if (err instanceof Error) return err.message;
+  if (err && typeof err === "object" && "message" in err) return String((err as { message: unknown }).message);
+  return "unknown error";
+}

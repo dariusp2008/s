@@ -1,4 +1,4 @@
-import { handleOptions, jsonResponse } from "../_shared/cors.ts";
+import { errorMessage, handleOptions, jsonResponse } from "../_shared/cors.ts";
 import { serviceClient } from "../_shared/db.ts";
 import { sendTopicMessage } from "../_shared/telegram.ts";
 
@@ -34,6 +34,6 @@ Deno.serve(async (req) => {
 
     return jsonResponse({ ok: true });
   } catch (err) {
-    return jsonResponse({ error: err instanceof Error ? err.message : "unknown error" }, 500);
+    return jsonResponse({ error: errorMessage(err) }, 500);
   }
 });
