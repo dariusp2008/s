@@ -659,14 +659,40 @@ input:focus-visible {
   width: min(100%, 560px);
   aspect-ratio: 4 / 3.4;
   background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
-  display: grid;
-  place-items: center;
-  padding: var(--space-6);
-  color: var(--color-blue);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-5);
+  padding: var(--space-7) var(--space-7) var(--space-6);
+  overflow: hidden;
 }
-.c-hero__flask-wrap svg { width: 22%; height: auto; }
+/* Signature: a chromatography trace on graph paper that draws once on
+   load — a nod to the reference-standards catalogue this shop sells. */
+.c-hero__chromatogram {
+  width: 100%; height: auto; flex: 1; min-height: 0;
+  border-radius: var(--radius-md);
+  background-color: var(--color-blue-tint);
+  background-image: linear-gradient(var(--color-border) 1px, transparent 1px), linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+.c-hero__chromatogram-axis { stroke: var(--color-ink-faint); stroke-width: 1.5; opacity: 0.55; }
+.c-hero__chromatogram-trace {
+  stroke: var(--color-blue); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round;
+  stroke-dasharray: 1; stroke-dashoffset: 1;
+  animation: c-chromato-draw 2.4s var(--ease-soft) 0.35s forwards;
+}
+@keyframes c-chromato-draw { to { stroke-dashoffset: 0; } }
+.c-hero__specimen-caption {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--color-ink-faint);
+}
+@media (prefers-reduced-motion: reduce) {
+  .c-hero__chromatogram-trace { animation: none; stroke-dashoffset: 0; }
+}
 
 /* Hero slideshow: replaces the flask graphic once product data loads
    (see script at the bottom of this file). Left in place, undisturbed,
@@ -1184,11 +1210,15 @@ input:focus-visible {
 
       <div class="c-hero__visual" id="hero-visual">
         <div class="c-hero__flask-wrap" id="hero-flask-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
-            <path d="M9 3h6v6.2l4.6 9.4a1.8 1.8 0 0 1-1.6 2.6H6a1.8 1.8 0 0 1-1.6-2.6L9 9.2V3Z"/>
-            <path d="M7.5 15h9"/>
-            <path d="M9 3h6"/>
+          <svg class="c-hero__chromatogram" viewBox="0 0 400 220" role="img" aria-label="Illustrative chromatogram trace">
+            <path class="c-hero__chromatogram-axis" d="M24 194 H384 M24 194 V26" fill="none" />
+            <path class="c-hero__chromatogram-trace" pathLength="1" fill="none"
+              d="M24 188 L64 187 L80 64 L98 186 L128 185 L148 100 L172 184 L210 183 L236 42 L264 182 L306 182 L326 120 L348 180 L384 179" />
           </svg>
+          <div class="c-hero__specimen-caption">
+            <span>Fig. 01 — Reference assay</span>
+            <span>NC · HPLC</span>
+          </div>
         </div>
       </div>
     </div>

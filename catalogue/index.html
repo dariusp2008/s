@@ -440,18 +440,33 @@ input:focus-visible {
 }
 .c-product-card.is-visible { opacity: 1; transform: translateY(0); }
 .c-product-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: transparent; }
-.c-product-card__top { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-5); gap: var(--space-2); }
-.c-product-card__category { font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-moss); }
-.c-product-card__stock { display: inline-flex; align-items: center; gap: 6px; font-size: var(--text-xs); font-weight: 600; color: var(--color-moss); white-space: nowrap; }
+.c-product-card__top { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); padding-bottom: var(--space-3); margin-bottom: var(--space-5); border-bottom: 1px solid var(--color-border); }
+.c-product-card__category { font-family: var(--font-mono); font-size: var(--text-xs); font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-moss); }
+.c-product-card__stock { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: var(--text-xs); font-weight: 500; color: var(--color-moss); white-space: nowrap; }
 .c-product-card__stock::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--color-moss); flex-shrink: 0; }
 .c-product-card__stock--low { color: #96631C; }
 .c-product-card__stock--low::before { background: #96631C; }
-.c-product-card__icon { width: 52px; height: 52px; border-radius: var(--radius-md); background: var(--color-blue-tint); color: var(--color-blue); display: grid; place-items: center; margin-bottom: var(--space-4); }
-.c-product-card__icon svg { width: 24px; height: 24px; }
-.c-product-card__thumb { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-md); background: var(--color-blue-tint); margin-bottom: var(--space-4); }
-.c-product-card__name { font-size: var(--text-md); margin-bottom: var(--space-2); }
-.c-product-card__meta { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); font-size: var(--text-xs); color: var(--color-ink-faint); margin-bottom: var(--space-5); }
-.c-product-card__meta strong { color: var(--color-ink-soft); font-weight: 600; }
+/* Uniform specimen panel: every card gets the same 4:3 media box, photo
+   or category icon on graph paper — keeps card heights aligned. */
+.c-product-card__media {
+  aspect-ratio: 4 / 3; margin-bottom: var(--space-5);
+  border-radius: var(--radius-md); overflow: hidden;
+  display: grid; place-items: center;
+  background-color: var(--color-blue-tint);
+  background-image: linear-gradient(var(--color-border) 1px, transparent 1px), linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+.c-product-card__media img { width: 100%; height: 100%; object-fit: cover; }
+.c-product-card__media-icon { color: var(--color-blue); display: grid; place-items: center; }
+.c-product-card__media-icon svg { width: 44px; height: 44px; }
+.c-product-card__name { font-size: var(--text-md); margin-bottom: var(--space-4); }
+/* COA-style ruled rows, so short-meta cards match tall ones and the data
+   reads like a spec sheet. */
+.c-product-card__meta { margin-bottom: var(--space-5); }
+.c-product-card__meta div { display: flex; justify-content: space-between; gap: var(--space-4); padding: var(--space-2) 0; border-top: 1px solid var(--color-border); }
+.c-product-card__meta div:last-child { border-bottom: 1px solid var(--color-border); }
+.c-product-card__meta dt { font-size: var(--text-xs); color: var(--color-ink-faint); text-transform: uppercase; letter-spacing: 0.04em; }
+.c-product-card__meta dd { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-ink); text-align: right; }
 .c-product-card__discount-hint { font-size: var(--text-xs); font-weight: 700; color: var(--color-moss); margin-bottom: var(--space-4); }
 .c-product-card__footer { margin-top: auto; display: flex; flex-direction: column; gap: var(--space-4); padding-top: var(--space-5); border-top: 1px solid var(--color-border); }
 .c-product-card__footer-row { display: flex; align-items: center; justify-content: space-between; }
@@ -885,14 +900,16 @@ input:focus-visible {
             '<span class="c-product-card__category">' + categoryLabel(product.category) + '</span>' +
             '<span class="c-product-card__stock' + (isLow ? ' c-product-card__stock--low' : '') + '">' + (isLow ? 'Low Stock' : 'In Stock') + '</span>' +
           '</div>' +
-          (product.imageUrl
-            ? '<img class="c-product-card__thumb" src="' + product.imageUrl + '" alt="" loading="lazy">'
-            : '<span class="c-product-card__icon" aria-hidden="true">' + iconFor(product.category) + '</span>') +
+          '<div class="c-product-card__media">' +
+            (product.imageUrl
+              ? '<img src="' + product.imageUrl + '" alt="" loading="lazy">'
+              : '<span class="c-product-card__media-icon" aria-hidden="true">' + iconFor(product.category) + '</span>') +
+          '</div>' +
           '<h3 class="c-product-card__name">' + product.name + '</h3>' +
-          '<p class="c-product-card__meta">' +
-            '<span><strong>Purity</strong> ' + product.purity + '</span>' +
-            '<span><strong>Format</strong> ' + product.format + '</span>' +
-          '</p>' +
+          '<dl class="c-product-card__meta">' +
+            '<div><dt>Purity</dt><dd>' + (product.purity || '—') + '</dd></div>' +
+            '<div><dt>Format</dt><dd>' + (product.format || '—') + '</dd></div>' +
+          '</dl>' +
           (product.discountTiers && product.discountTiers.length
             ? '<p class="c-product-card__discount-hint">Buy ' + product.discountTiers[0].min_qty + '+ save ' + product.discountTiers[0].discount_pct + '%</p>'
             : '') +
