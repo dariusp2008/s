@@ -17,13 +17,19 @@
 -- CATEGORIES
 -- ---------------------------------------------------------------------
 create table if not exists public.categories (
-  id          text primary key,             -- slug, e.g. 'reference-standards'
-  label       text not null,
-  description text,
-  icon        text,                          -- key into js/icons.js, e.g. 'molecule'
-  sort_order  int not null default 0,
-  created_at  timestamptz not null default now()
+  id           text primary key,             -- slug, e.g. 'reference-standards'
+  label        text not null,
+  description  text,
+  icon         text,                          -- key into js/icons.js, e.g. 'molecule'
+  image_url    text,                          -- public URL into the product-images bucket; null falls back to the icon
+  show_on_home boolean not null default true, -- surfaces the category in the home page "Shop by category" grid
+  sort_order   int not null default 0,
+  created_at   timestamptz not null default now()
 );
+
+-- Covers instances where this script already ran before these columns existed.
+alter table public.categories add column if not exists image_url text;
+alter table public.categories add column if not exists show_on_home boolean not null default true;
 
 -- ---------------------------------------------------------------------
 -- PRODUCTS

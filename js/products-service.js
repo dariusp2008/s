@@ -54,7 +54,9 @@ window.NicheChemsData = (function () {
       id: row.id,
       label: row.label,
       description: row.description || "",
-      icon: row.icon || "flask"
+      icon: row.icon || "flask",
+      imageUrl: row.image_url || null,
+      showOnHome: row.show_on_home !== false
     };
   }
 
@@ -79,7 +81,9 @@ window.NicheChemsData = (function () {
   }
 
   function fallbackCategories() {
-    return window.NICHECHEMS_CATEGORIES || [];
+    return (window.NICHECHEMS_CATEGORIES || []).map(function (c) {
+      return Object.assign({ imageUrl: null, showOnHome: true }, c);
+    });
   }
 
   /**

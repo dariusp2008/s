@@ -264,7 +264,7 @@ dialog.c-dialog::backdrop { background: rgba(32, 39, 34, 0.55); }
         <div class="c-table-wrap">
           <table class="c-table">
             <thead>
-              <tr><th>Icon</th><th>Label</th><th>Slug</th><th>Products</th><th>Sort</th><th>Actions</th></tr>
+              <tr><th>Image</th><th>Label</th><th>Slug</th><th>Products</th><th>On Home</th><th>Sort</th><th>Actions</th></tr>
             </thead>
             <tbody id="categories-tbody"></tbody>
           </table>
@@ -338,6 +338,14 @@ dialog.c-dialog::backdrop { background: rgba(32, 39, 34, 0.55); }
         <label for="cat-description">Description</label>
         <textarea id="cat-description"></textarea>
       </div>
+      <div class="c-form-field">
+        <label for="cat-image-input">Category Photo
+          <span class="c-form-field__hint">JPG/PNG/WebP, up to 5&nbsp;MB. Shown on the home page "Shop by category" tile; leave empty to keep using the icon.</span>
+        </label>
+        <img class="c-image-preview" id="cat-image-preview" alt="" hidden>
+        <input type="file" id="cat-image-input" accept="image/png,image/jpeg,image/webp">
+        <button type="button" class="c-btn c-btn--ghost c-btn--sm" id="cat-image-remove-btn" hidden style="margin-top: var(--space-3);">Remove photo</button>
+      </div>
       <div class="c-dialog__row">
         <div class="c-form-field">
           <label for="cat-icon">Icon
@@ -349,6 +357,12 @@ dialog.c-dialog::backdrop { background: rgba(32, 39, 34, 0.55); }
           <label for="cat-sort">Sort order</label>
           <input type="number" id="cat-sort" value="0" step="1">
         </div>
+      </div>
+      <div class="c-form-field">
+        <label style="display:flex;align-items:center;gap:var(--space-2);cursor:pointer;">
+          <input type="checkbox" id="cat-show-home" checked>
+          Show on the home page "Shop by category" grid
+        </label>
       </div>
       <p class="c-dialog__error" id="category-form-error" role="alert"></p>
       <div class="c-dialog__actions">
@@ -691,17 +705,22 @@ dialog.c-dialog::backdrop { background: rgba(32, 39, 34, 0.55); }
   function renderCategoriesTable() {
     var tbody = document.getElementById("categories-tbody");
     if (state.categories.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="6" class="c-table__empty">No categories yet.</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="7" class="c-table__empty">No categories yet.</td></tr>';
       return;
     }
     tbody.innerHTML = state.categories.map(function (cat) {
       var count = state.products.filter(function (p) { return p.category_id === cat.id; }).length;
+      var onHome = cat.show_on_home !== false;
+      var visual = cat.image_url
+        ? '<img src="' + cat.image_url + '" alt="" width="36" height="36" style="object-fit:cover;border-radius:8px;">'
+        : '<span class="c-icon-chip" aria-hidden="true">' + (icons[cat.icon] || "") + "</span>";
       return (
         "<tr>" +
-          '<td><span class="c-icon-chip" aria-hidden="true">' + (icons[cat.icon] || "") + "</span></td>" +
+          "<td>" + visual + "</td>" +
           "<td>" + cat.label + "</td>" +
           "<td>" + cat.id + "</td>" +
           "<td>" + count + "</td>" +
+          '<td><button type="button" class="c-btn c-btn--ghost c-btn--sm" data-toggle-home="' + cat.id + '" aria-pressed="' + onHome + '">' + (onHome ? "Shown" : "Hidden") + "</button></td>" +
           "<td>" + cat.sort_order + "</td>" +
           '<td><div class="c-row-actions">' +
             '<button type="button" class="c-btn c-btn--ghost c-btn--sm" data-edit-category="' + cat.id + '">Edit</button>' +
@@ -721,6 +740,13 @@ dialog.c-dialog::backdrop { background: rgba(32, 39, 34, 0.55); }
     if (current) select.value = current;
   }
 
+  // Category photo staging mirrors the product dialog: picked file is
+  // held client-side and only uploaded on save, so cancelling never
+  // leaves an orphaned file in the bucket.
+  var catPendingImageFile = null;
+  var catCurrentImageUrl = null;
+  var catImageRemoved = false;
+
   function openCategoryDialog(existing) {
     var dialog = document.getElementById("category-dialog");
     var form = document.getElementById("category-form");
@@ -738,17 +764,57 @@ dialog.c-dialog::backdrop { background: rgba(32, 39, 34, 0.55); }
     form.dataset.editingId = existing ? existing.id : "";
     idInput.disabled = !!existing;
 
+    catPendingImageFile = null;
+    catImageRemoved = false;
+    catCurrentImageUrl = (existing && existing.image_url) || null;
+    document.getElementById("cat-image-input").value = "";
+    var imgPreview = document.getElementById("cat-image-preview");
+    var imgRemoveBtn = document.getElementById("cat-image-remove-btn");
+    imgPreview.src = catCurrentImageUrl || "";
+    imgPreview.hidden = !catCurrentImageUrl;
+    imgRemoveBtn.hidden = !catCurrentImageUrl;
+
     if (existing) {
       document.getElementById("cat-label").value = existing.label;
       idInput.value = existing.id;
       document.getElementById("cat-description").value = existing.description || "";
       iconSelect.value = existing.icon;
       document.getElementById("cat-sort").value = existing.sort_order;
+      document.getElementById("cat-show-home").checked = existing.show_on_home !== false;
     } else {
       document.getElementById("cat-sort").value = state.categories.length;
+      document.getElementById("cat-show-home").checked = true;
     }
     dialog.showModal();
   }
+
+  document.getElementById("cat-image-input").addEventListener("change", function () {
+    var errorEl = document.getElementById("category-form-error");
+    errorEl.textContent = "";
+    var file = this.files && this.files[0];
+    if (!file) return;
+    if (file.size > MAX_IMAGE_BYTES) {
+      errorEl.textContent = "Image is too large. 5 MB max.";
+      this.value = "";
+      return;
+    }
+    catPendingImageFile = file;
+    catImageRemoved = false;
+    var preview = document.getElementById("cat-image-preview");
+    preview.src = URL.createObjectURL(file);
+    preview.hidden = false;
+    document.getElementById("cat-image-remove-btn").hidden = false;
+  });
+
+  document.getElementById("cat-image-remove-btn").addEventListener("click", function () {
+    catPendingImageFile = null;
+    catImageRemoved = true;
+    document.getElementById("cat-image-input").value = "";
+    var preview = document.getElementById("cat-image-preview");
+    preview.src = "";
+    preview.hidden = true;
+    this.hidden = true;
+  });
 
   document.getElementById("add-category-btn").addEventListener("click", function () { openCategoryDialog(null); });
   document.getElementById("category-cancel-btn").addEventListener("click", function () { document.getElementById("category-dialog").close(); });
@@ -777,11 +843,23 @@ dialog.c-dialog::backdrop { background: rgba(32, 39, 34, 0.55); }
       label: document.getElementById("cat-label").value.trim(),
       description: document.getElementById("cat-description").value.trim(),
       icon: document.getElementById("cat-icon").value,
-      sort_order: parseInt(document.getElementById("cat-sort").value, 10) || 0
+      sort_order: parseInt(document.getElementById("cat-sort").value, 10) || 0,
+      show_on_home: document.getElementById("cat-show-home").checked,
+      image_url: catCurrentImageUrl
     };
 
     saveBtn.disabled = true;
     try {
+      if (catPendingImageFile) {
+        var ext = (catPendingImageFile.name.split(".").pop() || "jpg").toLowerCase();
+        var path = "categories/" + id + "-" + Date.now() + "." + ext;
+        var uploadResult = await client.storage.from("product-images").upload(path, catPendingImageFile, { upsert: true });
+        if (uploadResult.error) throw uploadResult.error;
+        payload.image_url = client.storage.from("product-images").getPublicUrl(path).data.publicUrl;
+      } else if (catImageRemoved) {
+        payload.image_url = null;
+      }
+
       var user = (await client.auth.getSession()).data.session.user;
       if (mode === "add") {
         payload.id = id;
@@ -806,6 +884,27 @@ dialog.c-dialog::backdrop { background: rgba(32, 39, 34, 0.55); }
   document.getElementById("categories-tbody").addEventListener("click", async function (event) {
     var editBtn = event.target.closest("[data-edit-category]");
     var deleteBtn = event.target.closest("[data-delete-category]");
+    var homeBtn = event.target.closest("[data-toggle-home]");
+
+    if (homeBtn) {
+      var homeId = homeBtn.getAttribute("data-toggle-home");
+      var homeCat = state.categories.filter(function (c) { return c.id === homeId; })[0];
+      if (!homeCat) return;
+      homeBtn.disabled = true;
+      try {
+        var newValue = homeCat.show_on_home === false;
+        var toggleResult = await client.from("categories").update({ show_on_home: newValue }).eq("id", homeId);
+        if (toggleResult.error) throw toggleResult.error;
+        var toggleUser = (await client.auth.getSession()).data.session.user;
+        await logAudit("update", "categories", homeId, toggleUser.email);
+        showToast(newValue ? "Category shown on home page." : "Category hidden from home page.");
+        await loadData();
+      } catch (err) {
+        homeBtn.disabled = false;
+        showToast(err.message || "Couldn't update that category.", true);
+      }
+      return;
+    }
 
     if (editBtn) {
       var cat = state.categories.filter(function (c) { return c.id === editBtn.getAttribute("data-edit-category"); })[0];
