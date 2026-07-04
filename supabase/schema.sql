@@ -234,13 +234,6 @@ values
    'Store at 2–8°C in original sealed packaging, away from light.',
    'For laboratory research use only. Handle with standard PPE (gloves, eye protection) per institutional safety protocols. See Safety Data Sheet for full hazard classification.'),
 
-  ('nc-3325', 'NC-3325', 'chromatography', 'GC-Grade Chromatography Standard Mix',
-   'An eight-component mixed standard formulated for gas-chromatography method validation and instrument qualification.',
-   '≥99% per component', '8 × 1 mL set', 410, 'set', 'in-stock', true,
-   'Mixture, see Certificate of Analysis', 'Mixture, see Certificate of Analysis',
-   'Store at 2–8°C in original sealed packaging, away from light.',
-   'For laboratory research use only. Handle with standard PPE (gloves, eye protection) per institutional safety protocols. See Safety Data Sheet for full hazard classification.'),
-
   ('nc-4460', 'NC-4460', 'buffers', 'Buffered Calibration Solution, pH 7.00',
    'A traceable pH 7.00 buffer solution for routine calibration and verification of laboratory pH meters.',
    '±0.01 pH', '500 mL bottle', 58, 'unit', 'in-stock', true,
