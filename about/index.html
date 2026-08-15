@@ -15,7 +15,7 @@
 
 <style>
 /* Design tokens, reset, header/nav/footer are identical to the rest of
-   the site — see catalogue/index.html's section-1 comment. */
+   the site - see catalogue/index.html's section-1 comment. */
 :root {
   --color-bg:          #FAF9F6;
   --color-bg-alt:      #F2F0EA;
@@ -124,7 +124,6 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2.5px soli
   font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--color-moss); margin-bottom: var(--space-4);
 }
-.c-eyebrow::before { content: ""; width: 22px; height: 2px; background: var(--color-moss); border-radius: var(--radius-pill); }
 
 .c-btn {
   display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
@@ -140,7 +139,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2.5px soli
 .c-btn--on-blue { background: var(--color-on-blue); color: var(--color-blue-dark); }
 .c-btn--on-blue:hover { background: var(--color-bg-alt); transform: translateY(-1px); }
 
-/* -- Top bar / header / mobile nav — identical to catalogue/index.html -- */
+/* -- Top bar / header / mobile nav - identical to catalogue/index.html -- */
 .c-top-bar { background: var(--color-forest); color: var(--color-on-blue); }
 .c-top-bar__inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--space-2) var(--space-6); padding-block: var(--space-2); font-size: var(--text-xs); text-align: center; }
 .c-top-bar__inner a { text-decoration: underline; text-underline-offset: 2px; opacity: 0.9; }
@@ -239,7 +238,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2.5px soli
 .c-cta-band p { color: rgba(251, 251, 248, 0.82); margin-bottom: 0; max-width: 48ch; }
 .c-cta-band__actions { display: flex; flex-wrap: wrap; gap: var(--space-4); }
 
-/* -- Footer — identical to catalogue/index.html -- */
+/* -- Footer - identical to catalogue/index.html -- */
 .c-footer { background: var(--color-forest); color: rgba(251, 251, 248, 0.88); }
 .c-footer__top { display: grid; gap: var(--space-8); padding-block: var(--space-10); }
 @media (min-width: 700px) { .c-footer__top { grid-template-columns: 1.3fr repeat(3, 1fr); gap: var(--space-6); } }
@@ -357,7 +356,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2.5px soli
       <div class="c-section-head">
         <span class="c-eyebrow">Paying With Ethereum</span>
         <h2>A guide to buying ETH and connecting a wallet</h2>
-        <p>Four steps, start to finish. Budget 15–20 minutes if this is your first time, most of that is exchange identity verification, not the crypto part.</p>
+        <p>Four steps, start to finish. Budget 15-20 minutes if this is your first time, most of that is exchange identity verification, not the crypto part.</p>
       </div>
 
       <ol class="c-guide-list">
@@ -375,7 +374,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2.5px soli
             <li>Rainbow (mobile)</li>
             <li>Trust Wallet (mobile)</li>
           </ul>
-          <p>Set it up, securely back up the seed phrase it gives you, then withdraw your ETH from the exchange to your new wallet. None of these wallets require identity verification — see the privacy section below.</p>
+          <p>Set it up, securely back up the seed phrase it gives you, then withdraw your ETH from the exchange to your new wallet. None of these wallets require identity verification - see the privacy section below.</p>
         </li>
 
         <li class="c-guide-step">
@@ -408,9 +407,9 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2.5px soli
         <p>Identity checks happen at exchanges, not in your wallet. The wallet you actually pay us from can be completely private.</p>
       </div>
       <div class="c-prose">
-        <p>Self-custody wallets like <strong>Trust Wallet</strong>, <strong>MetaMask</strong>, <strong>Exodus</strong>, and <strong>Rainbow</strong> require no identity verification at all — no KYC, no account, no email. You install the app, it generates a seed phrase, and the wallet is yours. Nothing about it is tied to your name, and we never see anything beyond the wallet address the payment arrives from.</p>
-        <p>That means the only KYC step in the whole flow is the exchange where you first buy ETH. Once the ETH is withdrawn to your own non-KYC wallet, the purchase itself — connecting at checkout, approving the transaction, paying — involves no identity disclosure to us or anyone else. For researchers who prefer discretion in their procurement, this is the simplest setup: buy ETH wherever convenient, move it to Trust Wallet or another self-custody wallet, and pay from there.</p>
-        <p>Practical tips: keep the wallet you pay from separate from the one holding long-term funds, back up the seed phrase offline, and remember we only ever need the transaction hash to confirm your payment — never your identity documents.</p>
+        <p>Self-custody wallets like <strong>Trust Wallet</strong>, <strong>MetaMask</strong>, <strong>Exodus</strong>, and <strong>Rainbow</strong> require no identity verification at all - no KYC, no account, no email. You install the app, it generates a seed phrase, and the wallet is yours. Nothing about it is tied to your name, and we never see anything beyond the wallet address the payment arrives from.</p>
+        <p>That means the only KYC step in the whole flow is the exchange where you first buy ETH. Once the ETH is withdrawn to your own non-KYC wallet, the purchase itself - connecting at checkout, approving the transaction, paying - involves no identity disclosure to us or anyone else. For researchers who prefer discretion in their procurement, this is the simplest setup: buy ETH wherever convenient, move it to Trust Wallet or another self-custody wallet, and pay from there.</p>
+        <p>Practical tips: keep the wallet you pay from separate from the one holding long-term funds, back up the seed phrase offline, and remember we only ever need the transaction hash to confirm your payment - never your identity documents.</p>
       </div>
     </div>
   </section>

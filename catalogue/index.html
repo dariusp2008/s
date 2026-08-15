@@ -34,7 +34,7 @@
 <style>
 /* =====================================================================
    Design tokens, reset, layout primitives, buttons, top bar, header and
-   mobile nav are identical to home/index.html — kept in sync by hand
+   mobile nav are identical to home/index.html - kept in sync by hand
    since this static build has no CSS bundler. See that file's section 1
    comment for the color-ratio / contrast rationale behind these tokens.
    ===================================================================== */
@@ -203,13 +203,6 @@ input:focus-visible {
   color: var(--color-moss);
   margin-bottom: var(--space-4);
 }
-.c-eyebrow::before {
-  content: "";
-  width: 22px;
-  height: 2px;
-  background: var(--color-moss);
-  border-radius: var(--radius-pill);
-}
 
 /* =====================================================================
    BUTTONS
@@ -366,7 +359,7 @@ input:focus-visible {
 .c-page-header__lede { font-size: var(--text-md); color: var(--color-ink-soft); max-width: 48rem; }
 
 /* =====================================================================
-   CATALOGUE TOOLBAR — category filter pills + search + result count
+   CATALOGUE TOOLBAR - category filter pills + search + result count
    Filters are rendered from /js/products-data.js so adding a category
    there automatically adds a filter pill here.
    ===================================================================== */
@@ -446,7 +439,7 @@ input:focus-visible {
 .c-product-card__stock--low { color: #96631C; }
 .c-product-card__stock--low::before { background: #96631C; }
 /* Uniform specimen panel: every card gets the same 4:3 media box, photo
-   or category icon — keeps card heights aligned. */
+   or category icon - keeps card heights aligned. */
 .c-product-card__media {
   aspect-ratio: 4 / 3; margin-bottom: var(--space-5);
   border-radius: var(--radius-sm); overflow: hidden;
@@ -455,14 +448,12 @@ input:focus-visible {
   border: 1px solid var(--color-border);
 }
 .c-product-card__media img { width: 100%; height: 100%; object-fit: cover; }
-.c-product-card__media-icon { color: var(--color-blue); display: grid; place-items: center; }
-.c-product-card__media-icon svg { width: 44px; height: 44px; }
+.c-product-card__media-icon { font-family: var(--font-serif); font-weight: 300; font-size: var(--text-3xl); line-height: 1; color: var(--color-sage); }
 .c-product-card__name { font-size: var(--text-md); margin-bottom: var(--space-4); }
 /* COA-style ruled rows, so short-meta cards match tall ones and the data
    reads like a spec sheet. */
 .c-product-card__meta { margin-bottom: var(--space-5); }
-.c-product-card__meta div { display: flex; justify-content: space-between; gap: var(--space-4); padding: var(--space-2) 0; border-top: 1px solid var(--color-border); }
-.c-product-card__meta div:last-child { border-bottom: 1px solid var(--color-border); }
+.c-product-card__meta div { display: flex; justify-content: space-between; gap: var(--space-4); padding: var(--space-1) 0; }
 .c-product-card__meta dt { font-size: var(--text-xs); color: var(--color-ink-faint); text-transform: uppercase; letter-spacing: 0.04em; }
 .c-product-card__meta dd { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-ink); text-align: right; }
 .c-product-card__discount-hint { font-size: var(--text-xs); font-weight: 700; color: var(--color-moss); margin-bottom: var(--space-4); }
@@ -663,7 +654,7 @@ input:focus-visible {
     </noscript>
 
     <!-- ===================================================================
-         TOOLBAR — filter pills + search, rendered from /js/products-data.js
+         TOOLBAR - filter pills + search, rendered from /js/products-data.js
          =================================================================== -->
     <div class="c-catalogue-toolbar">
       <div class="c-filter-pills" id="category-filters" role="group" aria-label="Filter by category"></div>
@@ -837,7 +828,7 @@ input:focus-visible {
   window.addEventListener("storage", function (e) { if (e.key === "nichechems_cart") syncCartBadge(); });
 
   /* =====================================================================
-     CATALOGUE: filter pills, search, and product grid — data comes from
+     CATALOGUE: filter pills, search, and product grid - data comes from
      window.NicheChemsData (Supabase, with a static fallback), see
      /js/products-service.js. categories/products start empty and are
      populated once by init() below; icons.js loads synchronously since
@@ -902,12 +893,12 @@ input:focus-visible {
           '<div class="c-product-card__media">' +
             (product.imageUrl
               ? '<img src="' + product.imageUrl + '" alt="" loading="lazy">'
-              : '<span class="c-product-card__media-icon" aria-hidden="true">' + iconFor(product.category) + '</span>') +
+              : '<span class="c-product-card__media-icon" aria-hidden="true">' + String(product.name || "").trim().charAt(0).toUpperCase() + '</span>') +
           '</div>' +
           '<h3 class="c-product-card__name">' + product.name + '</h3>' +
           '<dl class="c-product-card__meta">' +
-            '<div><dt>Purity</dt><dd>' + (product.purity || '—') + '</dd></div>' +
-            '<div><dt>Format</dt><dd>' + (product.format || '—') + '</dd></div>' +
+            '<div><dt>Purity</dt><dd>' + (product.purity || '-') + '</dd></div>' +
+            '<div><dt>Format</dt><dd>' + (product.format || '-') + '</dd></div>' +
           '</dl>' +
           (product.discountTiers && product.discountTiers.length
             ? '<p class="c-product-card__discount-hint">Buy ' + product.discountTiers[0].min_qty + '+ save ' + product.discountTiers[0].discount_pct + '%</p>'

@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="/css/fonts.css">
 
 <!--
-  Internal tool, not a marketing page — no top bar / public nav / footer
+  Internal tool, not a marketing page - no top bar / public nav / footer
   columns here on purpose. Authorization model: signing in only proves
   *who* someone is (Supabase Auth); being allowed to manage the catalogue
   is a separate check against the admin_users allowlist (see
@@ -281,7 +281,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   }
 
   /** Checks the admin_users allowlist via the is_admin() RPC (direct
-   *  table access is blocked by RLS — see supabase/schema.sql). */
+   *  table access is blocked by RLS - see supabase/schema.sql). */
   async function currentUserIsAdmin() {
     var sessionResult = await client.auth.getSession();
     var user = sessionResult.data && sessionResult.data.session && sessionResult.data.session.user;
@@ -341,7 +341,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
     window.location.href = "dashboard/index.html";
   });
 
-  // -- Create account (bootstrap path — still needs manual admin_users
+  // -- Create account (bootstrap path - still needs manual admin_users
   // approval, see supabase/schema.sql's ADMIN BOOTSTRAP section) --------
   var signupEmail = document.getElementById("signup-email");
   var signupPassword = document.getElementById("signup-password");

@@ -15,7 +15,7 @@
 
 <style>
 /* Design tokens, reset, header/nav/footer are identical to the rest of
-   the site — see catalogue/index.html's section-1 comment. */
+   the site - see catalogue/index.html's section-1 comment. */
 :root {
   --color-bg:          #FAF9F6;
   --color-bg-alt:      #F2F0EA;
@@ -125,7 +125,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--color-moss); margin-bottom: var(--space-4);
 }
-.c-eyebrow::before { content: ""; width: 22px; height: 2px; background: var(--color-moss); border-radius: var(--radius-pill); }
 
 .c-btn {
   display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
@@ -140,7 +139,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .c-btn--ghost { background: transparent; color: var(--color-forest); border: 1.5px solid var(--color-border-cool); }
 .c-btn--ghost:hover { border-color: var(--color-moss); background: var(--color-green-tint); transform: translateY(-1px); }
 
-/* -- Top bar / header / mobile nav — identical to catalogue/index.html -- */
+/* -- Top bar / header / mobile nav - identical to catalogue/index.html -- */
 .c-top-bar { background: var(--color-forest); color: var(--color-on-blue); }
 .c-top-bar__inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--space-2) var(--space-6); padding-block: var(--space-2); font-size: var(--text-xs); text-align: center; }
 .c-top-bar__inner a { text-decoration: underline; text-underline-offset: 2px; opacity: 0.9; }
@@ -201,7 +200,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .c-page-header__title { font-size: var(--text-2xl); margin-bottom: var(--space-4); max-width: 40rem; }
 .c-page-header__lede { font-size: var(--text-md); color: var(--color-ink-soft); max-width: 46rem; }
 
-/* -- Contact form fields — identical to checkout/index.html -- */
+/* -- Contact form fields - identical to checkout/index.html -- */
 .c-form-field { margin-bottom: var(--space-5); }
 .c-form-field__row { display: grid; grid-template-columns: 1fr; gap: var(--space-4); }
 @media (min-width: 500px) { .c-form-field__row { grid-template-columns: 1fr 1fr; } }
@@ -297,7 +296,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .c-chat-end { display: block; width: 100%; text-align: center; margin-top: var(--space-3); font-size: var(--text-xs); color: var(--color-ink-faint); }
 .c-chat-end:hover { color: var(--color-error); }
 
-/* -- Footer — identical to catalogue/index.html -- */
+/* -- Footer - identical to catalogue/index.html -- */
 .c-footer { background: var(--color-forest); color: rgba(251, 251, 248, 0.88); }
 .c-footer__top { display: grid; gap: var(--space-8); padding-block: var(--space-10); }
 @media (min-width: 700px) { .c-footer__top { grid-template-columns: 1.3fr repeat(3, 1fr); gap: var(--space-6); } }
@@ -624,7 +623,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   window.addEventListener("storage", function (e) { if (e.key === "nichechems_cart") syncCartBadge(); });
 
   // -------------------------------------------------------------------
-  // EMAIL FORM — builds a mailto: link, no backend involved.
+  // EMAIL FORM - builds a mailto: link, no backend involved.
   // -------------------------------------------------------------------
   var emailForm = document.getElementById("email-form");
   emailForm.addEventListener("submit", function (event) {
@@ -646,7 +645,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
       return;
     }
 
-    var body = message + "\n\n— " + name + " (" + email + ")";
+    var body = message + "\n\n- " + name + " (" + email + ")";
     var mailto = "mailto:research@nichechems.com?subject=" + encodeURIComponent(subject) +
       "&body=" + encodeURIComponent(body);
     window.location.href = mailto;
@@ -655,7 +654,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   });
 
   // -------------------------------------------------------------------
-  // LIVE CHAT WIDGET — each chat is a Telegram forum topic created by
+  // LIVE CHAT WIDGET - each chat is a Telegram forum topic created by
   // the chat-open Edge Function and deleted by chat-close. Messages are
   // relayed both ways through Edge Functions (see supabase/functions/),
   // polled every 3s rather than using Realtime, since the anon key here

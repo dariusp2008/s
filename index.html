@@ -51,9 +51,9 @@
    ===================================================================== */
 :root {
   /* -- Color: 70% off-white / ivory / cool-gray neutrals ---------------- */
-  --color-bg:          #FAF9F6; /* alabaster — primary page background */
-  --color-bg-alt:      #F2F0EA; /* soft ivory — alternating section bg */
-  --color-bg-cool:     #EFF2F0; /* very light cool gray — botanical sections */
+  --color-bg:          #FAF9F6; /* alabaster - primary page background */
+  --color-bg-alt:      #F2F0EA; /* soft ivory - alternating section bg */
+  --color-bg-cool:     #EFF2F0; /* very light cool gray - botanical sections */
   --color-surface:     #FFFFFF; /* card / raised surface */
   --color-border:      #E4E1D8; /* hairline borders on ivory */
   --color-border-cool: #DCE3DE;
@@ -68,7 +68,7 @@
   --color-blue-dark:   #2A459E; /* hover / active state */
   --color-blue-tint:   #EDF2FD; /* faint blue wash for badges/backgrounds */
 
-  /* -- Color: 10% Natural Greens — accents & botanical details only ---- */
+  /* -- Color: 10% Natural Greens - accents & botanical details only ---- */
   --color-sage:        #93AC8B;
   --color-moss:        #5C7A52;
   --color-forest:      #33502F;
@@ -259,13 +259,7 @@ input:focus-visible {
   color: var(--color-moss);
   margin-bottom: var(--space-4);
 }
-.c-eyebrow::before {
-  content: "";
-  width: 22px;
-  height: 2px;
-  background: var(--color-moss);
-  border-radius: var(--radius-pill);
-}
+
 .c-section-head h2 { font-size: var(--text-2xl); }
 .c-section-head p {
   margin-top: var(--space-4);
@@ -416,7 +410,7 @@ input:focus-visible {
 .c-logo__mark img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
 .c-logo__word-alt { color: var(--color-blue); }
 
-/* Header logo reads bigger than the footer one — this is the primary
+/* Header logo reads bigger than the footer one - this is the primary
    brand mark on the page, footer's is secondary. */
 .c-header .c-logo { font-size: 1.4rem; }
 .c-header .c-logo__mark { width: 64px; height: 64px; }
@@ -649,7 +643,7 @@ input:focus-visible {
   padding: var(--space-7) var(--space-7) var(--space-6);
   overflow: hidden;
 }
-/* Signature: a chromatography trace that draws once on load — a nod to
+/* Signature: a chromatography trace that draws once on load - a nod to
    the reference-standards catalogue this shop sells. */
 .c-hero__chromatogram {
   width: 100%; height: auto; flex: 1; min-height: 0;
@@ -674,7 +668,7 @@ input:focus-visible {
 
 /* Hero slideshow: replaces the flask graphic once product data loads
    (see script at the bottom of this file). Left in place, undisturbed,
-   if JS/data never arrives — progressive enhancement, same pattern as
+   if JS/data never arrives - progressive enhancement, same pattern as
    js/products-service.js's fallback-to-static-data approach. */
 .c-hero-slideshow {
   position: relative;
@@ -689,8 +683,7 @@ input:focus-visible {
 .c-hero-slideshow__slide { flex: 0 0 100%; min-width: 0; height: 100%; }
 .c-hero-slideshow__link { display: flex; flex-direction: column; height: 100%; }
 .c-hero-slideshow__media { width: 100%; height: 62%; object-fit: cover; background: var(--color-blue-tint); flex-shrink: 0; }
-.c-hero-slideshow__media--icon { display: grid; place-items: center; color: var(--color-blue); }
-.c-hero-slideshow__media--icon svg { width: 30%; height: 30%; }
+.c-hero-slideshow__media--icon { display: grid; place-items: center; color: var(--color-sage); font-family: var(--font-serif); font-weight: 300; font-size: clamp(3rem, 2rem + 6vw, 5rem); line-height: 1; }
 .c-hero-slideshow__info { padding: var(--space-5) var(--space-6); display: flex; flex-direction: column; gap: var(--space-1); }
 .c-hero-slideshow__name { font-family: var(--font-serif); font-size: var(--text-md); color: var(--color-forest); }
 .c-hero-slideshow__price { font-family: var(--font-mono); font-weight: 500; font-size: var(--text-sm); color: var(--color-blue); }
@@ -757,7 +750,7 @@ input:focus-visible {
 
 /* =====================================================================
    9. SHOP BY CATEGORY
-   Home no longer hardcodes individual products — the storefront's
+   Home no longer hardcodes individual products - the storefront's
    product catalogue will be managed entirely from the admin dashboard
    (see /admin/products), so only stable category-level content lives
    here. Category tiles are static HTML (works with no JS); if
@@ -822,16 +815,14 @@ input:focus-visible {
   z-index: 1;
 }
 .c-category-tile__icon {
-  width: 52px;
-  height: 52px;
-  border-radius: var(--radius-md);
-  background: var(--color-blue-tint);
-  color: var(--color-blue);
-  display: grid;
-  place-items: center;
+  display: block;
+  font-family: var(--font-serif);
+  font-size: var(--text-2xl);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--color-sage);
   margin-bottom: var(--space-5);
 }
-.c-category-tile__icon svg { width: 24px; height: 24px; }
 /* Full-bleed photo header for tiles whose category has an admin-uploaded
    image (categories.image_url). Falls back to the icon chip otherwise. */
 .c-category-tile--photo { overflow: hidden; }
@@ -871,7 +862,7 @@ input:focus-visible {
 .c-category-tile__link:hover::after { transform: translate(2px, -2px); }
 
 /* =====================================================================
-   10. WHY NICHECHEMS — two principles, asymmetric editorial layout.
+   10. WHY NICHECHEMS - two principles, asymmetric editorial layout.
    Deliberately not a centered icon-card grid: a lead statement on the
    left, numbered claims on the right, no decorative icons. Every claim
    here maps to something the catalogue actually shows.
@@ -1106,7 +1097,7 @@ input:focus-visible {
 <a class="c-skip-link" href="#main-content">Skip to main content</a>
 
 <!-- =====================================================================
-     TOP UTILITY BAR — reinforces compliance posture site-wide
+     TOP UTILITY BAR - reinforces compliance posture site-wide
      ===================================================================== -->
 <div class="c-top-bar">
   <div class="l-container c-top-bar__inner">
@@ -1190,7 +1181,7 @@ input:focus-visible {
               d="M24 188 L64 187 L80 64 L98 186 L128 185 L148 100 L172 184 L210 183 L236 42 L264 182 L306 182 L326 120 L348 180 L384 179" />
           </svg>
           <div class="c-hero__specimen-caption">
-            <span>Fig. 01 — Reference assay</span>
+            <span>Fig. 01 - Reference assay</span>
             <span>NC · HPLC</span>
           </div>
         </div>
@@ -1201,7 +1192,7 @@ input:focus-visible {
   <!-- ===================================================================
        SHOP BY CATEGORY
        Individual products are managed from the admin dashboard, not
-       hard-coded here — see /js/products-data.js for the single source
+       hard-coded here - see /js/products-data.js for the single source
        of truth these category counts are synced from.
        =================================================================== -->
   <section class="l-section l-section--alt" aria-labelledby="categories-heading">
@@ -1218,9 +1209,7 @@ input:focus-visible {
       <ul class="c-category-grid" id="category-grid">
         <li class="c-category-tile" data-category="reference-standards">
           <span class="c-category-tile__count" data-category-count="reference-standards">2 items</span>
-          <span class="c-category-tile__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><path d="m9.8 10.2-3-2.7M14.2 10.2l3-2.7M9.8 13.8l-3 2.7M14.2 13.8l3 2.7"/></svg>
-          </span>
+          <span class="c-category-tile__icon" aria-hidden="true">R</span>
           <h3 class="c-category-tile__name">Reference Standards</h3>
           <p class="c-category-tile__desc">Certified single-analyte standards for calibration and QC.</p>
           <a class="c-category-tile__link" href="catalogue/index.html?category=reference-standards">Browse category</a>
@@ -1228,9 +1217,7 @@ input:focus-visible {
 
         <li class="c-category-tile" data-category="isotope-labeled">
           <span class="c-category-tile__count" data-category-count="isotope-labeled">2 items</span>
-          <span class="c-category-tile__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 15 0 0 1 0 18a9 15 0 0 1 0-18Z"/><path d="M3 12h18"/></svg>
-          </span>
+          <span class="c-category-tile__icon" aria-hidden="true">I</span>
           <h3 class="c-category-tile__name">Isotope-Labeled Standards</h3>
           <p class="c-category-tile__desc">Stable-isotope internal standards for LC-MS/MS and GC-MS workflows.</p>
           <a class="c-category-tile__link" href="catalogue/index.html?category=isotope-labeled">Browse category</a>
@@ -1238,9 +1225,7 @@ input:focus-visible {
 
         <li class="c-category-tile" data-category="chromatography">
           <span class="c-category-tile__count" data-category-count="chromatography">2 items</span>
-          <span class="c-category-tile__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v9.5a3 3 0 0 0 .9 2.1l3.1 3.1"/><path d="M18 3v9.5a3 3 0 0 1-.9 2.1l-3.1 3.1"/><path d="M4 3h6M14 3h6"/><path d="M10 21h4"/></svg>
-          </span>
+          <span class="c-category-tile__icon" aria-hidden="true">C</span>
           <h3 class="c-category-tile__name">Chromatography Standards</h3>
           <p class="c-category-tile__desc">Multi-component mixes for HPLC and GC method validation.</p>
           <a class="c-category-tile__link" href="catalogue/index.html?category=chromatography">Browse category</a>
@@ -1248,9 +1233,7 @@ input:focus-visible {
 
         <li class="c-category-tile" data-category="buffers">
           <span class="c-category-tile__count" data-category-count="buffers">2 items</span>
-          <span class="c-category-tile__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6v6.4l4.3 9a2 2 0 0 1-1.8 2.6H6.5a2 2 0 0 1-1.8-2.6l4.3-9V2Z"/><path d="M8 15h8"/></svg>
-          </span>
+          <span class="c-category-tile__icon" aria-hidden="true">B</span>
           <h3 class="c-category-tile__name">Buffers &amp; Calibration</h3>
           <p class="c-category-tile__desc">Traceable pH and conductivity calibration solutions.</p>
           <a class="c-category-tile__link" href="catalogue/index.html?category=buffers">Browse category</a>
@@ -1258,9 +1241,7 @@ input:focus-visible {
 
         <li class="c-category-tile" data-category="solvents">
           <span class="c-category-tile__count" data-category-count="solvents">1 item</span>
-          <span class="c-category-tile__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6.5L6.5 18a3.2 3.2 0 0 0 2.8 4.8h5.4A3.2 3.2 0 0 0 17.5 18L12 8.5"/><path d="M9 15h6"/></svg>
-          </span>
+          <span class="c-category-tile__icon" aria-hidden="true">S</span>
           <h3 class="c-category-tile__name">Solvents &amp; Chemicals</h3>
           <p class="c-category-tile__desc">High-purity anhydrous solvents for sample prep and extraction.</p>
           <a class="c-category-tile__link" href="catalogue/index.html?category=solvents">Browse category</a>
@@ -1268,9 +1249,7 @@ input:focus-visible {
 
         <li class="c-category-tile" data-category="forensic">
           <span class="c-category-tile__count" data-category-count="forensic">1 item</span>
-          <span class="c-category-tile__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 4v16"/></svg>
-          </span>
+          <span class="c-category-tile__icon" aria-hidden="true">F</span>
           <h3 class="c-category-tile__name">Forensic Reference Panels</h3>
           <p class="c-category-tile__desc">Multi-analyte panels for forensic toxicology screening.</p>
           <a class="c-category-tile__link" href="catalogue/index.html?category=forensic">Browse category</a>
@@ -1280,14 +1259,14 @@ input:focus-visible {
   </section>
 
   <!-- ===================================================================
-       WHY NICHECHEMS — two principles, no icon-card grid
+       WHY NICHECHEMS - two principles, no icon-card grid
        =================================================================== -->
   <section class="l-section c-principles" aria-labelledby="why-heading">
     <div class="l-container c-principles__inner">
       <div class="c-principles__lead">
         <span class="c-eyebrow">Why NicheChems</span>
         <h2 id="why-heading">Two things we don&rsquo;t compromise on.</h2>
-        <p class="c-principles__lead-note">Everything else &mdash; packaging, sourcing, support &mdash; follows from these.</p>
+        <p class="c-principles__lead-note">Everything else - packaging, sourcing, support - follows from these.</p>
       </div>
 
       <ol class="c-principles__list">
@@ -1295,7 +1274,7 @@ input:focus-visible {
           <span class="c-principle__index" aria-hidden="true">01</span>
           <div class="c-principle__body">
             <h3>Purity is measured, not marketed.</h3>
-            <p>Every listing shows the tested purity and the exact packaging format for that lot. The figure you read on the page is the figure on the vial &mdash; not a category average or a rounded-up claim.</p>
+            <p>Every listing shows the tested purity and the exact packaging format for that lot. The figure you read on the page is the figure on the vial - not a category average or a rounded-up claim.</p>
           </div>
         </li>
         <li class="c-principle">
@@ -1499,7 +1478,7 @@ input:focus-visible {
         var count = products.filter(function (p) { return p.category === cat.id; }).length;
         var visual = cat.imageUrl
           ? '<img class="c-category-tile__photo" src="' + esc(cat.imageUrl) + '" alt="" loading="lazy">'
-          : '<span class="c-category-tile__icon" aria-hidden="true">' + (icons[cat.icon] || icons.flask || "") + "</span>";
+          : '<span class="c-category-tile__icon" aria-hidden="true">' + esc(String(cat.label || "").trim().charAt(0).toUpperCase()) + "</span>";
         return (
           '<li class="c-category-tile' + (cat.imageUrl ? " c-category-tile--photo" : "") + '" data-category="' + esc(cat.id) + '">' +
             '<span class="c-category-tile__count">' + count + (count === 1 ? " item" : " items") + "</span>" +
@@ -1520,7 +1499,7 @@ input:focus-visible {
   /* -- Hero slideshow: swaps the static flask graphic for a carousel of
      live products (image if the admin dashboard set one, else the
      product's category icon), once data loads. Left untouched on
-     failure/empty catalogue — see the CSS comment above .c-hero-slideshow. */
+     failure/empty catalogue - see the CSS comment above .c-hero-slideshow. */
   (function heroSlideshow() {
     var visual = document.getElementById("hero-visual");
     var flaskWrap = document.getElementById("hero-flask-wrap");
@@ -1551,7 +1530,7 @@ input:focus-visible {
         var iconWrap = document.createElement("span");
         iconWrap.className = "c-hero-slideshow__media c-hero-slideshow__media--icon";
         iconWrap.setAttribute("aria-hidden", "true");
-        iconWrap.innerHTML = iconFor(categories, product.category);
+        iconWrap.textContent = String(product.name || "").trim().charAt(0).toUpperCase();
         link.appendChild(iconWrap);
       }
 

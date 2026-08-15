@@ -13,7 +13,7 @@
 
 <!--
   Auth model: this page checks for a valid Supabase session AND admin_users
-  membership (via the is_admin() RPC) before showing any content — see
+  membership (via the is_admin() RPC) before showing any content - see
   requireAdmin() in the script below. That check is UX only, not the real
   security boundary: every insert/update/delete here goes straight to
   Supabase and is actually enforced by the RLS policies in
@@ -175,7 +175,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 .c-row-actions { display: flex; gap: var(--space-2); }
 
-/* -- Dialogs (native <dialog> — handles focus-trap/backdrop/Esc for us) --*/
+/* -- Dialogs (native <dialog> - handles focus-trap/backdrop/Esc for us) --*/
 dialog.c-dialog {
   border: none; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); padding: 0;
   width: min(94vw, 36rem); max-height: 88vh; overflow-y: auto;
@@ -247,11 +247,11 @@ dialog.c-dialog::backdrop { background: rgba(32, 39, 34, 0.55); }
     <div class="l-container">
 
       <div class="c-stats-grid">
-        <div class="c-stat-card"><div class="c-stat-card__value" id="stat-products">—</div><div class="c-stat-card__label">Products</div></div>
-        <div class="c-stat-card"><div class="c-stat-card__value" id="stat-categories">—</div><div class="c-stat-card__label">Categories</div></div>
-        <div class="c-stat-card"><div class="c-stat-card__value" id="stat-lowstock">—</div><div class="c-stat-card__label">Low Stock</div></div>
-        <div class="c-stat-card"><div class="c-stat-card__value" id="stat-inactive">—</div><div class="c-stat-card__label">Hidden / Inactive</div></div>
-        <div class="c-stat-card"><div class="c-stat-card__value" id="stat-pending-orders">—</div><div class="c-stat-card__label">Orders Awaiting Payment</div></div>
+        <div class="c-stat-card"><div class="c-stat-card__value" id="stat-products">-</div><div class="c-stat-card__label">Products</div></div>
+        <div class="c-stat-card"><div class="c-stat-card__value" id="stat-categories">-</div><div class="c-stat-card__label">Categories</div></div>
+        <div class="c-stat-card"><div class="c-stat-card__value" id="stat-lowstock">-</div><div class="c-stat-card__label">Low Stock</div></div>
+        <div class="c-stat-card"><div class="c-stat-card__value" id="stat-inactive">-</div><div class="c-stat-card__label">Hidden / Inactive</div></div>
+        <div class="c-stat-card"><div class="c-stat-card__value" id="stat-pending-orders">-</div><div class="c-stat-card__label">Orders Awaiting Payment</div></div>
       </div>
 
       <section class="c-admin-section">
@@ -556,7 +556,7 @@ dialog.c-dialog::backdrop { background: rgba(32, 39, 34, 0.55); }
   var state = { categories: [], products: [], orders: [], search: "", orderStatusFilter: "all" };
 
   // Image upload for the product dialog is staged client-side (pendingImageFile)
-  // and only actually uploaded to Supabase Storage on save — avoids orphaned
+  // and only actually uploaded to Supabase Storage on save - avoids orphaned
   // files in the bucket if the admin picks an image then cancels the dialog.
   var pendingImageFile = null;
   var currentImageUrl = null;
@@ -605,7 +605,7 @@ dialog.c-dialog::backdrop { background: rgba(32, 39, 34, 0.55); }
   });
 
   // -----------------------------------------------------------------
-  // Auth guard — see the top-of-file comment: this is UX, RLS is the
+  // Auth guard - see the top-of-file comment: this is UX, RLS is the
   // real boundary.
   // -----------------------------------------------------------------
   async function requireAdmin() {
@@ -694,7 +694,7 @@ dialog.c-dialog::backdrop { background: rgba(32, 39, 34, 0.55); }
 
   function categoryLabel(id) {
     var match = state.categories.filter(function (c) { return c.id === id; })[0];
-    return match ? match.label : (id || "—");
+    return match ? match.label : (id || "-");
   }
 
   // -----------------------------------------------------------------
@@ -1240,7 +1240,7 @@ dialog.c-dialog::backdrop { background: rgba(32, 39, 34, 0.55); }
     tbody.innerHTML = filtered.map(function (o) {
       var ref = o.id.slice(0, 8).toUpperCase();
       var date = new Date(o.created_at).toLocaleDateString();
-      var eth = o.eth_amount != null ? Number(o.eth_amount).toFixed(6) + " ETH" : "—";
+      var eth = o.eth_amount != null ? Number(o.eth_amount).toFixed(6) + " ETH" : "-";
       return (
         "<tr>" +
           "<td>" + ref + "</td>" +
