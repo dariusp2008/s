@@ -88,4 +88,8 @@
 a.c-logo {
   font-family: "Bayside", var(--font-serif), Georgia, serif;
   letter-spacing: 0.04em;
+  font-size: 1.6rem;
 }
+/* .c-header .c-logo (two classes) out-specifies a.c-logo, so match it to
+   push the header wordmark bigger and crisper. */
+.c-header a.c-logo { font-size: 2rem; }
