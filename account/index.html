@@ -69,7 +69,7 @@
   --text-xl:   clamp(1.75rem, 1.4rem + 1.4vw, 2.375rem);
   --text-2xl:  clamp(2.25rem, 1.7rem + 2.4vw, 3.375rem);
 
-  --leading-tight: 1.15;
+  --leading-tight: 1.08;
   --leading-normal: 1.6;
 
   --space-1: 0.25rem;
@@ -130,6 +130,7 @@ h1, h2, h3, h4 {
   font-weight: 500;
   line-height: var(--leading-tight);
   color: var(--color-forest);
+  letter-spacing: -0.012em;
   text-wrap: balance;
 }
 
@@ -174,8 +175,8 @@ a:focus-visible, button:focus-visible, input:focus-visible {
    ===================================================================== */
 .c-btn {
   display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
-  padding: 0.9rem 1.75rem; border-radius: var(--radius-md); font-size: var(--text-sm); font-weight: 600;
-  letter-spacing: 0.01em; width: 100%;
+  padding: 0.9rem 1.75rem; border-radius: 2px; font-size: var(--text-sm); font-weight: 600;
+  letter-spacing: 0.02em; width: 100%;
   transition: transform var(--duration-base) var(--ease-organic), box-shadow var(--duration-base) var(--ease-organic),
               background-color var(--duration-fast) var(--ease-soft), color var(--duration-fast) var(--ease-soft),
               opacity var(--duration-fast) var(--ease-soft);

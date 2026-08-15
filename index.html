@@ -96,7 +96,7 @@
   --text-2xl:  clamp(2.25rem, 1.7rem + 2.4vw, 3.375rem);
   --text-3xl:  clamp(2.75rem, 1.95rem + 3.4vw, 4.5rem);
 
-  --leading-tight: 1.15;
+  --leading-tight: 1.08;
   --leading-snug:  1.35;
   --leading-normal: 1.6;
 
@@ -170,6 +170,7 @@ h1, h2, h3, h4 {
   font-weight: 500;
   line-height: var(--leading-tight);
   color: var(--color-forest);
+  letter-spacing: -0.012em;
   text-wrap: balance;
 }
 
@@ -302,10 +303,10 @@ input:focus-visible {
   justify-content: center;
   gap: var(--space-2);
   padding: 0.9rem 1.75rem;
-  border-radius: var(--radius-md);
+  border-radius: 2px;
   font-size: var(--text-sm);
   font-weight: 600;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
   transition: transform var(--duration-base) var(--ease-organic),
               box-shadow var(--duration-base) var(--ease-organic),
               background-color var(--duration-fast) var(--ease-soft),
@@ -1339,16 +1340,6 @@ input:focus-visible {
         Niche<span class="c-logo__word-alt">Chems</span>
       </a>
       <p>Research chemicals and certified reference materials for verified research professionals. Research use only.</p>
-
-      <form class="c-footer__newsletter" id="newsletter-form">
-        <label for="newsletter-email">Laboratory bulletin</label>
-        <div class="c-footer__newsletter-row">
-          <label class="u-visually-hidden" for="newsletter-email">Email address</label>
-          <input type="email" id="newsletter-email" name="email" placeholder="you@institution.edu" autocomplete="email" required>
-          <button class="c-btn c-btn--primary c-btn--sm" type="submit">Subscribe</button>
-        </div>
-        <p class="c-footer__newsletter-note" id="newsletter-note" role="status" aria-live="polite"></p>
-      </form>
     </div>
 
     <div class="c-footer__col">
@@ -1365,9 +1356,8 @@ input:focus-visible {
       <h3>Resources</h3>
       <ul>
         <li><a href="about/index.html">About Us</a></li>
+        <li><a href="contact/index.html">Contact</a></li>
         <li><a href="#contact">Safety Data Sheets</a></li>
-        <li><a href="#contact">Shipping &amp; Handling Policy</a></li>
-        <li><a href="#contact">Research Use Policy</a></li>
       </ul>
     </div>
 
@@ -1675,20 +1665,6 @@ input:focus-visible {
     });
   }
   revealCategoryTiles();
-
-  /* -- Newsletter form: no backend yet, so this just confirms locally.
-     Nothing is actually stored/sent — purely a UI acknowledgment. ----- */
-  var newsletterForm = document.getElementById("newsletter-form");
-  var newsletterNote = document.getElementById("newsletter-note");
-  var newsletterEmail = document.getElementById("newsletter-email");
-  var newsletterBtn = newsletterForm.querySelector("button[type=submit]");
-  newsletterForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-    newsletterNote.textContent = "You're subscribed. Thanks for joining the bulletin.";
-    newsletterEmail.disabled = true;
-    newsletterBtn.disabled = true;
-    newsletterBtn.textContent = "Subscribed";
-  });
 })();
 </script>
 </body>

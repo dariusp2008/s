@@ -74,7 +74,7 @@
   --text-2xl:  clamp(2.25rem, 1.7rem + 2.4vw, 3.375rem);
   --text-3xl:  clamp(2.75rem, 1.95rem + 3.4vw, 4.5rem);
 
-  --leading-tight: 1.15;
+  --leading-tight: 1.08;
   --leading-snug:  1.35;
   --leading-normal: 1.6;
 
@@ -137,6 +137,7 @@ h1, h2, h3, h4 {
   font-weight: 500;
   line-height: var(--leading-tight);
   color: var(--color-forest);
+  letter-spacing: -0.012em;
   text-wrap: balance;
 }
 
@@ -219,10 +220,10 @@ input:focus-visible {
   justify-content: center;
   gap: var(--space-2);
   padding: 0.9rem 1.75rem;
-  border-radius: var(--radius-md);
+  border-radius: 2px;
   font-size: var(--text-sm);
   font-weight: 600;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
   transition: transform var(--duration-base) var(--ease-organic),
               box-shadow var(--duration-base) var(--ease-organic),
               background-color var(--duration-fast) var(--ease-soft),
@@ -448,9 +449,10 @@ input:focus-visible {
    or category icon — keeps card heights aligned. */
 .c-product-card__media {
   aspect-ratio: 4 / 3; margin-bottom: var(--space-5);
-  border-radius: var(--radius-md); overflow: hidden;
+  border-radius: var(--radius-sm); overflow: hidden;
   display: grid; place-items: center;
-  background-color: var(--color-blue-tint);
+  background-color: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
 }
 .c-product-card__media img { width: 100%; height: 100%; object-fit: cover; }
 .c-product-card__media-icon { color: var(--color-blue); display: grid; place-items: center; }
