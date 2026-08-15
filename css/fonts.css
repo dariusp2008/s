@@ -72,29 +72,28 @@
   font-display: swap;
 }
 
-/* Bayside (Indieground Design) for the NicheChems wordmark only.
-   NOTE: this is the DEMO cut, licensed for PERSONAL USE ONLY — a
-   commercial license is required from indieground.net for a live store. */
+/* Archivo Black for the NicheChems wordmark only — a hinted TrueType
+   display face (SIL Open Font License, commercial-safe) that renders
+   crisp on Windows, unlike the previous unhinted OTF. */
 @font-face {
-  font-family: "Bayside";
-  src: url("/bayside/BaysideFont-Regular-Demo.otf") format("opentype");
+  font-family: "Archivo Black";
+  src: url("/fonts/ArchivoBlack-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 /* a.c-logo out-specifies each page's inline `.c-logo { font-family }` rule,
-   so the wordmark picks up Bayside site-wide without editing every file. */
+   so the wordmark picks up Archivo Black site-wide without editing every file. */
 a.c-logo {
-  font-family: "Bayside", var(--font-serif), Georgia, serif;
-  letter-spacing: 0.04em;
-  font-size: 2.6rem;
+  font-family: "Archivo Black", var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  font-size: 1.3rem;
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
-/* .c-header .c-logo (two classes) out-specifies a.c-logo, so match it to
-   push the header wordmark bigger and crisper (the demo OTF renders soft
-   at small sizes on Windows; scaling it up sharpens it). */
-.c-header a.c-logo { font-size: 3.6rem; }
+/* .c-header .c-logo (two classes) out-specifies a.c-logo, so match it. */
+.c-header a.c-logo { font-size: 1.6rem; }
