@@ -71,3 +71,21 @@
   font-style: normal;
   font-display: swap;
 }
+
+/* Bayside (Indieground Design) for the NicheChems wordmark only.
+   NOTE: this is the DEMO cut, licensed for PERSONAL USE ONLY — a
+   commercial license is required from indieground.net for a live store. */
+@font-face {
+  font-family: "Bayside";
+  src: url("/bayside/BaysideFont-Regular-Demo.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* a.c-logo out-specifies each page's inline `.c-logo { font-family }` rule,
+   so the wordmark picks up Bayside site-wide without editing every file. */
+a.c-logo {
+  font-family: "Bayside", var(--font-serif), Georgia, serif;
+  letter-spacing: 0.04em;
+}
