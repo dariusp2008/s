@@ -521,22 +521,27 @@ input:focus-visible {
    CTA BAND
    ===================================================================== */
 .c-cta-band {
-  position: relative;
-  overflow: hidden;
   border-radius: var(--radius-lg);
   margin-inline: var(--space-5);
-  padding: var(--space-9) var(--space-6);
-  text-align: center;
+  padding: var(--space-8) var(--space-6);
+  background: var(--color-blue);
+  color: var(--color-on-blue);
+  display: grid;
+  gap: var(--space-6);
 }
-@media (min-width: 700px) { .c-cta-band { margin-inline: var(--space-7); padding: var(--space-10) var(--space-9); } }
-.c-cta-band::before {
-  content: ""; position: absolute; bottom: -30%; left: -6%; width: 320px; height: 320px;
-  background: rgba(255, 255, 255, 0.08); border-radius: var(--radius-blob);
+@media (min-width: 800px) {
+  .c-cta-band {
+    margin-inline: var(--space-7);
+    padding: var(--space-9);
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: var(--space-9);
+  }
 }
-.c-cta-band__inner { position: relative; z-index: 1; max-width: 40rem; margin-inline: auto; }
-.c-cta-band h2 { color: var(--color-on-blue); font-size: var(--text-xl); margin-bottom: var(--space-4); }
-.c-cta-band p { color: rgba(251, 251, 248, 0.85); font-size: var(--text-md); margin-bottom: var(--space-7); }
-.c-cta-band__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-4); }
+.c-cta-band__inner { max-width: 46rem; }
+.c-cta-band h2 { color: var(--color-on-blue); font-size: var(--text-xl); letter-spacing: -0.01em; margin-bottom: var(--space-3); }
+.c-cta-band p { color: rgba(251, 251, 248, 0.82); margin-bottom: 0; max-width: 48ch; }
+.c-cta-band__actions { display: flex; flex-wrap: wrap; gap: var(--space-4); }
 
 /* =====================================================================
    FOOTER
@@ -684,13 +689,13 @@ input:focus-visible {
        CTA BAND
        =================================================================== -->
   <section class="l-section">
-    <div class="c-cta-band l-section--blue">
+    <div class="c-cta-band">
       <div class="c-cta-band__inner">
         <h2>Can't find what you need?</h2>
         <p>Our team can source additional reference materials and custom panels for qualified research institutions.</p>
-        <div class="c-cta-band__actions">
-          <a class="c-btn c-btn--on-blue" href="#contact">Contact Our Team</a>
-        </div>
+      </div>
+      <div class="c-cta-band__actions">
+        <a class="c-btn c-btn--on-blue" href="#contact">Contact Our Team</a>
       </div>
     </div>
   </section>

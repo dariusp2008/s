@@ -232,13 +232,12 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2.5px soli
 .c-guide-step li { font-size: var(--text-sm); color: var(--color-ink-soft); padding-left: var(--space-5); position: relative; }
 .c-guide-step li::before { content: "\2022"; position: absolute; left: var(--space-1); color: var(--color-blue); font-weight: 700; }
 
-.c-cta-band { position: relative; overflow: hidden; border-radius: var(--radius-lg); margin-inline: var(--space-5); padding: var(--space-9) var(--space-6); text-align: center; }
-@media (min-width: 700px) { .c-cta-band { margin-inline: var(--space-7); padding: var(--space-10) var(--space-9); } }
-.c-cta-band::before { content: ""; position: absolute; bottom: -30%; left: -6%; width: 320px; height: 320px; background: rgba(255, 255, 255, 0.08); border-radius: var(--radius-blob); }
-.c-cta-band__inner { position: relative; z-index: 1; max-width: 40rem; margin-inline: auto; }
-.c-cta-band h2 { color: var(--color-on-blue); font-size: var(--text-xl); margin-bottom: var(--space-4); }
-.c-cta-band p { color: rgba(251, 251, 248, 0.85); font-size: var(--text-md); margin-bottom: var(--space-7); }
-.c-cta-band__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-4); }
+.c-cta-band { border-radius: var(--radius-lg); margin-inline: var(--space-5); padding: var(--space-8) var(--space-6); background: var(--color-blue); color: var(--color-on-blue); display: grid; gap: var(--space-6); }
+@media (min-width: 800px) { .c-cta-band { margin-inline: var(--space-7); padding: var(--space-9); grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: var(--space-9); } }
+.c-cta-band__inner { max-width: 46rem; }
+.c-cta-band h2 { color: var(--color-on-blue); font-size: var(--text-xl); letter-spacing: -0.01em; margin-bottom: var(--space-3); }
+.c-cta-band p { color: rgba(251, 251, 248, 0.82); margin-bottom: 0; max-width: 48ch; }
+.c-cta-band__actions { display: flex; flex-wrap: wrap; gap: var(--space-4); }
 
 /* -- Footer — identical to catalogue/index.html -- */
 .c-footer { background: var(--color-forest); color: rgba(251, 251, 248, 0.88); }
@@ -420,14 +419,14 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2.5px soli
        CTA BAND
        =================================================================== -->
   <section class="l-section">
-    <div class="c-cta-band l-section--blue">
+    <div class="c-cta-band">
       <div class="c-cta-band__inner">
         <h2>Ready to order?</h2>
         <p>Browse research chemicals and certified reference materials, or reach out if you need help with your first crypto payment.</p>
-        <div class="c-cta-band__actions">
-          <a class="c-btn c-btn--on-blue" href="../catalogue/index.html">Browse Catalogue</a>
-          <a class="c-btn c-btn--ghost" style="color: var(--color-on-blue); border-color: rgba(251,251,248,0.35);" href="#contact">Contact Our Team</a>
-        </div>
+      </div>
+      <div class="c-cta-band__actions">
+        <a class="c-btn c-btn--on-blue" href="../catalogue/index.html">Browse Catalogue</a>
+        <a class="c-btn c-btn--ghost" style="color: var(--color-on-blue); border-color: rgba(251,251,248,0.35);" href="#contact">Contact Our Team</a>
       </div>
     </div>
   </section>
