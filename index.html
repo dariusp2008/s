@@ -412,8 +412,8 @@ input:focus-visible {
 
 /* Header logo reads bigger than the footer one - this is the primary
    brand mark on the page, footer's is secondary. */
-.c-header .c-logo { font-size: 1.4rem; }
-.c-header .c-logo__mark { width: 64px; height: 64px; }
+.c-header .c-logo { font-size: 1.25rem; }
+.c-header .c-logo__mark { width: 44px; height: 44px; }
 .c-nav {
   display: none;
 }
@@ -806,8 +806,7 @@ input:focus-visible {
   display: inline-flex;
   align-items: center;
   gap: var(--space-1);
-  padding-top: var(--space-5);
-  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-4);
 }
 .c-category-tile__link::after { content: "\2197"; transition: transform var(--duration-fast) var(--ease-soft); }
 .c-category-tile__link:hover::after { transform: translate(2px, -2px); }
@@ -1422,13 +1421,15 @@ input:focus-visible {
         window.NicheChemsData.fetchCategories(),
         window.NicheChemsData.fetchProducts()
       ]);
-      var categories = results[0].filter(function (c) { return c.showOnHome !== false; });
       var products = results[1];
-      var icons = window.NICHECHEMS_ICONS || {};
+      function countFor(cat) { return products.filter(function (p) { return p.category === cat.id; }).length; }
+      // Only surface categories that are flagged for home AND actually have
+      // stock, so empty "0 items" tiles never show.
+      var categories = results[0].filter(function (c) { return c.showOnHome !== false && countFor(c) > 0; });
       if (!categories.length) return;
 
       grid.innerHTML = categories.map(function (cat) {
-        var count = products.filter(function (p) { return p.category === cat.id; }).length;
+        var count = countFor(cat);
         var visual = cat.imageUrl
           ? '<img class="c-category-tile__photo" src="' + esc(cat.imageUrl) + '" alt="" loading="lazy">'
           : '<span class="c-category-tile__icon" aria-hidden="true">' + esc(String(cat.label || "").trim().charAt(0).toUpperCase()) + "</span>";

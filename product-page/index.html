@@ -196,8 +196,8 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .c-logo__mark { display: grid; place-items: center; width: 38px; height: 38px; border-radius: var(--radius-md); background: var(--color-blue); color: var(--color-on-blue); flex-shrink: 0; overflow: hidden; }
 .c-logo__mark img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
 .c-logo__word-alt { color: var(--color-blue); }
-.c-header .c-logo { font-size: 1.4rem; }
-.c-header .c-logo__mark { width: 64px; height: 64px; }
+.c-header .c-logo { font-size: 1.25rem; }
+.c-header .c-logo__mark { width: 44px; height: 44px; }
 .c-nav { display: none; }
 .c-nav__list { display: flex; align-items: center; gap: var(--space-7); font-size: var(--text-sm); font-weight: 500; }
 .c-nav__list a { position: relative; padding-block: var(--space-2); color: var(--color-ink-soft); transition: color var(--duration-fast) var(--ease-soft); }
@@ -300,6 +300,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   display: grid; place-items: center;
   background-color: var(--color-bg-alt);
   border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
 }
 .c-product-visual__photo { width: 100%; height: 100%; object-fit: cover; }
 .c-product-visual__icon { font-family: var(--font-serif); font-weight: 300; font-size: clamp(4rem, 3rem + 6vw, 7rem); line-height: 1; color: var(--color-sage); }
@@ -345,9 +346,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .c-cart-status { font-size: var(--text-sm); color: var(--color-moss); font-weight: 600; min-height: 1.3em; margin-bottom: var(--space-6); }
 
 .c-spec-table { width: 100%; border-collapse: collapse; margin-bottom: var(--space-8); }
-.c-spec-table tr { border-bottom: 1px solid var(--color-border); }
-.c-spec-table tr:last-child { border-bottom: none; }
-.c-spec-table th, .c-spec-table td { text-align: left; padding: var(--space-3) var(--space-4) var(--space-3) 0; font-size: var(--text-sm); vertical-align: top; }
+.c-spec-table th, .c-spec-table td { text-align: left; padding: var(--space-2) var(--space-4) var(--space-2) 0; font-size: var(--text-sm); vertical-align: top; }
 .c-spec-table th { color: var(--color-ink-faint); font-weight: 600; width: 40%; }
 .c-spec-table td { color: var(--color-ink); }
 
