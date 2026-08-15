@@ -52,8 +52,8 @@
 :root {
   /* -- Color: 70% off-white / ivory / cool-gray neutrals ---------------- */
   --color-bg:          #FAF9F6; /* alabaster - primary page background */
-  --color-bg-alt:      #F2F0EA; /* soft ivory - alternating section bg */
-  --color-bg-cool:     #EFF2F0; /* very light cool gray - botanical sections */
+  --color-bg-alt:      #EFEADF; /* soft ivory - alternating section bg */
+  --color-bg-cool:     #E7EEE7; /* very light cool gray - botanical sections */
   --color-surface:     #FFFFFF; /* card / raised surface */
   --color-border:      #E4E1D8; /* hairline borders on ivory */
   --color-border-cool: #DCE3DE;
@@ -634,6 +634,7 @@ input:focus-visible {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   overflow: hidden;
+  box-shadow: var(--shadow-md);
   transition: transform var(--duration-base) var(--ease-organic),
               box-shadow var(--duration-base) var(--ease-organic);
 }
@@ -741,6 +742,7 @@ input:focus-visible {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
   transition: transform var(--duration-base) var(--ease-organic),
               box-shadow var(--duration-base) var(--ease-organic),
               border-color var(--duration-base) var(--ease-soft);
@@ -1210,7 +1212,7 @@ input:focus-visible {
   <!-- ===================================================================
        WHY NICHECHEMS - two principles, no icon-card grid
        =================================================================== -->
-  <section class="l-section c-principles" aria-labelledby="why-heading">
+  <section class="l-section l-section--cool c-principles" aria-labelledby="why-heading">
     <div class="l-container c-principles__inner">
       <div class="c-principles__lead">
         <span class="c-eyebrow">Why NicheChems</span>

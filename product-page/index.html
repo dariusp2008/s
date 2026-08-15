@@ -19,8 +19,8 @@
    1 comment for the color-ratio / contrast rationale. */
 :root {
   --color-bg:          #FAF9F6;
-  --color-bg-alt:      #F2F0EA;
-  --color-bg-cool:     #EFF2F0;
+  --color-bg-alt:      #EFEADF;
+  --color-bg-cool:     #E7EEE7;
   --color-surface:     #FFFFFF;
   --color-border:      #E4E1D8;
   --color-border-cool: #DCE3DE;
@@ -370,6 +370,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .c-product-card {
   position: relative; display: flex; flex-direction: column; background: var(--color-surface);
   border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
   transition: transform var(--duration-base) var(--ease-organic), box-shadow var(--duration-base) var(--ease-organic), border-color var(--duration-base) var(--ease-soft);
 }
 .c-product-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: transparent; }
