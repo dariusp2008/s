@@ -870,50 +870,54 @@ input:focus-visible {
 .c-category-tile__link:hover::after { transform: translate(2px, -2px); }
 
 /* =====================================================================
-   10. WHY NICHECHEMS (value props)
+   10. WHY NICHECHEMS — two principles, asymmetric editorial layout.
+   Deliberately not a centered icon-card grid: a lead statement on the
+   left, numbered claims on the right, no decorative icons. Every claim
+   here maps to something the catalogue actually shows.
    ===================================================================== */
-.c-value-grid {
+.c-principles__inner {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-7);
+  gap: var(--space-8);
 }
-@media (min-width: 700px) {
-  .c-value-grid { grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 900px) {
+  .c-principles__inner {
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+    column-gap: var(--space-10);
+    align-items: start;
+  }
+  .c-principles__lead { position: sticky; top: calc(var(--header-h) + var(--space-6)); }
 }
-@media (min-width: 1100px) {
-  .c-value-grid { grid-template-columns: repeat(4, 1fr); }
-}
-.c-value-card {
-  position: relative;
-  padding-top: var(--space-6);
-}
-.c-value-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 40px;
-  height: 3px;
-  background: var(--color-sage);
-  border-radius: var(--radius-pill);
-}
-.c-value-card__icon {
-  width: 50px;
-  height: 50px;
-  border-radius: var(--radius-md);
-  background: var(--color-green-tint);
-  color: var(--color-forest);
-  display: grid;
-  place-items: center;
+.c-principles__lead h2 {
+  font-size: var(--text-2xl);
+  line-height: 1.04;
+  letter-spacing: -0.015em;
   margin-bottom: var(--space-5);
 }
-.c-value-card h3 {
+.c-principles__lead-note {
+  color: var(--color-ink-soft);
+  max-width: 32ch;
+}
+.c-principle {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-5);
+  padding-block: var(--space-7);
+}
+.c-principle + .c-principle { border-top: 1px solid var(--color-border); }
+.c-principle__index {
+  font-size: var(--text-xl);
+  font-weight: 300;
+  color: var(--color-sage);
+  line-height: 0.9;
+  font-variant-numeric: tabular-nums;
+}
+.c-principle__body h3 {
   font-size: var(--text-md);
   margin-bottom: var(--space-3);
 }
-.c-value-card p {
-  font-size: var(--text-sm);
+.c-principle__body p {
   color: var(--color-ink-soft);
+  max-width: 54ch;
 }
 
 /* =====================================================================
@@ -1278,46 +1282,32 @@ input:focus-visible {
   </section>
 
   <!-- ===================================================================
-       WHY NICHECHEMS
+       WHY NICHECHEMS — two principles, no icon-card grid
        =================================================================== -->
-  <section class="l-section" aria-labelledby="why-heading">
-    <div class="l-container">
-      <div class="c-section-head c-section-head--center">
+  <section class="l-section c-principles" aria-labelledby="why-heading">
+    <div class="l-container c-principles__inner">
+      <div class="c-principles__lead">
         <span class="c-eyebrow">Why NicheChems</span>
-        <h2 id="why-heading">What sets us apart</h2>
-        <p>Four principles guide how we source, document, and ship every material we carry.</p>
+        <h2 id="why-heading">Two things we don&rsquo;t compromise on.</h2>
+        <p class="c-principles__lead-note">Everything else &mdash; packaging, sourcing, support &mdash; follows from these.</p>
       </div>
 
-      <div class="c-value-grid">
-        <div class="c-value-card">
-          <span class="c-value-card__icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-          </span>
-          <h3>Scientific Precision</h3>
-          <p>Lot-tested materials with tight purity tolerances, so your baseline data stays reliable.</p>
-        </div>
-        <div class="c-value-card">
-          <span class="c-value-card__icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6.5v5C4 16.4 7.4 20.6 12 22c4.6-1.4 8-5.6 8-10.5v-5L12 3Z"/><path d="M9 12.2l2 2 4-4.4"/></svg>
-          </span>
-          <h3>Verified Compliance</h3>
-          <p>Institutional verification, restricted fulfillment, and documented chain of custody on every order.</p>
-        </div>
-        <div class="c-value-card">
-          <span class="c-value-card__icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-          </span>
-          <h3>Full Transparency</h3>
-          <p>Purity data, packaging, and specifications listed openly on every catalogue page.</p>
-        </div>
-        <div class="c-value-card">
-          <span class="c-value-card__icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4-2.4-6-6-6-9.6C6 7 8.7 4 12 4s6 3 6 7.4c0 3.6-2 7.2-6 9.6Z"/><path d="M12 11V4"/></svg>
-          </span>
-          <h3>Botanical-Inspired Sourcing</h3>
-          <p>Where possible, reference materials are sourced from renewable, plant-derived feedstocks.</p>
-        </div>
-      </div>
+      <ol class="c-principles__list">
+        <li class="c-principle">
+          <span class="c-principle__index" aria-hidden="true">01</span>
+          <div class="c-principle__body">
+            <h3>Purity is measured, not marketed.</h3>
+            <p>Every listing shows the tested purity and the exact packaging format for that lot. The figure you read on the page is the figure on the vial &mdash; not a category average or a rounded-up claim.</p>
+          </div>
+        </li>
+        <li class="c-principle">
+          <span class="c-principle__index" aria-hidden="true">02</span>
+          <div class="c-principle__body">
+            <h3>Access is gated before anything ships.</h3>
+            <p>Orders are held until professional or institutional status is verified. Fulfillment is restricted by design, so what leaves the bench only goes to accounts cleared to receive it.</p>
+          </div>
+        </li>
+      </ol>
     </div>
   </section>
 
