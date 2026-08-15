@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Catalogue | NicheChems Research Chemicals</title>
 <meta name="description" content="Browse NicheChems' full catalogue of research chemicals, reference standards, isotope-labeled standards, buffers, solvents, and forensic reference panels.">
@@ -18,9 +18,7 @@
 
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%233B5FCC'/%3E%3Cpath d='M13 6h6v6.6l4.6 9.9a2 2 0 0 1-1.8 2.9H10.2a2 2 0 0 1-1.8-2.9L13 12.6V6z' fill='none' stroke='%23FAF9F6' stroke-width='1.7' stroke-linejoin='round' stroke-linecap='round'/%3E%3Cpath d='M11 19h10' stroke='%23A9C9A0' stroke-width='1.7' stroke-linecap='round'/%3E%3C/svg%3E">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/fonts.css">
 
 <script type="application/ld+json">
 {
@@ -63,8 +61,8 @@
   --color-ink-faint:   #7C877F;
   --color-on-blue:     #FBFBF8;
 
-  --font-serif: "Fraunces", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
-  --font-sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Creato Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans:  "Creato Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono:  "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
 
   --text-xs:   clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
@@ -447,14 +445,12 @@ input:focus-visible {
 .c-product-card__stock--low { color: #96631C; }
 .c-product-card__stock--low::before { background: #96631C; }
 /* Uniform specimen panel: every card gets the same 4:3 media box, photo
-   or category icon on graph paper — keeps card heights aligned. */
+   or category icon — keeps card heights aligned. */
 .c-product-card__media {
   aspect-ratio: 4 / 3; margin-bottom: var(--space-5);
   border-radius: var(--radius-md); overflow: hidden;
   display: grid; place-items: center;
   background-color: var(--color-blue-tint);
-  background-image: linear-gradient(var(--color-border) 1px, transparent 1px), linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
-  background-size: 22px 22px;
 }
 .c-product-card__media img { width: 100%; height: 100%; object-fit: cover; }
 .c-product-card__media-icon { color: var(--color-blue); display: grid; place-items: center; }
@@ -574,10 +570,7 @@ input:focus-visible {
   overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
 }
 /* Lab-documentation voice: mono for labels and data (kept in sync with home). */
-/* Lab-notebook graph paper behind the page header, same treatment as the home hero. */
-.c-page-header { position: relative; }
-.c-page-header::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(var(--color-border) 1px, transparent 1px), linear-gradient(90deg, var(--color-border) 1px, transparent 1px); background-size: 34px 34px; opacity: 0.5; -webkit-mask-image: radial-gradient(ellipse 85% 100% at 65% 20%, black 0%, transparent 75%); mask-image: radial-gradient(ellipse 85% 100% at 65% 20%, black 0%, transparent 75%); pointer-events: none; }
-.c-page-header > * { position: relative; }
+-.c-page-header > * { position: relative; }
 .c-eyebrow { font-family: var(--font-mono); font-weight: 600; letter-spacing: 0.16em; }
 .c-top-bar__inner { font-family: var(--font-mono); letter-spacing: 0.02em; }
 .c-product-card__meta { font-family: var(--font-mono); }
@@ -654,7 +647,7 @@ input:focus-visible {
     </nav>
     <span class="c-eyebrow">Full Catalogue</span>
     <h1 class="c-page-header__title">Research chemicals</h1>
-    <p class="c-page-header__lede">Verified materials for calibration, method validation, and analytical research. Filter by category or search by name or catalog number. Full specifications, Certificates of Analysis, and Safety Data Sheets are available on each product page.</p>
+    <p class="c-page-header__lede">Verified materials for calibration, method validation, and analytical research. Filter by category or search by name or catalog number. Full specifications and Safety Data Sheets are available on each product page.</p>
   </div>
 
   <div class="l-container">
@@ -731,7 +724,6 @@ input:focus-visible {
       <ul>
         <li><a href="../about/index.html">About Us</a></li>
         <li><a href="#contact">Safety Data Sheets</a></li>
-        <li><a href="#contact">Certificate of Analysis Requests</a></li>
         <li><a href="#contact">Shipping &amp; Handling Policy</a></li>
         <li><a href="#contact">Research Use Policy</a></li>
       </ul>

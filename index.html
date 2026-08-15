@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NicheChems | Research Chemicals for Verified Professionals</title>
-<meta name="description" content="NicheChems supplies research chemicals and certified reference materials to verified research professionals. Every lot documented with a Certificate of Analysis and Safety Data Sheet. Research use only.">
+<meta name="description" content="NicheChems supplies research chemicals and certified reference materials to verified research professionals. Research use only.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://nichechems.com/">
 
@@ -21,9 +21,7 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%233B5FCC'/%3E%3Cpath d='M13 6h6v6.6l4.6 9.9a2 2 0 0 1-1.8 2.9H10.2a2 2 0 0 1-1.8-2.9L13 12.6V6z' fill='none' stroke='%23FAF9F6' stroke-width='1.7' stroke-linejoin='round' stroke-linecap='round'/%3E%3Cpath d='M11 19h10' stroke='%23A9C9A0' stroke-width='1.7' stroke-linecap='round'/%3E%3C/svg%3E">
 
 <!-- Editorial serif for display type, humanist sans for UI/body -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/fonts.css">
 
 <script type="application/ld+json">
 {
@@ -82,15 +80,11 @@
   --color-ink-faint:   #7C877F;
   --color-on-blue:     #FBFBF8; /* text on blue surfaces */
 
-  /* -- Typography --------------------------------------------------------
-     Serif = Fraunces (editorial, scientific-journal feel) for headings.
-     Sans  = Inter for UI/body. Sizes are fluid via clamp() so the type
-     scale itself is responsive without extra breakpoints. */
-  --font-serif: "Fraunces", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
-  --font-sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  /* Mono = instrument-printout voice: item counts, prices, spec data.
-     Anything that reads like it came off a lab instrument or a COA
-     should be set in this face. */
+  /* Typography: Creato Display for headings and body. Sizes are fluid
+     via clamp() so the type scale is responsive without extra breakpoints. */
+  --font-serif: "Creato Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans:  "Creato Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* Mono voice for numeric/spec readouts (item counts, prices). */
   --font-mono:  "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
 
   --text-xs:   clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
@@ -577,21 +571,6 @@ input:focus-visible {
   overflow: hidden;
   padding-block: var(--space-9) var(--space-10);
 }
-/* Lab-notebook graph paper, drawn with two hairline gradients and faded
-   out radially so it reads as texture, not wallpaper. */
-.c-hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(var(--color-border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
-  background-size: 34px 34px;
-  opacity: 0.5;
-  -webkit-mask-image: radial-gradient(ellipse 80% 90% at 70% 30%, black 0%, transparent 72%);
-  mask-image: radial-gradient(ellipse 80% 90% at 70% 30%, black 0%, transparent 72%);
-  pointer-events: none;
-}
 .c-hero__inner {
   position: relative;
   z-index: 1;
@@ -669,14 +648,12 @@ input:focus-visible {
   padding: var(--space-7) var(--space-7) var(--space-6);
   overflow: hidden;
 }
-/* Signature: a chromatography trace on graph paper that draws once on
-   load — a nod to the reference-standards catalogue this shop sells. */
+/* Signature: a chromatography trace that draws once on load — a nod to
+   the reference-standards catalogue this shop sells. */
 .c-hero__chromatogram {
   width: 100%; height: auto; flex: 1; min-height: 0;
   border-radius: var(--radius-md);
   background-color: var(--color-blue-tint);
-  background-image: linear-gradient(var(--color-border) 1px, transparent 1px), linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
-  background-size: 26px 26px;
 }
 .c-hero__chromatogram-axis { stroke: var(--color-ink-faint); stroke-width: 1.5; opacity: 0.55; }
 .c-hero__chromatogram-trace {
@@ -1197,15 +1174,10 @@ input:focus-visible {
       <div class="c-hero__content">
         <span class="c-hero__eyebrow">Research Chemicals</span>
         <h1 class="c-hero__title">High-purity research chemicals, verified and documented.</h1>
-        <p class="c-hero__lede">NicheChems supplies research chemicals and certified reference materials to verified research professionals worldwide. Each lot is documented with a Certificate of Analysis and Safety Data Sheet.</p>
+        <p class="c-hero__lede">NicheChems supplies research chemicals and certified reference materials to verified research professionals worldwide.</p>
         <div class="c-hero__actions">
           <a class="c-btn c-btn--primary" href="catalogue/index.html">Browse Catalogue</a>
-          <a class="c-btn c-btn--ghost" href="#contact">Request a Certificate of Analysis</a>
         </div>
-        <p class="c-hero__disclaimer">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M12 16.5h.01"/><path d="M10.3 3.9 2.5 17.5A1.8 1.8 0 0 0 4 20.3h16a1.8 1.8 0 0 0 1.5-2.8L13.7 3.9a1.8 1.8 0 0 0-3.4 0Z"/></svg>
-          <span>All materials are supplied strictly for in-vitro laboratory and forensic research use by verified institutional and professional accounts. Not for human or veterinary use.</span>
-        </p>
       </div>
 
       <div class="c-hero__visual" id="hero-visual">
@@ -1224,55 +1196,6 @@ input:focus-visible {
     </div>
   </section>
 
-  <div class="l-container"><div class="c-divider" role="presentation"></div></div>
-
-  <!-- ===================================================================
-       TRUST / COMPLIANCE STRIP
-       =================================================================== -->
-  <section class="l-section" aria-labelledby="trust-heading">
-    <div class="l-container">
-      <h2 id="trust-heading" class="u-visually-hidden">Why researchers trust NicheChems</h2>
-      <ul class="c-trust-strip__list">
-        <li class="c-trust-strip__item">
-          <span class="c-trust-strip__icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6.5v5C4 16.4 7.4 20.6 12 22c4.6-1.4 8-5.6 8-10.5v-5L12 3Z"/></svg>
-          </span>
-          <div>
-            <h3>Research Use Only</h3>
-            <p>Every order requires professional or institutional account verification.</p>
-          </div>
-        </li>
-        <li class="c-trust-strip__item">
-          <span class="c-trust-strip__icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12.5 11.2 15 16 9.5"/><rect x="3.5" y="3.5" width="17" height="17" rx="4"/></svg>
-          </span>
-          <div>
-            <h3>Verified Purity</h3>
-            <p>Certificates of Analysis issued for every lot, available on request.</p>
-          </div>
-        </li>
-        <li class="c-trust-strip__item">
-          <span class="c-trust-strip__icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h13v9H3z"/><path d="M16 12h3.2L21 15v3h-5"/><circle cx="7.5" cy="18.5" r="1.6"/><circle cx="17.5" cy="18.5" r="1.6"/></svg>
-          </span>
-          <div>
-            <h3>Controlled Cold-Chain Shipping</h3>
-            <p>Temperature-monitored packaging for sensitive reference materials.</p>
-          </div>
-        </li>
-        <li class="c-trust-strip__item">
-          <span class="c-trust-strip__icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M9.5 13h5M9.5 16.5h5"/></svg>
-          </span>
-          <div>
-            <h3>Full QA Documentation</h3>
-            <p>SDS and COA paperwork available for download with every product.</p>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </section>
-
   <!-- ===================================================================
        SHOP BY CATEGORY
        Individual products are managed from the admin dashboard, not
@@ -1285,7 +1208,7 @@ input:focus-visible {
         <div class="c-section-head">
           <span class="c-eyebrow">Catalogue</span>
           <h2 id="categories-heading">Shop by category</h2>
-          <p>Browse research chemicals and reference materials by category. Every listing includes purity data, packaging options, and downloadable documentation.</p>
+          <p>Browse research chemicals and reference materials by category. Every listing includes purity data and packaging options.</p>
         </div>
         <a class="c-btn c-btn--ghost" href="catalogue/index.html">View Full Catalogue</a>
       </div>
@@ -1385,7 +1308,7 @@ input:focus-visible {
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
           </span>
           <h3>Full Transparency</h3>
-          <p>Certificates of Analysis and Safety Data Sheets published alongside every catalogue listing.</p>
+          <p>Purity data, packaging, and specifications listed openly on every catalogue page.</p>
         </div>
         <div class="c-value-card">
           <span class="c-value-card__icon" aria-hidden="true">
@@ -1398,25 +1321,6 @@ input:focus-visible {
     </div>
   </section>
 
-  <div class="l-container"><div class="c-divider" role="presentation"></div></div>
-
-  <!-- ===================================================================
-       INSTITUTIONAL TRUST STRIP
-       =================================================================== -->
-  <section class="l-section l-section--cool c-institutional" aria-labelledby="institutional-heading">
-    <div class="l-container">
-      <h2 id="institutional-heading" class="u-visually-hidden">Trusted by research professionals</h2>
-      <p>Trusted by verified research professionals worldwide.</p>
-      <ul class="c-institutional__list">
-        <li>Independent Researchers</li>
-        <li>Analytical Chemists</li>
-        <li>R&amp;D Teams</li>
-        <li>Laboratory Professionals</li>
-        <li>Forensic Specialists</li>
-      </ul>
-    </div>
-  </section>
-
   <!-- ===================================================================
        CTA BAND
        =================================================================== -->
@@ -1424,7 +1328,7 @@ input:focus-visible {
     <div class="c-cta-band l-section--blue">
       <div class="c-cta-band__inner">
         <h2>Explore the full catalogue</h2>
-        <p>Every listing includes documented purity, packaging options, and a downloadable Certificate of Analysis.</p>
+        <p>Every listing includes documented purity and packaging options.</p>
         <div class="c-cta-band__actions">
           <a class="c-btn c-btn--on-blue" href="catalogue/index.html">Browse Full Catalogue</a>
           <a class="c-btn c-btn--ghost" style="color: var(--color-on-blue); border-color: rgba(251,251,248,0.35);" href="#contact">Contact Our Team</a>
@@ -1475,7 +1379,6 @@ input:focus-visible {
       <ul>
         <li><a href="about/index.html">About Us</a></li>
         <li><a href="#contact">Safety Data Sheets</a></li>
-        <li><a href="#contact">Certificate of Analysis Requests</a></li>
         <li><a href="#contact">Shipping &amp; Handling Policy</a></li>
         <li><a href="#contact">Research Use Policy</a></li>
       </ul>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About Us | NicheChems</title>
 <meta name="description" content="About NicheChems, and a plain-language guide to buying Ethereum and connecting a wallet to pay for your order.">
@@ -11,9 +11,7 @@
 
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%233B5FCC'/%3E%3Cpath d='M13 6h6v6.6l4.6 9.9a2 2 0 0 1-1.8 2.9H10.2a2 2 0 0 1-1.8-2.9L13 12.6V6z' fill='none' stroke='%23FAF9F6' stroke-width='1.7' stroke-linejoin='round' stroke-linecap='round'/%3E%3Cpath d='M11 19h10' stroke='%23A9C9A0' stroke-width='1.7' stroke-linecap='round'/%3E%3C/svg%3E">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/fonts.css">
 
 <style>
 /* Design tokens, reset, header/nav/footer are identical to the rest of
@@ -44,9 +42,9 @@
   --color-ink-faint:   #7C877F;
   --color-on-blue:     #FBFBF8;
 
-  --font-serif: "Fraunces", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-serif: "Creato Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono:  ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --font-sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans:  "Creato Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono:  "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
 
   --text-xs:   clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
@@ -263,10 +261,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2.5px soli
 
 .u-visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 /* Lab-documentation voice: mono for labels and data (kept in sync with home). */
-/* Lab-notebook graph paper behind the page header, same treatment as the home hero. */
-.c-page-header { position: relative; }
-.c-page-header::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(var(--color-border) 1px, transparent 1px), linear-gradient(90deg, var(--color-border) 1px, transparent 1px); background-size: 34px 34px; opacity: 0.5; -webkit-mask-image: radial-gradient(ellipse 85% 100% at 65% 20%, black 0%, transparent 75%); mask-image: radial-gradient(ellipse 85% 100% at 65% 20%, black 0%, transparent 75%); pointer-events: none; }
-.c-page-header > * { position: relative; }
+-.c-page-header > * { position: relative; }
 .c-eyebrow { font-family: var(--font-mono); font-weight: 600; letter-spacing: 0.16em; }
 .c-top-bar__inner { font-family: var(--font-mono); letter-spacing: 0.02em; }
 </style>
@@ -350,7 +345,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2.5px soli
        =================================================================== -->
   <section class="l-section" style="padding-top: 0;">
     <div class="l-container c-prose">
-      <p>NicheChems supplies research chemicals, isotope-labeled internal standards, calibration buffers, high-purity solvents, and forensic reference panels to verified research professionals worldwide. Every lot ships with a Certificate of Analysis and Safety Data Sheet, and every product on the site is managed through our internal catalogue tools, so what you see here reflects current stock and pricing, not a stale spec sheet.</p>
+      <p>NicheChems supplies research chemicals, isotope-labeled internal standards, calibration buffers, high-purity solvents, and forensic reference panels to verified research professionals worldwide. Every product on the site is managed through our internal catalogue tools, so what you see here reflects current stock and pricing, not a stale spec sheet.</p>
       <p>We run a lean, research-focused operation. To keep overhead down, and pass that through in pricing, we accept payment in Ethereum (ETH) only: no card processors, no invoicing delays. If you've never paid with crypto before, the guide below covers everything you need: buying ETH, moving it to a wallet you control, and connecting that wallet at checkout.</p>
     </div>
   </section>
@@ -466,7 +461,6 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2.5px soli
       <ul>
         <li><a href="index.html">About Us</a></li>
         <li><a href="#contact">Safety Data Sheets</a></li>
-        <li><a href="#contact">Certificate of Analysis Requests</a></li>
         <li><a href="#contact">Shipping &amp; Handling Policy</a></li>
       </ul>
     </div>

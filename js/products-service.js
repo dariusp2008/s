@@ -38,8 +38,8 @@ window.NicheChemsData = (function () {
       priceUnit: row.price_unit || "unit",
       stock: row.stock_status || "in-stock",
       active: row.active !== false,
-      casNumber: row.cas_number || "Available on Certificate of Analysis",
-      molecularFormula: row.molecular_formula || "See Certificate of Analysis",
+      casNumber: row.cas_number || "Available on request",
+      molecularFormula: row.molecular_formula || "Available on request",
       storageConditions: row.storage_conditions || "See Safety Data Sheet for storage requirements.",
       hazardInfo: row.hazard_info || "For laboratory research use only. See Safety Data Sheet for full hazard classification.",
       coaUrl: row.coa_url || null,
@@ -68,8 +68,8 @@ window.NicheChemsData = (function () {
     return (window.NICHECHEMS_PRODUCTS || []).map(function (p) {
       return Object.assign({
         description: "",
-        casNumber: "Available on Certificate of Analysis",
-        molecularFormula: "See Certificate of Analysis",
+        casNumber: "Available on request",
+        molecularFormula: "Available on request",
         storageConditions: "See Safety Data Sheet for storage requirements.",
         hazardInfo: "For laboratory research use only. See Safety Data Sheet for full hazard classification.",
         coaUrl: null,
