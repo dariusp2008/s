@@ -207,7 +207,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 
 .c-checkout-card {
   background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg);
-  padding: var(--space-6); margin-bottom: var(--space-7);
+  padding: var(--space-6); margin-bottom: var(--space-7); box-shadow: var(--shadow-sm);
 }
 @media (min-width: 600px) { .c-checkout-card { padding: var(--space-7); } }
 .c-checkout-card h2 { font-size: var(--text-lg); margin-bottom: var(--space-6); }
@@ -215,7 +215,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .c-cart-line { display: flex; gap: var(--space-4); align-items: center; padding-block: var(--space-5); border-bottom: 1px solid var(--color-border); }
 .c-cart-line:last-child { border-bottom: none; padding-bottom: 0; }
 .c-cart-line:first-child { padding-top: 0; }
-.c-cart-line__icon { width: 46px; height: 46px; border-radius: var(--radius-sm); background: var(--color-bg-alt); color: var(--color-sage); font-family: var(--font-serif); font-weight: 300; font-size: var(--text-lg); display: grid; place-items: center; flex-shrink: 0; }
+.c-cart-line__icon {
+  width: 46px; height: 46px; border-radius: 50%;
+  background: linear-gradient(155deg, var(--color-green-tint) 0%, var(--color-bg-cool) 100%);
+  border: 1px solid var(--color-border-cool);
+  color: var(--color-moss); font-family: var(--font-serif); font-weight: 500; font-size: var(--text-md);
+  display: grid; place-items: center; flex-shrink: 0;
+}
 .c-cart-line__info { flex: 1; min-width: 0; }
 .c-cart-line__name { font-size: var(--text-sm); font-weight: 600; color: var(--color-forest); }
 .c-cart-line__meta { font-size: var(--text-xs); color: var(--color-ink-faint); margin-top: 2px; }
@@ -249,11 +255,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   background: var(--color-bg); font-size: var(--text-sm); color: var(--color-ink); transition: border-color var(--duration-fast) var(--ease-soft);
 }
 .c-form-field textarea { resize: vertical; min-height: 4.5rem; }
-.c-form-field input:focus, .c-form-field textarea:focus { border-color: var(--color-blue); }
+.c-form-field input:focus, .c-form-field textarea:focus { border-color: var(--color-blue); box-shadow: 0 0 0 3px var(--color-blue-tint); }
 .c-form-field input[aria-invalid="true"], .c-form-field textarea[aria-invalid="true"] { border-color: var(--color-error); }
 .c-form-field-error { min-height: 1.1em; font-size: var(--text-xs); color: var(--color-error); margin-top: var(--space-2); }
 
-.c-order-summary { position: sticky; top: calc(var(--header-h) + var(--space-5)); }
+.c-order-summary { position: sticky; top: calc(var(--header-h) + var(--space-5)); box-shadow: var(--shadow-md); }
 .c-order-summary__row { display: flex; align-items: center; justify-content: space-between; font-size: var(--text-sm); color: var(--color-ink-soft); padding-block: var(--space-2); }
 .c-order-summary__row--total { border-top: 1px solid var(--color-border); margin-top: var(--space-3); padding-top: var(--space-4); font-size: var(--text-md); color: var(--color-forest); font-weight: 600; }
 .c-order-summary__note { font-size: var(--text-xs); color: var(--color-ink-faint); margin-block: var(--space-4) var(--space-6); }
@@ -692,63 +698,29 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     continueBtn.disabled = true;
     continueBtn.textContent = "Submitting order…";
 
-    var orderPayload = {
-      status: "pending_payment",
-      payment_method: "ethereum",
+    // Checkout no longer writes to Supabase - the payment page only ever
+    // reads from sessionStorage (see payment/index.html), so an order
+    // reference generated client-side is enough to get the shopper to the
+    // payment step. There is no server-side record until the shopper
+    // emails their transaction hash + order reference, same as the manual
+    // confirmation flow on the payment page already assumes.
+    var orderId = (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(16).slice(2));
+    var customerName = document.getElementById("customer-name").value.trim();
+    var customerEmail = document.getElementById("customer-email").value.trim();
+
+    window.sessionStorage.setItem("nichechems_last_order", JSON.stringify({
+      orderId: orderId,
       subtotal: resolved.subtotal,
-      customer_name: document.getElementById("customer-name").value.trim(),
-      customer_email: document.getElementById("customer-email").value.trim(),
-      institution: document.getElementById("customer-institution").value.trim() || null,
-      phone: document.getElementById("customer-phone").value.trim() || null,
-      shipping_address: document.getElementById("customer-address").value.trim(),
-      notes: document.getElementById("customer-notes").value.trim() || null
-    };
+      itemCount: resolved.itemCount,
+      customerName: customerName,
+      customerEmail: customerEmail,
+      lines: resolved.lines.map(function (l) {
+        return { name: l.product.name, sku: l.product.sku, quantity: l.quantity, lineTotal: l.lineTotal };
+      })
+    }));
 
-    try {
-      // Link the order to a customer account if they're signed in (see
-      // account/index.html) - guest checkout still works, customer_id
-      // just stays null and the order won't show in anyone's history.
-      var sessionResult = await window.supabaseClient.auth.getSession();
-      var loggedInUser = sessionResult.data && sessionResult.data.session && sessionResult.data.session.user;
-      if (loggedInUser) orderPayload.customer_id = loggedInUser.id;
-
-      var orderResult = await window.supabaseClient.from("orders").insert(orderPayload).select().single();
-      if (orderResult.error) throw orderResult.error;
-      var order = orderResult.data;
-
-      var itemRows = resolved.lines.map(function (line) {
-        return {
-          order_id: order.id,
-          product_id: line.product.id,
-          product_name: line.product.name,
-          sku: line.product.sku,
-          unit_price: line.unitPrice,
-          quantity: line.quantity,
-          line_total: line.lineTotal
-        };
-      });
-      var itemsResult = await window.supabaseClient.from("order_items").insert(itemRows);
-      if (itemsResult.error) throw itemsResult.error;
-
-      window.sessionStorage.setItem("nichechems_last_order", JSON.stringify({
-        orderId: order.id,
-        subtotal: resolved.subtotal,
-        itemCount: resolved.itemCount,
-        customerName: orderPayload.customer_name,
-        customerEmail: orderPayload.customer_email,
-        lines: resolved.lines.map(function (l) {
-          return { name: l.product.name, sku: l.product.sku, quantity: l.quantity, lineTotal: l.lineTotal };
-        })
-      }));
-
-      window.NicheChemsCart.clearCart();
-      window.location.href = "../payment/index.html?order=" + order.id;
-    } catch (err) {
-      console.error("Checkout: order submission failed.", err);
-      errorEl.textContent = "Couldn't submit your order right now. Please try again, or email research@nichechems.com to place your order directly.";
-      continueBtn.disabled = false;
-      continueBtn.textContent = "Continue to Payment";
-    }
+    window.NicheChemsCart.clearCart();
+    window.location.href = "../payment/index.html?order=" + orderId;
   });
 
   /* -- Boot -------------------------------------------------------------*/
