@@ -242,8 +242,8 @@ input:focus-visible {
   .l-section { padding-block: var(--space-10); }
 }
 
-.l-section--alt   { background: var(--color-bg-alt); }
-.l-section--cool  { background: var(--color-bg-cool); }
+.l-section--alt   { background: var(--color-bg-alt); box-shadow: inset 0 1px 0 var(--color-border); }
+.l-section--cool  { background: var(--color-bg-cool); box-shadow: inset 0 1px 0 var(--color-border-cool); }
 .l-section--blue  { background: linear-gradient(155deg, var(--color-blue) 0%, var(--color-blue-dark) 100%); color: var(--color-on-blue); }
 
 /* Section eyebrow + heading + subhead pattern, reused across the page */
@@ -648,7 +648,9 @@ input:focus-visible {
   position: relative;
   width: 100%;
   aspect-ratio: 4 / 3;
-  background: var(--color-bg-alt);
+  background:
+    radial-gradient(120% 140% at 100% 0%, var(--color-green-tint) 0%, transparent 55%),
+    linear-gradient(155deg, var(--color-bg-alt) 0%, var(--color-bg-cool) 100%);
   border-bottom: 1px solid var(--color-border);
   display: grid;
   place-items: center;
@@ -771,13 +773,27 @@ input:focus-visible {
   z-index: 1;
 }
 .c-category-tile__icon {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
   font-family: var(--font-serif);
-  font-size: var(--text-2xl);
-  font-weight: 300;
+  font-size: var(--text-md);
+  font-weight: 500;
   line-height: 1;
-  color: var(--color-sage);
+  color: var(--color-moss);
+  background: linear-gradient(155deg, var(--color-green-tint) 0%, var(--color-bg-cool) 100%);
+  border: 1px solid var(--color-border-cool);
   margin-bottom: var(--space-5);
+  transition: transform var(--duration-base) var(--ease-organic),
+              background var(--duration-base) var(--ease-organic);
+}
+.c-category-tile:hover .c-category-tile__icon {
+  transform: scale(1.08);
+  background: linear-gradient(155deg, var(--color-blue-tint) 0%, var(--color-green-tint) 100%);
+  color: var(--color-blue);
 }
 /* Full-bleed photo header for tiles whose category has an admin-uploaded
    image (categories.image_url). Falls back to the icon chip otherwise. */
@@ -852,9 +868,17 @@ input:focus-visible {
 }
 .c-principle + .c-principle { border-top: 1px solid var(--color-border); }
 .c-principle__index {
-  font-size: var(--text-xl);
-  font-weight: 300;
-  color: var(--color-sage);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-cool);
+  font-size: var(--text-md);
+  font-weight: 500;
+  color: var(--color-moss);
   line-height: 0.9;
   font-variant-numeric: tabular-nums;
 }
@@ -900,14 +924,25 @@ input:focus-visible {
    12. CTA BAND
    ===================================================================== */
 .c-cta-band {
+  position: relative;
+  overflow: hidden;
   border-radius: var(--radius-lg);
   margin-inline: var(--space-5);
   padding: var(--space-8) var(--space-6);
-  background: var(--color-blue);
+  background: linear-gradient(155deg, var(--color-blue) 0%, var(--color-blue-dark) 100%);
   color: var(--color-on-blue);
   display: grid;
   gap: var(--space-6);
 }
+.c-cta-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(60% 120% at 100% 0%, rgba(255,255,255,0.14) 0%, transparent 60%),
+              radial-gradient(50% 90% at 0% 100%, rgba(255,255,255,0.08) 0%, transparent 55%);
+  pointer-events: none;
+}
+.c-cta-band__inner, .c-cta-band__actions { position: relative; z-index: 1; }
 @media (min-width: 800px) {
   .c-cta-band {
     margin-inline: var(--space-7);
