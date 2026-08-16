@@ -174,29 +174,7 @@ a:focus-visible, button:focus-visible { outline: 2.5px solid var(--color-blue); 
 .c-amount-row--eth span:last-child { font-family: var(--font-mono); }
 .c-rate-note { font-size: var(--text-xs); color: var(--color-ink-faint); margin-top: var(--space-3); }
 
-.c-address-box {
-  display: flex; align-items: center; gap: var(--space-3); background: var(--color-bg-alt); border: 1px solid var(--color-border);
-  border-radius: var(--radius-md); padding: var(--space-4); margin-block: var(--space-5);
-}
-.c-address-box code { flex: 1; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-ink); overflow-wrap: anywhere; }
-.c-copy-btn { flex-shrink: 0; padding: var(--space-2) var(--space-3); border-radius: var(--radius-sm); font-size: var(--text-xs); font-weight: 600; color: var(--color-blue); border: 1.5px solid var(--color-blue-tint); }
-.c-copy-btn:hover { background: var(--color-blue-tint); }
-
 .c-wallet-connect-btn { margin-bottom: var(--space-6); }
-
-.c-divider-row { display: flex; align-items: center; gap: var(--space-4); margin-block: var(--space-7); color: var(--color-ink-faint); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.06em; }
-.c-divider-row::before, .c-divider-row::after { content: ""; flex: 1; height: 1px; background: var(--color-border); }
-
-.c-manual-note { font-size: var(--text-sm); color: var(--color-ink-soft); margin-bottom: var(--space-5); }
-.c-manual-note strong { color: var(--color-forest); }
-
-.c-toast {
-  position: fixed; bottom: var(--space-6); left: 50%; transform: translateX(-50%);
-  background: var(--color-forest); color: var(--color-on-blue); padding: var(--space-3) var(--space-5);
-  border-radius: var(--radius-md); box-shadow: var(--shadow-lg); font-size: var(--text-xs); font-weight: 600;
-  z-index: 500; opacity: 0; pointer-events: none; transition: opacity var(--duration-base) var(--ease-soft);
-}
-.c-toast.is-visible { opacity: 1; }
 
 .c-empty-order { text-align: center; padding-block: var(--space-9); color: var(--color-ink-soft); max-width: 32rem; margin-inline: auto; }
 .c-empty-order p { margin-bottom: var(--space-6); }
@@ -269,15 +247,6 @@ a:focus-visible, button:focus-visible { outline: 2.5px solid var(--color-blue); 
                  window.ethereum (EIP-1193) connect + send logic gets
                  added here later. -->
             <button type="button" class="c-btn c-btn--primary c-wallet-connect-btn" id="connect-wallet-btn">Connect Wallet</button>
-
-            <div class="c-divider-row">or send manually</div>
-
-            <p class="c-manual-note">Send the exact ETH amount above to the address below, then email your transaction hash and order reference to <strong>research@nichechems.com</strong> so we can confirm and fulfill your order.</p>
-            <div class="c-address-box">
-              <code id="eth-address"></code>
-              <button type="button" class="c-copy-btn" id="copy-address-btn">Copy</button>
-            </div>
-            <a class="c-btn c-btn--ghost c-btn--sm" id="email-confirm-link" href="#">Email Your Transaction Hash</a>
           </div>
 
         </div>
@@ -286,42 +255,17 @@ a:focus-visible, button:focus-visible { outline: 2.5px solid var(--color-blue); 
   </div>
 </main>
 
-<p class="c-toast" id="toast" role="status" aria-live="polite"></p>
-
 <script>
 (function () {
   "use strict";
 
-  // TODO(wallet): replace with your real Ethereum receiving address
-  // before accepting live payments.
-  var ETH_RECEIVING_ADDRESS = "0xYOUR_ETHEREUM_ADDRESS_HERE";
   var FALLBACK_ETH_USD_RATE = 3000; // used only if the live rate fetch below fails
-
-  document.getElementById("eth-address").textContent = ETH_RECEIVING_ADDRESS;
-
-  function showToast(message) {
-    var toast = document.getElementById("toast");
-    toast.textContent = message;
-    toast.classList.add("is-visible");
-    window.clearTimeout(showToast._t);
-    showToast._t = window.setTimeout(function () { toast.classList.remove("is-visible"); }, 2400);
-  }
-
-  document.getElementById("copy-address-btn").addEventListener("click", async function () {
-    try {
-      await navigator.clipboard.writeText(ETH_RECEIVING_ADDRESS);
-      showToast("Address copied.");
-    } catch (err) {
-      showToast("Couldn't copy automatically. Please select and copy the address manually.");
-    }
-  });
 
   /* =====================================================================
      Order summary - read from sessionStorage (written by checkout/
-     index.html right after it created the order in Supabase). Payment
-     never queries Supabase directly: orders aren't publicly readable
-     (see supabase/schema.sql), and the browser already has everything
-     it needs from the checkout step.
+     index.html right before redirecting here). There is no server-side
+     order record: checkout generates the order id client-side and never
+     calls Supabase.
      ===================================================================== */
   var params = new URLSearchParams(window.location.search);
   var orderIdFromUrl = params.get("order");
@@ -342,15 +286,6 @@ a:focus-visible, button:focus-visible { outline: 2.5px solid var(--color-blue); 
   document.getElementById("order-ref").textContent = stored.orderId.slice(0, 8).toUpperCase();
   document.getElementById("summary-count").textContent = stored.itemCount + (stored.itemCount === 1 ? " item" : " items");
   document.getElementById("summary-usd").textContent = "$" + stored.subtotal.toFixed(2);
-
-  var mailSubject = encodeURIComponent("Payment confirmation, order " + stored.orderId.slice(0, 8).toUpperCase());
-  var mailBody = encodeURIComponent(
-    "Order reference: " + stored.orderId + "\n" +
-    "Amount: $" + stored.subtotal.toFixed(2) + " USD\n" +
-    "Transaction hash: \n\n" +
-    "(paste your Ethereum transaction hash above)"
-  );
-  document.getElementById("email-confirm-link").href = "mailto:research@nichechems.com?subject=" + mailSubject + "&body=" + mailBody;
 
   function renderEthAmount(rate, isLive) {
     var ethAmount = stored.subtotal / rate;
